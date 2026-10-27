@@ -1,0 +1,30 @@
+# Sistema
+.DS_Store
+
+# Ferramentas
+.playwright-mcp/
+node_modules/
+.impeccable/
+
+# Saída do inspector de design (screenshots). A folha de direção fica.
+.taste-skill/*
+!.taste-skill/direction.json
+
+# Trabalho temporário — nunca versionar derivados experimentais
+tmp/
+*.tmp
+scratch/
+
+# Referência pesada: nunca entra no repositório nem no build
+reference/raw/
+*.zip
+
+# Originais das fotografias de acervo (14 MB para gerar 440 KB).
+# São refazíveis: assets/credits.json guarda a URL de origem de cada uma.
+# Regerar com: python3 tools/fetch-originals.py && python3 tools/build-assets.py
+assets/*
+!assets/credits.json
+
+# Skills instaladas: reinstaláveis via skills-lock.json e `impeccable install`.
+# O binário sozinho tem 17 MB.
+.claude/skills/

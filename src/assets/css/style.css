@@ -1,0 +1,488 @@
+/* ===========================================================================
+   Connect-Air Climatização — folha única
+   Direção: "The dark room" (tasteskill, seed 1099997846, 1 redraw: type)
+   Um campo escuro de cima a baixo; dentro dele, objetos iluminados.
+   Sem framework, sem biblioteca, sem dependência externa em runtime.
+   =========================================================================== */
+
+/* --- Tipografia: Clash Grotesk, auto-hospedada ---------------------------- */
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/clash-grotesk-400.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/clash-grotesk-500.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+/* --- Tokens --------------------------------------------------------------- */
+:root {
+  /* Cor: mantida da marca. #021D64 e #0267DB estão escritos na prancha do .ai */
+  --bg:      #021d64;   /* a sala */
+  --surface: #01123d;   /* um degrau de tom, nunca uma linha */
+  --ink:     #eef3fc;
+  --muted:   #a9bfe4;
+  --accent:  #0267db;   /* o azul da marca: preenchimentos */
+  --accent-ink: #6aa9f2; /* o mesmo azul, clareado o bastante para virar texto */
+
+  /* Cinco degraus de tamanho, não seis */
+  --s1: clamp(0.8125rem, 0.79rem + 0.10vw, 0.875rem);   /* 13–14 */
+  --s2: clamp(1.0625rem, 1.00rem + 0.25vw, 1.1875rem);  /* 17–19 */
+  --s3: clamp(1.375rem,  1.02rem + 1.5vw,  2.25rem);    /* 22–36 */
+  --s4: clamp(2.25rem,   1.60rem + 2.9vw,  3.25rem);    /* 36–52 */
+  --s5: clamp(2.75rem,   1.40rem + 6.0vw,  4.5rem);     /* 44–72 */
+
+  --margin: 32px;          /* uma margem para a página inteira */
+  --gap-section: 110px;    /* duas seções vizinhas somam 220px: dentro de 120–240 */
+  --radius: 0;             /* um raio só: quadrado */
+  --t: 180ms cubic-bezier(.2,.6,.3,1);
+}
+
+@media (max-width: 760px) {
+  :root { --margin: 20px; --gap-section: 48px; }
+}
+
+/* --- Base ----------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Clash Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--s2);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+a:not([class]) { text-decoration: underline; text-underline-offset: 0.25em; }
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+::selection { background: var(--accent); color: #fff; }
+
+.wrap {
+  width: 100%;
+  padding-inline: var(--margin);   /* duas margens externas iguais, sempre */
+  margin-inline: auto;
+  max-width: 1680px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+.skip {
+  position: absolute; left: var(--margin); top: -100px;
+  background: var(--ink); color: var(--bg);
+  padding: 12px 18px; font-size: var(--s1); z-index: 100;
+  transition: top var(--t);
+}
+.skip:focus { top: 12px; }
+
+/* --- Ação primária: o único elemento sólido e claro da página ------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 26px;
+  background: var(--ink); color: var(--bg);
+  font-size: var(--s2); font-weight: 500;
+  border: 0; border-radius: var(--radius); cursor: pointer;
+  transition: transform 140ms cubic-bezier(.2,.6,.3,1), background var(--t);
+}
+.btn:hover { background: #fff; }
+.btn:active { transform: scale(0.975); }
+
+/* ação secundária: um degrau de tom, nunca um contorno de 1px */
+.btn--ghost { background: var(--surface); color: var(--ink); }
+.btn--ghost:hover { background: #021a55; }
+
+/* --- Barra do topo -------------------------------------------------------- */
+.top {
+  position: absolute; inset: 0 0 auto 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--margin);
+}
+.top__mark { width: clamp(150px, 15vw, 210px); }
+.top__mark img { width: 100%; }
+.top nav { display: flex; gap: 26px; }
+.top nav a { font-size: var(--s1); color: var(--muted); transition: color var(--t); }
+.top nav a:hover, .top nav a:focus-visible { color: var(--ink); }
+@media (max-width: 860px) { .top nav a:not(.top__cta) { display: none; } }
+
+/* ===========================================================================
+   1. Abertura — "Duas portas numa parede escura"
+   =========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 104px var(--margin) 40px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: var(--s5);
+  line-height: 1.0;
+  max-width: 20ch;
+  margin: 0 auto;
+}
+.hero__sub {
+  margin: 22px auto 0;
+  max-width: 58ch;
+  color: var(--muted);
+  font-size: var(--s2);
+}
+
+/* as duas portas */
+.doors {
+  display: flex; justify-content: center; gap: 72px;
+  margin: 40px 0 0;
+}
+.door {
+  display: block; width: 240px; text-align: left;
+  transition: opacity var(--t);
+}
+.door img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  border-radius: var(--radius);
+}
+.door__name {
+  display: block; margin-top: 18px;
+  font-size: var(--s3); line-height: 1.2; color: var(--ink);
+}
+.door__line {
+  display: block; margin-top: 6px;
+  font-size: var(--s2); line-height: 1.4; color: var(--muted);
+}
+/* apontar uma porta mantém-na inteira e recua a outra — só a imagem */
+.doors:hover .door:not(:hover) img,
+.doors:focus-within .door:not(:focus-within) img { opacity: .5; }
+.door img { transition: opacity var(--t); }
+
+.hero__act { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 760px) {
+  .hero { padding: 104px var(--margin) 56px; justify-content: flex-start; }
+  .hero h1 { font-size: 10vw; max-width: none; }
+  .doors { gap: 14px; margin-top: 40px; }
+  .door { width: calc((100% - 14px) / 2); max-width: 168px; }
+  .door__name { font-size: var(--s2); font-weight: 500; }
+  .door__line { font-size: var(--s1); }
+  .hero__act { margin-top: 40px; width: 100%; }
+  .hero__act .btn { flex: 1 1 100%; justify-content: center; }
+}
+
+/* ===========================================================================
+   2. Serviços — "Colunas de nomes num tamanho só"
+   =========================================================================== */
+.services { padding-block: var(--gap-section); }
+.services h2 { font-size: var(--s4); margin-bottom: 72px; }
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
+}
+.services__col:nth-of-type(1) { grid-column: 1 / span 3; }
+.services__col:nth-of-type(2) { grid-column: 4 / span 3; }
+.services__col:nth-of-type(3) { grid-column: 7 / span 3; }
+.services__col h3 { color: var(--ink); }
+/* as colunas 10–12 ficam vazias de propósito e recebem a descrição */
+.services__echo {
+  grid-column: 10 / span 3;
+  grid-row: 1;
+  font-size: var(--s3); line-height: 1.3; color: var(--ink);
+  align-self: start;
+}
+
+.services__col h3 { font-size: var(--s3); font-weight: 500; line-height: 1.3; margin-bottom: .9em; }
+.services__list { list-style: none; margin: 0; padding: 0; }
+.services__list li { margin: 0; }
+.services__list button {
+  all: unset; display: block; width: 100%;
+  font-size: var(--s3); line-height: 1.3; padding-block: 9px;
+  color: var(--muted); cursor: pointer;
+  transition: color var(--t);
+}
+.services__list button:hover,
+.services__list button:focus-visible,
+.services__list button[aria-current='true'] { color: var(--ink); }
+
+@media (max-width: 980px) {
+  .services h2 { margin-bottom: 48px; }
+  .services__grid { grid-template-columns: 1fr; gap: 40px; }
+  .services__col:nth-of-type(1),
+  .services__col:nth-of-type(2),
+  .services__col:nth-of-type(3) { grid-column: 1; }
+  .services__echo { display: none; }
+  .services__list button { line-height: 1.4; padding-block: 7px; }
+  .services__sum { display: block; margin-top: 14px; color: var(--muted); font-size: var(--s2); }
+}
+@media (min-width: 981px) { .services__sum { display: none; } }
+
+/* ===========================================================================
+   3. Os sistemas — "Fotografia fixa, lista ativa"   (a coisa viva da página)
+   =========================================================================== */
+.systems { padding-block: var(--gap-section); }
+.systems__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; }
+
+.systems__media {
+  grid-column: 1 / span 5;
+  position: sticky; top: 12vh; align-self: start;
+}
+.systems__media img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: var(--radius);
+  transition: opacity 300ms linear;
+}
+.systems__media img.is-fading { opacity: 0; }
+
+.systems__side { grid-column: 7 / span 6; }
+.systems h2 { font-size: var(--s4); margin-bottom: 48px; }
+
+.systems__list { list-style: none; margin: 0; padding: 0; }
+.systems__row { border: 0; }
+.systems__row > button {
+  all: unset;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+  width: 100%; min-height: 58px; cursor: pointer;
+  font-size: var(--s3); line-height: 1.2; color: var(--muted);
+  transition: color var(--t);
+}
+.systems__row > button:hover,
+.systems__row > button:focus-visible { color: var(--ink); }
+.systems__row[data-active='true'] > button { color: var(--ink); font-weight: 500; }
+.systems__use { font-size: var(--s1); color: var(--muted); white-space: nowrap; }
+.systems__row[data-active='true'] .systems__use { color: var(--ink); }
+
+.systems__panel {
+  max-width: 38ch; font-size: var(--s2); line-height: 1.5;
+  color: var(--muted); padding-bottom: 18px;
+}
+.systems__panel p { margin-bottom: 12px; }
+.systems__panel a { color: var(--ink); text-decoration: underline; text-underline-offset: .25em; }
+
+/* Sem JS: tudo aberto e legível. Com JS, o script fecha os inativos. */
+.js .systems__panel[hidden] { display: none; }
+
+@media (max-width: 980px) {
+  .systems__grid { grid-template-columns: 1fr; gap: 0; }
+  .systems__media {
+    grid-column: 1; position: static;
+    margin-inline: calc(var(--margin) * -1); margin-bottom: 32px;
+  }
+  .systems__media img { aspect-ratio: 4 / 3; height: auto; }
+  .systems__side { grid-column: 1; }
+  .systems h2 { font-size: var(--s3); margin-bottom: 24px; }
+  .systems__row > button { min-height: 56px; }
+}
+
+/* ===========================================================================
+   4. A consequência — "Declaração em escada"
+   =========================================================================== */
+.stair { padding-block: var(--gap-section); }
+.stair__field {
+  background: var(--surface);
+  padding: clamp(40px, 5vw, 80px);
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;
+  align-items: center;
+}
+.stair__text { grid-column: 1 / span 6; }
+.stair__statement {
+  font-size: var(--s3); line-height: 1.1; font-weight: 400;
+  letter-spacing: -0.03em; margin: 0;
+}
+.stair__statement span { display: block; }
+.stair__statement span:nth-child(1) { padding-left: 0; }
+.stair__statement span:nth-child(2) { padding-left: 6vw; }
+.stair__statement span:nth-child(3) { padding-left: 12vw; }
+.stair__statement span:nth-child(3) { color: var(--accent-ink); }
+
+.stair__pics { grid-column: 8 / span 5; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stair__pics img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+
+.stair__note {
+  grid-column: 1 / span 6; margin-top: 32px;
+  font-size: var(--s2); line-height: 1.5; color: var(--muted); max-width: 44ch;
+}
+
+@media (max-width: 980px) {
+  .stair__field { grid-template-columns: 1fr; }
+  .stair__text, .stair__pics, .stair__note { grid-column: 1; }
+  .stair__statement span:nth-child(2) { padding-left: 7vw; }
+  .stair__statement span:nth-child(3) { padding-left: 14vw; }
+  .stair__pics { margin-top: 40px; }
+  .stair__note { margin-top: 32px; }
+}
+
+/* ===========================================================================
+   5. A empresa — "Painel embutido, retrato recortado"
+   =========================================================================== */
+.about { padding-block: var(--gap-section); }
+.about__panel {
+  position: relative; overflow: hidden;
+  background: var(--surface);
+  padding: 56px;
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;
+}
+.about h2 {
+  grid-column: 1 / span 6; font-size: var(--s4); max-width: 13ch; margin: 0;
+}
+.about__figure {
+  grid-column: 1 / span 6; align-self: end;
+  margin-top: 56px; margin-bottom: -12%;
+}
+.about__figure img {
+  width: 100%; aspect-ratio: 1; object-fit: cover;
+  clip-path: circle(50% at 50% 50%);   /* a esfera do símbolo da marca */
+}
+.about__side {
+  grid-column: 8 / span 4; grid-row: 1 / span 2;
+  display: flex; flex-direction: column; gap: 64px; align-items: start;
+}
+.about__block { max-width: 300px; }
+.about__block h3 { font-size: var(--s2); font-weight: 500; line-height: 1.2; margin-bottom: 14px; }
+.about__block p { font-size: var(--s2); line-height: 1.55; color: var(--muted); }
+
+@media (max-width: 980px) {
+  .about__panel { padding: 28px var(--margin); grid-template-columns: 1fr; min-height: auto; }
+  .about h2 { grid-column: 1; font-size: 8.5vw; }
+  .about__side { grid-column: 1; grid-row: auto; gap: 40px; margin-top: 40px; }
+  .about__block { max-width: none; }
+  .about__figure { grid-column: 1; margin: 48px auto -20%; width: 86%; }
+}
+
+/* ===========================================================================
+   6. Credenciamentos — "Nomes como uma frase"
+   =========================================================================== */
+.creds { padding-block: var(--gap-section); }
+.creds__sentence {
+  font-size: var(--s3); line-height: 1.25; letter-spacing: -0.02em;
+  max-width: 40ch; margin: 0;
+}
+.creds__lead { color: var(--ink); }
+.creds__name { color: var(--muted); transition: color 400ms linear; }
+.creds__name.is-lit { color: var(--ink); }
+.creds__foot { margin-top: 40px; font-size: var(--s2); color: var(--muted); max-width: 52ch; }
+
+/* ===========================================================================
+   7. Contato — "Cartão de visita sobre uma fotografia"
+   =========================================================================== */
+.contact { position: relative; }
+.contact__photo { position: relative; height: 100svh; }
+.contact__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.card {
+  position: absolute; top: 60px; right: 60px;
+  width: 380px; padding: 32px;
+  background: var(--ink); color: var(--bg);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column; gap: 20px;
+}
+.card h2 { font-size: var(--s3); line-height: 1.1; color: var(--bg); margin: 0; }
+.card dl { margin: 0; display: grid; gap: 14px; font-size: var(--s2); line-height: 1.45; }
+.card dt { font-weight: 500; }
+.card dd { margin: 0; color: #2a3b6e; }
+.card dd a { text-decoration: underline; text-underline-offset: .25em; }
+.card .btn {
+  background: var(--bg); color: var(--ink);
+  justify-content: center; width: 100%; min-height: 52px; margin-top: 4px;
+}
+.card .btn:hover { background: var(--accent); }
+
+@media (max-width: 980px) {
+  .contact__photo { height: 70svh; }
+  .card {
+    position: relative; inset: auto;
+    width: auto; margin: -80px var(--margin) 0; top: 0;
+  }
+  .card .btn { min-height: 56px; }
+}
+
+/* ===========================================================================
+   8. Rodapé — "Colunas em cima, logotipo embaixo"
+   =========================================================================== */
+.foot {
+  background: var(--surface);
+  display: grid; grid-template-rows: auto 1fr auto;
+  padding: 40px var(--margin);
+  margin-top: var(--gap-section);
+}
+.foot__cols {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+}
+.foot__col { font-size: var(--s2); line-height: 1.5; }
+.foot__col h2 { font-size: var(--s2); font-weight: 500; line-height: 1.5; letter-spacing: 0; margin-bottom: 6px; }
+.foot__col ul { list-style: none; margin: 0; padding: 0; color: var(--muted); }
+.foot__col a:hover { color: var(--ink); }
+
+.foot__mark { align-self: end; }
+.foot__mark svg { width: 100%; height: auto; display: block; fill: var(--ink); }
+.foot__legal {
+  margin-top: 20px; font-size: var(--s1); line-height: 1.5; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between;
+}
+
+@media (max-width: 760px) {
+  .foot { min-height: auto; }
+  .foot__cols { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .foot__mark { margin-top: 20svh; }
+}
+
+/* --- WhatsApp fixo (exigência do escopo: visível em toda a rolagem) ------- */
+.float {
+  position: fixed; right: var(--margin); bottom: var(--margin); z-index: 50;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  background: var(--ink); color: var(--bg);
+  font-size: var(--s2); font-weight: 500; border-radius: var(--radius);
+  transition: transform 140ms cubic-bezier(.2,.6,.3,1), background var(--t);
+}
+.float:hover { background: #fff; }
+.float:active { transform: scale(0.975); }
+.float svg { width: 20px; height: 20px; fill: currentColor; }
+/* o cartão de contato já tem o seu próprio botão: o flutuante sai da frente */
+.float.is-away { opacity: 0; visibility: hidden; transform: translateY(12px); }
+.float { transition: transform 140ms cubic-bezier(.2,.6,.3,1), background var(--t),
+                     opacity var(--t), visibility var(--t); }
+@media (max-width: 560px) { .float span { display: none; } .float { padding: 16px; } }
+
+/* --- Entradas: discretas, e nunca escondem conteúdo sem script ------------ */
+.js [data-rise] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 620ms cubic-bezier(.2,.6,.3,1), transform 620ms cubic-bezier(.2,.6,.3,1);
+}
+.js [data-rise].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js [data-rise] { opacity: 1; transform: none; }
+}

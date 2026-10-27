@@ -1,0 +1,17 @@
+/* Connect-Air — tokens de marca
+ * Fonte: logotipo_connect_air.ai (as duas cores estão escritas na prancha)
+ * e favicon_connect_air.svg (#0267db).
+ * Cores de apoio são DERIVADAS, ainda não aprovadas pelo cliente.
+ */
+:root {
+  /* Oficiais — não alterar */
+  --ca-azul-profundo: #021d64;
+  --ca-azul: #0267db;
+
+  /* Derivadas — propostas, a validar na direção de arte */
+  --ca-azul-claro: #3b8bef;
+  --ca-tinta: #0a1430;
+  --ca-papel: #f7f9fc;
+  --ca-branco: #ffffff;
+  --ca-linha: rgba(2, 29, 100, 0.12);
+}
