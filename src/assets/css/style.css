@@ -1,7 +1,6 @@
 /* ===========================================================================
-   Connect-Air Climatização — folha única
-   Direção: "The dark room" (tasteskill, seed 1099997846, 1 redraw: type)
-   Um campo escuro de cima a baixo; dentro dele, objetos iluminados.
+   Connect-Air Climatização
+   Página clara, navegação fixa e um único caminho até o WhatsApp.
    Sem framework, sem biblioteca, sem dependência externa em runtime.
    =========================================================================== */
 
@@ -19,471 +18,396 @@
 
 /* --- Tokens --------------------------------------------------------------- */
 :root {
-  /* Cor: mantida da marca. #021D64 e #0267DB estão escritos na prancha do .ai */
-  --bg:      #021d64;   /* a sala */
-  --surface: #01123d;   /* um degrau de tom, nunca uma linha */
-  --ink:     #eef3fc;
-  --muted:   #a9bfe4;
-  --accent:  #0267db;   /* o azul da marca: preenchimentos */
-  --accent-ink: #6aa9f2; /* o mesmo azul, clareado o bastante para virar texto */
+  /* #021D64 e #0267DB estão escritos na prancha do .ai do cliente.
+     A página é clara: o azul profundo vira tinta e campo, não fundo. */
+  --paper:    #ffffff;
+  --paper-2:  #eff4fb;   /* um degrau de tom, nunca uma linha */
+  --navy:     #021d64;   /* campo de cor das seções fortes */
+  --navy-2:   #01123d;   /* rodapé */
+  --ink:      #0c1a40;
+  --ink-2:    #28395f;   /* texto corrido secundário: 10:1 no papel */
+  --ink-soft: #52648c;   /* só rótulos e notas curtas */
+  --accent:   #0267db;   /* a ação: só ela usa esta cor cheia */
+  --accent-d: #0154b4;
+  --on-navy:  #eaf1fc;
+  --on-navy-soft: #adc2e6;
 
-  /* Cinco degraus de tamanho, não seis */
+  /* Cinco degraus de tamanho */
   --s1: clamp(0.8125rem, 0.79rem + 0.10vw, 0.875rem);   /* 13–14 */
   --s2: clamp(1.0625rem, 1.00rem + 0.25vw, 1.1875rem);  /* 17–19 */
-  --s3: clamp(1.375rem,  1.02rem + 1.5vw,  2.25rem);    /* 22–36 */
-  --s4: clamp(2.25rem,   1.60rem + 2.9vw,  3.25rem);    /* 36–52 */
-  --s5: clamp(2.75rem,   1.40rem + 6.0vw,  4.5rem);     /* 44–72 */
+  --s3: clamp(1.375rem,  1.02rem + 1.50vw, 2.25rem);    /* 22–36 */
+  --s4: clamp(1.875rem,  1.30rem + 2.60vw, 3.00rem);    /* 30–48 */
+  --s5: clamp(2.5rem,    1.30rem + 5.40vw, 4.25rem);    /* 40–68 */
 
-  --margin: 32px;          /* uma margem para a página inteira */
-  --gap-section: 110px;    /* duas seções vizinhas somam 220px: dentro de 120–240 */
-  --radius: 0;             /* um raio só: quadrado */
+  --margin: 32px;
+  --gap-section: 104px;
+  --radius: 0;
+  --bar: 76px;            /* altura da barra fixa */
   --t: 180ms cubic-bezier(.2,.6,.3,1);
 }
 
 @media (max-width: 760px) {
-  :root { --margin: 20px; --gap-section: 48px; }
+  :root { --margin: 20px; --gap-section: 64px; --bar: 64px; }
 }
 
 /* --- Base ----------------------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar) + 16px); }
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
   font-family: 'Clash Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: var(--s2);
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 h1, h2, h3 {
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-  margin: 0;
-  text-wrap: balance;
+  font-weight: 400; letter-spacing: -0.03em; line-height: 1.0;
+  margin: 0; text-wrap: balance; color: var(--ink);
 }
-
 p { margin: 0; text-wrap: pretty; }
 img { display: block; max-width: 100%; height: auto; }
-
 a { color: inherit; text-decoration: none; }
-a:not([class]) { text-decoration: underline; text-underline-offset: 0.25em; }
+a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 
-:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
-}
-
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 ::selection { background: var(--accent); color: #fff; }
 
-.wrap {
-  width: 100%;
-  padding-inline: var(--margin);   /* duas margens externas iguais, sempre */
-  margin-inline: auto;
-  max-width: 1680px;
-}
+.wrap { width: 100%; padding-inline: var(--margin); margin-inline: auto; max-width: 1280px; }
 
 .sr-only {
-  position: absolute; width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip-path: inset(50%); white-space: nowrap;
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
-
 .skip {
-  position: absolute; left: var(--margin); top: -100px;
-  background: var(--ink); color: var(--bg);
-  padding: 12px 18px; font-size: var(--s1); z-index: 100;
-  transition: top var(--t);
+  position: fixed; left: var(--margin); top: -100px; z-index: 120;
+  background: var(--accent); color: #fff; padding: 14px 20px;
+  font-size: var(--s2); transition: top var(--t);
 }
 .skip:focus { top: 12px; }
 
-/* --- Ação primária: o único elemento sólido e claro da página ------------- */
+/* --- Botões: a ação primária é a única coisa azul-cheia da página -------- */
 .btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 26px;
-  background: var(--ink); color: var(--bg);
-  font-size: var(--s2); font-weight: 500;
-  border: 0; border-radius: var(--radius); cursor: pointer;
-  transition: transform 140ms cubic-bezier(.2,.6,.3,1), background var(--t);
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 17px 28px; min-height: 54px;
+  background: var(--accent); color: #fff;
+  font-size: var(--s2); font-weight: 500; line-height: 1.2;
+  border: 0; border-radius: var(--radius); cursor: pointer; text-align: center;
+  transition: background var(--t), transform 140ms cubic-bezier(.2,.6,.3,1);
 }
-.btn:hover { background: #fff; }
-.btn:active { transform: scale(0.975); }
+.btn:hover { background: var(--accent-d); }
+.btn:active { transform: scale(.975); }
+.btn svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
 
-/* ação secundária: um degrau de tom, nunca um contorno de 1px */
-.btn--ghost { background: var(--surface); color: var(--ink); }
-.btn--ghost:hover { background: #021a55; }
+/* secundário: degrau de tom, nunca contorno de 1px */
+.btn--soft { background: var(--paper-2); color: var(--ink); }
+.btn--soft:hover { background: #e2eaf7; }
 
-/* --- Barra do topo -------------------------------------------------------- */
-.top {
-  position: absolute; inset: 0 0 auto 0; z-index: 20;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: var(--margin);
+/* sobre campo de cor */
+.btn--onNavy { background: var(--on-navy); color: var(--navy); }
+.btn--onNavy:hover { background: #fff; }
+
+.btn--sm { padding: 12px 20px; min-height: 46px; }
+
+/* --- Barra fixa ----------------------------------------------------------- */
+.bar {
+  position: sticky; top: 0; z-index: 90;
+  height: var(--bar);
+  background: var(--paper);
+  transition: box-shadow var(--t);
 }
-.top__mark { width: clamp(150px, 15vw, 210px); }
-.top__mark img { width: 100%; }
-.top nav { display: flex; gap: 26px; }
-.top nav a { font-size: var(--s1); color: var(--muted); transition: color var(--t); }
-.top nav a:hover, .top nav a:focus-visible { color: var(--ink); }
-@media (max-width: 860px) { .top nav a:not(.top__cta) { display: none; } }
+.bar__in { height: 100%; display: flex; align-items: center; gap: 24px; }
+.bar.is-stuck { box-shadow: 0 1px 0 rgba(12,26,64,.12); } /* taste-skill-ignore: barra fixa, exceção prevista pela própria regra */
+.bar__mark { flex: none; width: clamp(140px, 14vw, 186px); }
+.bar__mark img { width: 100%; }
 
-/* ===========================================================================
-   1. Abertura — "Duas portas numa parede escura"
-   =========================================================================== */
-.hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 104px var(--margin) 40px;
-  text-align: center;
+.bar__nav { display: flex; gap: 22px; margin-inline-start: auto; }
+.bar__nav a {
+  font-size: var(--s2); color: var(--ink-soft);
+  padding-block: 6px; transition: color var(--t);
 }
+.bar__nav a:hover { color: var(--ink); }
+.bar__nav a[aria-current='true'] { color: var(--accent); font-weight: 500; }
 
-.hero h1 {
-  font-size: var(--s5);
-  line-height: 1.0;
-  max-width: 20ch;
-  margin: 0 auto;
-}
-.hero__sub {
-  margin: 22px auto 0;
-  max-width: 58ch;
-  color: var(--muted);
-  font-size: var(--s2);
+.bar__cta { flex: none; }
+@media (max-width: 1060px) {
+  .bar__nav { display: none; }
+  .bar__cta { margin-inline-start: auto; }
 }
 
-/* as duas portas */
-.doors {
-  display: flex; justify-content: center; gap: 72px;
-  margin: 40px 0 0;
-}
-.door {
-  display: block; width: 240px; text-align: left;
-  transition: opacity var(--t);
-}
-.door img {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
-  border-radius: var(--radius);
-}
-.door__name {
-  display: block; margin-top: 18px;
-  font-size: var(--s3); line-height: 1.2; color: var(--ink);
-}
-.door__line {
-  display: block; margin-top: 6px;
-  font-size: var(--s2); line-height: 1.4; color: var(--muted);
-}
-/* apontar uma porta mantém-na inteira e recua a outra — só a imagem */
-.doors:hover .door:not(:hover) img,
-.doors:focus-within .door:not(:focus-within) img { opacity: .5; }
-.door img { transition: opacity var(--t); }
-
-.hero__act { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-
-@media (max-width: 760px) {
-  .hero { padding: 104px var(--margin) 56px; justify-content: flex-start; }
-  .hero h1 { font-size: 10vw; max-width: none; }
-  .doors { gap: 14px; margin-top: 40px; }
-  .door { width: calc((100% - 14px) / 2); max-width: 168px; }
-  .door__name { font-size: var(--s2); font-weight: 500; }
-  .door__line { font-size: var(--s1); }
-  .hero__act { margin-top: 40px; width: 100%; }
-  .hero__act .btn { flex: 1 1 100%; justify-content: center; }
-}
-
-/* ===========================================================================
-   2. Serviços — "Colunas de nomes num tamanho só"
-   =========================================================================== */
-.services { padding-block: var(--gap-section); }
-.services h2 { font-size: var(--s4); margin-bottom: 72px; }
-
-.services__grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 32px;
-}
-.services__col:nth-of-type(1) { grid-column: 1 / span 3; }
-.services__col:nth-of-type(2) { grid-column: 4 / span 3; }
-.services__col:nth-of-type(3) { grid-column: 7 / span 3; }
-.services__col h3 { color: var(--ink); }
-/* as colunas 10–12 ficam vazias de propósito e recebem a descrição */
-.services__echo {
-  grid-column: 10 / span 3;
-  grid-row: 1;
-  font-size: var(--s3); line-height: 1.3; color: var(--ink);
-  align-self: start;
-}
-
-.services__col h3 { font-size: var(--s3); font-weight: 500; line-height: 1.3; margin-bottom: .9em; }
-.services__list { list-style: none; margin: 0; padding: 0; }
-.services__list li { margin: 0; }
-.services__list button {
-  all: unset; display: block; width: 100%;
-  font-size: var(--s3); line-height: 1.3; padding-block: 9px;
-  color: var(--muted); cursor: pointer;
-  transition: color var(--t);
-}
-.services__list button:hover,
-.services__list button:focus-visible,
-.services__list button[aria-current='true'] { color: var(--ink); }
-
-@media (max-width: 980px) {
-  .services h2 { margin-bottom: 48px; }
-  .services__grid { grid-template-columns: 1fr; gap: 40px; }
-  .services__col:nth-of-type(1),
-  .services__col:nth-of-type(2),
-  .services__col:nth-of-type(3) { grid-column: 1; }
-  .services__echo { display: none; }
-  .services__list button { line-height: 1.4; padding-block: 7px; }
-  .services__sum { display: block; margin-top: 14px; color: var(--muted); font-size: var(--s2); }
-}
-@media (min-width: 981px) { .services__sum { display: none; } }
-
-/* ===========================================================================
-   3. Os sistemas — "Fotografia fixa, lista ativa"   (a coisa viva da página)
-   =========================================================================== */
-.systems { padding-block: var(--gap-section); }
-.systems__grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px; }
-
-.systems__media {
-  grid-column: 1 / span 5;
-  position: sticky; top: 12vh; align-self: start;
-}
-.systems__media img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  border-radius: var(--radius);
-  transition: opacity 300ms linear;
-}
-.systems__media img.is-fading { opacity: 0; }
-
-.systems__side { grid-column: 7 / span 6; }
-.systems h2 { font-size: var(--s4); margin-bottom: 48px; }
-
-.systems__list { list-style: none; margin: 0; padding: 0; }
-.systems__row { border: 0; }
-.systems__row > button {
-  all: unset;
-  display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
-  width: 100%; min-height: 58px; cursor: pointer;
-  font-size: var(--s3); line-height: 1.2; color: var(--muted);
-  transition: color var(--t);
-}
-.systems__row > button:hover,
-.systems__row > button:focus-visible { color: var(--ink); }
-.systems__row[data-active='true'] > button { color: var(--ink); font-weight: 500; }
-.systems__use { font-size: var(--s1); color: var(--muted); white-space: nowrap; }
-.systems__row[data-active='true'] .systems__use { color: var(--ink); }
-
-.systems__panel {
-  max-width: 38ch; font-size: var(--s2); line-height: 1.5;
-  color: var(--muted); padding-bottom: 18px;
-}
-.systems__panel p { margin-bottom: 12px; }
-.systems__panel a { color: var(--ink); text-decoration: underline; text-underline-offset: .25em; }
-
-/* Sem JS: tudo aberto e legível. Com JS, o script fecha os inativos. */
-.js .systems__panel[hidden] { display: none; }
-
-@media (max-width: 980px) {
-  .systems__grid { grid-template-columns: 1fr; gap: 0; }
-  .systems__media {
-    grid-column: 1; position: static;
-    margin-inline: calc(var(--margin) * -1); margin-bottom: 32px;
-  }
-  .systems__media img { aspect-ratio: 4 / 3; height: auto; }
-  .systems__side { grid-column: 1; }
-  .systems h2 { font-size: var(--s3); margin-bottom: 24px; }
-  .systems__row > button { min-height: 56px; }
-}
-
-/* ===========================================================================
-   4. A consequência — "Declaração em escada"
-   =========================================================================== */
-.stair { padding-block: var(--gap-section); }
-.stair__field {
-  background: var(--surface);
-  padding: 40px;
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;
-  align-items: center;
-}
-@media (min-width: 981px) { .stair__field { padding: 72px; } }
-.stair__text { grid-column: 1 / span 6; }
-.stair__statement {
-  font-size: var(--s3); line-height: 1.1; font-weight: 400;
-  letter-spacing: -0.03em; margin: 0;
-}
-.stair__statement span { display: block; }
-.stair__statement span:nth-child(1) { padding-left: 0; }
-.stair__statement span:nth-child(2) { padding-left: 6vw; }
-.stair__statement span:nth-child(3) { padding-left: 12vw; }
-.stair__statement span:nth-child(3) { color: var(--accent-ink); }
-
-.stair__pics { grid-column: 8 / span 5; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.stair__pics img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-
-.stair__note {
-  grid-column: 1 / span 6; margin-top: 32px;
-  font-size: var(--s2); line-height: 1.5; color: var(--muted); max-width: 44ch;
-}
-
-@media (max-width: 980px) {
-  .stair__field { grid-template-columns: 1fr; }
-  .stair__text, .stair__pics, .stair__note { grid-column: 1; }
-  .stair__statement span:nth-child(2) { padding-left: 7vw; }
-  .stair__statement span:nth-child(3) { padding-left: 14vw; }
-  .stair__pics { margin-top: 40px; }
-  .stair__note { margin-top: 32px; }
-}
-
-/* ===========================================================================
-   5. A empresa — "Painel embutido, retrato recortado"
-   =========================================================================== */
-.about { padding-block: var(--gap-section); }
-.about__panel {
-  position: relative; overflow: hidden;
-  background: var(--surface);
-  padding: 56px;
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: 32px;
-}
-.about h2 {
-  grid-column: 1 / span 6; font-size: var(--s4); max-width: 13ch; margin: 0;
-}
-.about__figure {
-  grid-column: 1 / span 6; align-self: end;
-  margin-top: 56px; margin-bottom: -12%;
-}
-.about__figure img {
-  width: 100%; aspect-ratio: 1; object-fit: cover;
-  clip-path: circle(50% at 50% 50%);   /* a esfera do símbolo da marca */
-}
-.about__side {
-  grid-column: 8 / span 4; grid-row: 1 / span 2;
-  display: flex; flex-direction: column; gap: 64px; align-items: start;
-}
-.about__block { max-width: 300px; }
-.about__block h3 { font-size: var(--s2); font-weight: 500; line-height: 1.2; margin-bottom: 14px; }
-.about__block p { font-size: var(--s2); line-height: 1.55; color: var(--muted); }
-
-@media (max-width: 980px) {
-  .about__panel { padding: 28px var(--margin); grid-template-columns: 1fr; min-height: auto; }
-  .about h2 { grid-column: 1; font-size: 8.5vw; }
-  .about__side { grid-column: 1; grid-row: auto; gap: 40px; margin-top: 40px; }
-  .about__block { max-width: none; }
-  .about__figure { grid-column: 1; margin: 48px auto -20%; width: 86%; }
-}
-
-/* ===========================================================================
-   6. Credenciamentos — "Nomes como uma frase"
-   =========================================================================== */
-.creds { padding-block: var(--gap-section); }
-.creds__sentence {
-  font-size: var(--s3); line-height: 1.25; letter-spacing: -0.02em;
-  max-width: 40ch; margin: 0;
-}
-.creds__lead { color: var(--ink); }
-.creds__name { color: var(--muted); transition: color 400ms linear; }
-.creds__name.is-lit { color: var(--ink); }
-.creds__foot { margin-top: 40px; font-size: var(--s2); color: var(--muted); max-width: 52ch; }
-
-/* ===========================================================================
-   7. Contato — "Cartão de visita sobre uma fotografia"
-   =========================================================================== */
-.contact { position: relative; }
-.contact__photo { position: relative; height: 100svh; }
-.contact__photo img { width: 100%; height: 100%; object-fit: cover; }
-
-.card {
-  position: absolute; top: 60px; right: 60px;
-  width: 380px; padding: 32px;
-  background: var(--ink); color: var(--bg);
-  border-radius: var(--radius);
-  display: flex; flex-direction: column; gap: 20px;
-}
-.card h2 { font-size: var(--s3); line-height: 1.1; color: var(--bg); margin: 0; }
-.card dl { margin: 0; display: grid; gap: 14px; font-size: var(--s2); line-height: 1.45; }
-.card dt { font-weight: 500; }
-.card dd { margin: 0; color: #2a3b6e; }
-.card dd a { text-decoration: underline; text-underline-offset: .25em; }
-.card .btn {
-  background: var(--bg); color: var(--ink);
-  justify-content: center; width: 100%; min-height: 52px; margin-top: 4px;
-}
-.card .btn:hover { background: var(--accent); }
-
-@media (max-width: 980px) {
-  .contact__photo { height: 70svh; }
-  .card {
-    position: relative; inset: auto;
-    width: auto; margin: -80px var(--margin) 0; top: 0;
-  }
-  .card .btn { min-height: 56px; }
-}
-
-/* ===========================================================================
-   8. Rodapé — "Colunas em cima, logotipo embaixo"
-   =========================================================================== */
-.foot {
-  background: var(--surface);
-  display: grid; grid-template-rows: auto 1fr auto;
-  padding: 40px var(--margin);
-  margin-top: var(--gap-section);
-}
-.foot__cols {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
-}
-.foot__col { font-size: var(--s2); line-height: 1.5; }
-.foot__col h2 { font-size: var(--s2); font-weight: 500; line-height: 1.5; letter-spacing: 0; margin-bottom: 6px; }
-.foot__col ul { list-style: none; margin: 0; padding: 0; color: var(--muted); }
-.foot__col a:hover { color: var(--ink); }
-
-.foot__mark { align-self: end; }
-.foot__mark svg { width: 100%; height: auto; display: block; fill: var(--ink); }
-.foot__legal {
-  margin-top: 20px; font-size: var(--s1); line-height: 1.5; color: var(--muted);
-  display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between;
-}
-
-@media (max-width: 760px) {
-  .foot { min-height: auto; }
-  .foot__cols { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .foot__mark { margin-top: 20svh; }
-}
-
-/* --- WhatsApp fixo (exigência do escopo: visível em toda a rolagem) ------- */
+/* --- WhatsApp sempre à vista (exigência do escopo) ----------------------- */
 .float {
-  position: fixed; right: var(--margin); bottom: var(--margin); z-index: 50;
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 20px;
-  background: var(--ink); color: var(--bg);
-  font-size: var(--s2); font-weight: 500; border-radius: var(--radius);
-  transition: transform 140ms cubic-bezier(.2,.6,.3,1), background var(--t);
+  position: fixed; right: var(--margin); bottom: var(--margin); z-index: 80;
+  display: inline-grid; place-items: center;
+  width: 58px; height: 58px;
+  background: var(--accent); color: #fff;
+  transition: background var(--t), transform 140ms cubic-bezier(.2,.6,.3,1),
+              opacity var(--t), visibility var(--t);
 }
-.float:hover { background: #fff; }
-.float:active { transform: scale(0.975); }
-.float svg { width: 20px; height: 20px; fill: currentColor; }
-/* o cartão de contato já tem o seu próprio botão: o flutuante sai da frente */
-.float.is-away { opacity: 0; visibility: hidden; transform: translateY(12px); }
-.float { transition: transform 140ms cubic-bezier(.2,.6,.3,1), background var(--t),
-                     opacity var(--t), visibility var(--t); }
-@media (max-width: 560px) { .float span { display: none; } .float { padding: 16px; } }
+.float:hover { background: var(--accent-d); }
+.float:active { transform: scale(.975); }
+.float svg { width: 26px; height: 26px; fill: currentColor; }
+.float.is-away { opacity: 0; visibility: hidden; transform: translateY(10px); }
 
-/* --- Entradas: discretas, e nunca escondem conteúdo sem script ------------ */
+
+/* --- Cabeçalho de seção, igual em toda a página -------------------------- */
+.sec { padding-block: var(--gap-section); }
+.sec--tint { background: var(--paper-2); }
+.sec--navy { background: var(--navy); color: var(--on-navy); }
+.sec--navy h2, .sec--navy h3 { color: var(--on-navy); }
+
+.head { margin-bottom: 52px; }
+.head h2 { font-size: var(--s4); max-width: 22ch; }
+.head p { margin-top: 20px; color: var(--ink-2); max-width: 58ch; }
+.sec--navy .head p { color: var(--on-navy-soft); }
+
+/* ===========================================================================
+   1. Abertura
+   =========================================================================== */
+.hero { padding-block: clamp(44px, 6vw, 84px) var(--gap-section); }
+.hero h1 { font-size: var(--s5); max-width: 17ch; }
+.hero__sub {
+  margin-top: 26px; max-width: 54ch; font-size: var(--s3);
+  line-height: 1.35; color: var(--ink-2);
+}
+.hero__act { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+.hero__proof {
+  margin-top: 36px; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; gap: 10px 36px;
+  font-size: var(--s2); color: var(--ink-2);
+}
+.hero__proof strong { color: var(--ink); font-weight: 500; }
+
+/* as duas portas: o visitante se separa já na primeira tela */
+.doors { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.door {
+  display: block; background: var(--paper-2);
+  transition: background var(--t), transform var(--t);
+}
+.door:hover { background: #e2eaf7; transform: translateY(-3px); }
+.door img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.door__body { padding: 24px 24px 28px; }
+.door__name {
+  display: flex; align-items: center; gap: 10px;
+  font-size: var(--s3); line-height: 1.2; color: var(--ink); font-weight: 500;
+  letter-spacing: -0.02em; margin: 0;
+}
+.door__name svg { width: 22px; height: 22px; fill: var(--accent); flex: none; }
+.door__line { display: block; margin-top: 10px; color: var(--ink-2); font-size: var(--s2); }
+
+@media (max-width: 760px) {
+  .hero h1 { font-size: 10.5vw; max-width: none; }
+  .hero__sub { font-size: var(--s2); }
+  .hero__act { flex-direction: column; align-items: stretch; }
+  .doors { grid-template-columns: 1fr; gap: 14px; margin-top: 40px; }
+  .door img { aspect-ratio: 16 / 9; }
+}
+
+/* ===========================================================================
+   2. Serviços
+   =========================================================================== */
+.svc { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 32px; }
+.svc__col { grid-column: span 4; }
+.svc__col h3 { font-size: var(--s2); font-weight: 500; margin-bottom: 18px; color: var(--accent); }
+.svc__list { list-style: none; margin: 0; padding: 0; }
+.svc__list button {
+  all: unset; display: block; width: 100%; cursor: pointer;
+  font-size: var(--s3); line-height: 1.25; padding-block: 8px;
+  color: var(--ink-2); transition: color var(--t);
+}
+.svc__list button:hover, .svc__list button:focus-visible,
+.svc__list button[aria-current='true'] { color: var(--ink); }
+.svc__echo {
+  grid-column: 1 / -1; align-self: start; margin-top: 8px;
+  font-size: var(--s3); line-height: 1.3; color: var(--ink); max-width: 40ch;
+}
+@media (max-width: 1060px) {
+  .svc { grid-template-columns: 1fr; gap: 40px; }
+  .svc__col, .svc__echo { grid-column: 1; }
+  .svc__echo { display: none; }
+  .svc__sum { display: block; margin-top: 14px; color: var(--ink-2); font-size: var(--s2); }
+}
+@media (min-width: 1061px) { .svc__sum { display: none; } }
+
+/* ===========================================================================
+   3. Os sistemas — foto fixa, lista ativa (a coisa viva)
+   =========================================================================== */
+.sys { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; }
+.sys__media { grid-column: span 5; position: sticky; top: calc(var(--bar) + 32px); align-self: start; }
+.sys__media img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  transition: opacity 280ms linear;
+}
+.sys__media img.is-fading { opacity: 0; }
+.sys__side { grid-column: 7 / span 6; }
+
+.sys__list { list-style: none; margin: 0; padding: 0; }
+.sys__row > button {
+  all: unset; display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px; width: 100%; min-height: 60px; cursor: pointer;
+  font-size: var(--s3); line-height: 1.2; color: var(--ink-2);
+  transition: color var(--t);
+}
+.sys__row > button:hover, .sys__row > button:focus-visible { color: var(--ink); }
+.sys__row[data-active='true'] > button { color: var(--ink); font-weight: 500; }
+.sys__use { font-size: var(--s2); color: var(--ink-2); white-space: nowrap; }
+.sys__row[data-active='true'] .sys__use { color: var(--accent); }
+.sys__panel { max-width: 46ch; font-size: var(--s2); line-height: 1.5; color: var(--ink-2); padding-bottom: 20px; }
+.sys__panel p { margin-bottom: 14px; }
+.js .sys__panel[hidden] { display: none; }
+
+@media (max-width: 1060px) {
+  .sys { grid-template-columns: 1fr; gap: 24px; }
+  .sys__media { grid-column: 1; position: static; }
+  .sys__media img { aspect-ratio: 16 / 10; }
+  .sys__side { grid-column: 1; }
+}
+
+/* ===========================================================================
+   4. Contratos, PMOC e a obrigação (campo de cor)
+   =========================================================================== */
+.plan { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: start; }
+.plan__lead { grid-column: span 5; }
+.plan__lead h2 { font-size: var(--s4); }
+.plan__lead p { margin-top: 20px; color: var(--on-navy-soft); }
+.plan__lead .btn { margin-top: 32px; }
+.plan__blocks { grid-column: 7 / span 6; display: grid; gap: 40px; }
+.plan__block h3 { font-size: var(--s3); margin-bottom: 12px; }
+.plan__block p { color: var(--on-navy-soft); }
+@media (max-width: 1060px) {
+  .plan { grid-template-columns: 1fr; gap: 40px; }
+  .plan__lead, .plan__blocks { grid-column: 1; }
+}
+
+/* ===========================================================================
+   5. Por que escolher
+   =========================================================================== */
+.why { list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 56px; }
+.why li { display: flex; gap: 16px; align-items: start; }
+.why svg { width: 24px; height: 24px; fill: var(--accent); flex: none; margin-top: 4px; }
+.why span { font-size: var(--s3); line-height: 1.3; }
+@media (max-width: 1060px) { .why span { font-size: var(--s2); } }
+@media (max-width: 760px) { .why { grid-template-columns: 1fr; gap: 22px; } }
+
+/* ===========================================================================
+   6. A empresa
+   =========================================================================== */
+.about { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: center; }
+.about__figure { grid-column: span 5; }
+.about__figure img { width: 100%; aspect-ratio: 1; object-fit: cover; clip-path: circle(50% at 50% 50%); }
+.about__body { grid-column: 7 / span 6; }
+.about__body h2 { font-size: var(--s4); }
+.about__body p { margin-top: 22px; color: var(--ink-2); }
+.about__body .btn { margin-top: 32px; }
+@media (max-width: 1060px) {
+  .about { grid-template-columns: 1fr; gap: 32px; }
+  .about__figure { grid-column: 1; max-width: 300px; }
+  .about__body { grid-column: 1; }
+}
+
+/* ===========================================================================
+   7. Credenciamentos e parceiros
+   =========================================================================== */
+.partners { list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 28px 56px; }
+.partners a { display: block; transition: transform var(--t); }
+.partners a:hover { transform: translateY(-3px); }
+.partners img { height: 52px; width: auto; }
+/* parceiro citado pelo cliente sem logotipo enviado: entra pelo nome */
+.partners__name { font-size: var(--s3); color: var(--ink-2); text-decoration: underline; text-underline-offset: .22em; transition: color var(--t); }
+.partners__name:hover { color: var(--accent); }
+@media (max-width: 760px) { .partners { gap: 24px 32px; } .partners img { height: 40px; } }
+
+.creds { margin-top: 72px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; align-items: center; }
+.creds__seal { grid-column: span 2; }
+.creds__seal img { width: 100%; max-width: 124px; }
+.creds__text { grid-column: 4 / span 8; }
+.creds__sentence { font-size: var(--s3); line-height: 1.25; max-width: 24ch; }
+.creds__norms { margin-top: 18px; font-size: var(--s2); line-height: 1.55; color: var(--ink-2); max-width: 58ch; }
+.creds__name { color: var(--ink-2); transition: color 400ms linear; }
+.creds__name.is-lit { color: var(--accent); }
+.creds__foot { margin-top: 20px; color: var(--ink-2); max-width: 60ch; }
+@media (max-width: 1060px) {
+  .creds { grid-template-columns: 1fr; gap: 24px; }
+  .creds__seal { grid-column: 1; } .creds__seal img { max-width: 92px; }
+  .creds__text { grid-column: 1; }
+}
+
+/* ===========================================================================
+   8. Avaliações do Google
+   =========================================================================== */
+.rev { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: center; }
+.rev__lead { grid-column: span 6; }
+.rev__lead h2 { font-size: var(--s4); }
+.rev__lead p { margin-top: 20px; color: var(--ink-2); }
+.rev__card {
+  grid-column: 8 / span 5; background: var(--paper); padding: 36px;
+  display: flex; flex-direction: column; gap: 22px; align-items: start;
+}
+.rev__g { display: flex; align-items: center; gap: 14px; }
+.rev__g svg { width: 36px; height: 36px; flex: none; }
+.rev__g b { display: block; font-weight: 500; font-size: var(--s2); }
+.rev__g span { display: block; font-size: var(--s2); color: var(--ink-2); }
+.rev__card .btn { width: 100%; }
+@media (max-width: 1060px) {
+  .rev { grid-template-columns: 1fr; gap: 28px; }
+  .rev__lead, .rev__card { grid-column: 1; }
+  .rev__card { padding: 26px; }
+}
+
+/* ===========================================================================
+   9. Contato
+   =========================================================================== */
+.contact { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: center; }
+.contact__body { grid-column: span 6; }
+.contact__body h2 { font-size: var(--s4); }
+.contact__body p { margin-top: 20px; color: var(--on-navy-soft); max-width: 48ch; }
+.contact__act { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+.contact__dl { grid-column: 8 / span 5; margin: 0; display: grid; gap: 24px; }
+.contact__dl dt { font-size: var(--s2); color: var(--on-navy-soft); margin-bottom: 4px; }
+.contact__dl dd { margin: 0; font-size: var(--s3); line-height: 1.25; }
+.contact__dl dd a { text-decoration: underline; text-underline-offset: .22em; }
+@media (max-width: 1060px) {
+  .contact { grid-template-columns: 1fr; gap: 36px; }
+  .contact__body, .contact__dl { grid-column: 1; }
+  .contact__act { flex-direction: column; align-items: stretch; }
+}
+
+/* ===========================================================================
+   Rodapé
+   =========================================================================== */
+.foot { background: var(--navy-2); color: var(--on-navy); padding: 72px var(--margin) 40px; }
+.foot__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; max-width: 1280px; margin-inline: auto; }
+.foot__col h2 { font-size: var(--s2); font-weight: 500; letter-spacing: 0; line-height: 1.5; margin-bottom: 8px; color: var(--on-navy); }
+.foot__col ul { list-style: none; margin: 0; padding: 0; color: var(--on-navy-soft); font-size: var(--s2); line-height: 1.6; }
+.foot__col a:hover { color: var(--on-navy); }
+.foot__mark { max-width: 1280px; margin: 72px auto 0; }
+.foot__mark svg { width: 100%; height: auto; display: block; fill: var(--on-navy); }
+.foot__legal {
+  max-width: 1280px; margin: 20px auto 0; font-size: var(--s1);
+  color: var(--on-navy-soft); display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between;
+}
+@media (max-width: 760px) {
+  .foot__cols { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .foot__mark { margin-top: 48px; }
+}
+
+/* --- Entradas discretas; nada fica escondido se o script falhar ---------- */
 .js [data-rise] {
-  opacity: 0; transform: translateY(22px);
-  transition: opacity 620ms cubic-bezier(.2,.6,.3,1), transform 620ms cubic-bezier(.2,.6,.3,1);
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 560ms cubic-bezier(.2,.6,.3,1), transform 560ms cubic-bezier(.2,.6,.3,1);
 }
 .js [data-rise].is-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   .js [data-rise] { opacity: 1; transform: none; }
 }

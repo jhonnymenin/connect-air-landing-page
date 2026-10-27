@@ -83,7 +83,18 @@ Originais fora do git, refazíveis com `tools/fetch-originals.py`.
 | `controles-1957-{520,1040}` | *Pantex Plant Building 12-44-1 Air Conditioning*, 1957 | domínio público | VRF, Multi Split, escada |
 | `exaustao-cozinha-{520,1040}` | *Kitchen Exhaust Fans* | CC0 | Mini VRF, Split Inverter |
 
-**13 arquivos, 440 KB.** O script falha o build se passar de 25 arquivos ou 450 KB.
+### Logos, derivada única, sem duotone
+
+| Arquivo final | Origem | Observação |
+|---|---|---|
+| `parceiro-cacau-show`, `parceiro-oswaldo-cruz`, `parceiro-jtc`, `parceiro-ykp`, `parceiro-utc` | os 5 PNG da pasta do cliente | altura normalizada em 120 px (60 px renderizados), cor original |
+| `selo-cft-crt` | `logo_sistema_cft_crt.png` | 320 px, **mantém a cor**: o brasão em escala de cinza descaracteriza |
+
+**19 arquivos, 483 KB.** O script falha o build se passar de 25 arquivos ou 500 KB.
+
+> O teto subiu de 450 para 500 KB por um motivo declarado: a página clara pede
+> um tratamento de fotografia que retém mais detalhe, e entraram 6 logos que o
+> cliente pediu no documento. Não foi deriva.
 
 Todas via Wikimedia Commons, creditadas no rodapé da página. **Nenhuma é
 apresentada como foto da Connect-Air** — mostram o mundo do ofício, não a obra
@@ -94,6 +105,7 @@ do cliente. Saem assim que as fotos reais chegarem (ver
 
 | Imagem | Motivo |
 |---|---|
+| “UTC Engenharia” como rótulo | **Erro meu, corrigido.** O logo enviado é da **UTC Óleo e Gás** e eu o havia rotulado como UTC Engenharia e linkado para o Instagram da Wolfmann Construtora, que é outra empresa. Hoje o logo aparece com o nome correto e sem link, e a Wolfmann entra pelo nome, já que o logo dela não foi enviado. |
 | Técnicos de HVAC (USAF, domínio público) | São militares americanos identificáveis. Um visitante poderia tomá-los pela equipe da Connect-Air. |
 | `chiller-plant-scada-system` | Monitores de supervisório: outro mundo visual, não senta na sala escura. |
 | `industrial-water-cooling-tower`, `air-conditioning-plant-science` | Céu azul e gramado: claras demais para uma página escura. |

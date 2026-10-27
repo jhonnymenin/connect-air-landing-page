@@ -1,7 +1,54 @@
 # 02 · Direção de arte
 
-**Status: fechada em 27/10/2026 e construída.** A direção escolhida foi dealt
-pela skill `design-taste-frontend`, não inventada.
+**Status: revisada em 27/10/2026.** A primeira versão nasceu da direção
+*The dark room* (fundo escuro). **Foi descartada a pedido da EBSS**: escura
+demais para um público que precisa entender rápido e achar o botão.
+
+## A decisão de parar de sortear
+
+Ao receber o pedido de clarear, sorteei direções novas duas vezes. As duas
+rodadas devolveram opções que **não servem a esta página**: duas exigem muitas
+fotografias que não temos, e uma é um wordmark gigante que não diz o que a
+empresa faz. A segunda rodada ainda devolveu a mesma direção que eu já tinha
+descartado.
+
+Parei aí. A própria skill avisa: *"do not redraw to get something more
+comfortable"*. Rolar o dado até gostar do resultado não é direção de arte.
+
+**Então a decisão foi assumida, não sorteada:** isto é um **restyle**. As
+composições que funcionavam continuam (as duas portas, a lista de sistemas com
+fotografia fixa, os nomes cíclicos dos credenciamentos) e o que muda é fundo,
+navegação e hierarquia da ação. A instrução de quem conhece o cliente vale mais
+que uma folha sorteada.
+
+> ⚠️ Consequência registrada: `.taste-skill/direction.json` ficou com a folha da
+> segunda rodada (*The name as a monument*, tipografia Epilogue) e **não
+> descreve a página**. Por isso o inspector acusa `font-not-dealt`. A página usa
+> Clash Grotesk por escolha deliberada, não por falha de carregamento.
+
+## O que a página é hoje
+
+| | |
+|---|---|
+| Fundo | **Papel branco**, com dois campos de cor em `#021D64` (manutenção/PMOC e contato) e o rodapé em `#01123D` |
+| Tinta | `#0C1A40` para títulos, `#28395F` para texto corrido (10:1 no papel) |
+| Ação | `#0267DB` cheio. **É a única coisa com essa cor na página** |
+| Tipografia | Clash Grotesk 400/500, auto-hospedada, 39 KB |
+| Navegação | Barra fixa com logotipo, 5 âncoras com marcação da seção atual e o botão de orçamento sempre à vista |
+| WhatsApp | Botão flutuante compacto, visível em toda a rolagem (exigência do escopo § 03) |
+
+### Por que a barra fixa inferior do celular foi removida
+
+Cheguei a construir uma barra de ação em largura cheia no rodapé do celular.
+O inspector mostrou que ela **cobria texto** em várias posições de rolagem —
+títulos inteiros a 100%. Como a barra do topo já carrega o botão de orçamento
+em toda a rolagem, a barra de baixo era redundante e custava conteúdo. Saiu.
+
+---
+
+## Histórico: a direção original (descartada)
+
+A direção abaixo foi dealt pela skill e construída na primeira versão.
 
 | | |
 |---|---|
@@ -37,9 +84,7 @@ sem ser o logotipo.
 
 ---
 
-## Histórico da decisão
-
-O que segue registra como se chegou aqui.
+### Como se chegou à primeira versão
 
 ---
 

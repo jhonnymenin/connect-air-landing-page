@@ -1,8 +1,8 @@
 {
  "version": 1,
- "at": "2026-10-27T21:35:25.332Z",
- "seed": 1099997846,
- "redraws": 1,
+ "at": "2026-10-27T22:08:51.045Z",
+ "seed": 751800828,
+ "redraws": 2,
  "input": {
   "brief": "Connect-Air, climatização de comércio e indústria em São Paulo há 15 anos: instalação, manutenção preventiva e corretiva, contratos mensais e PMOC para VRF, chiller, fancoil e splitão",
   "sector": "architecture",
@@ -11,7 +11,9 @@
   "keep": [
    "palette"
   ],
-  "avoid": [],
+  "avoid": [
+   "dark-room"
+  ],
   "sections": [
    "features",
    "list",
@@ -21,125 +23,132 @@
    "contact",
    "footer"
   ],
-  "direction": "dark-room"
+  "direction": null
  },
  "imagery": "atmosphere",
  "allow": [],
  "direction": {
-  "id": "dark-room",
-  "name": "The dark room",
+  "id": "name-as-monument",
+  "name": "The name as a monument",
   "sectors": [
+   "agency",
+   "studio-portfolio",
+   "personal-portfolio",
    "hospitality",
    "restaurant",
    "music",
+   "culture",
    "fashion",
-   "physical-product",
-   "finance",
+   "event",
    "architecture",
-   "studio-portfolio",
-   "ai-product",
-   "personal-portfolio"
+   "real-estate",
+   "physical-product",
+   "consumer-app",
+   "other"
   ],
   "tones": [
-   "quiet",
+   "bold",
+   "editorial",
    "luxury"
   ],
   "needs": [],
-  "idea": "One dark field from top to bottom, and in it, lit things. Photographs and objects appear like exhibits in a dim gallery: each with space around it, each the brightest thing on its screen. Type is light, small and sparse. The darkness is not a theme switch; it is a room, and the page is a slow walk through it. It suits subjects sold on atmosphere and material: an evening restaurant, a metal card, a record, a house at dusk.",
-  "composition": "A single near-black or deep-toned ground runs the full page with no section bands. First screen: either the name at full width in a light weight along the bottom edge with one dim photograph above it, or one object or photograph centred at 40–50% of the viewport with a line of text beneath at 16–18px. Each later screen holds one or two lit items at a generous size (the main one 40–60% of the screen width) with its text set beside it at full reading size; the darkness frames the items, it does not replace content. Images vary in size but all share the same darkness at their edges so they sit in the ground without frames. Practical details come last in a simple two-column text block. The only solid light element on the page is the single primary action.",
-  "typography": "Light or regular weights; they glow on dark. Avoid heavy bold, which looks cheap on black. Headings 4–7vw at most; text 16–18px with leading 1.6 and a slightly lifted ink (not pure white).",
+  "idea": "The name is the headline. Set it so large that it becomes architecture: as wide as the viewport, cropped by an edge, or stacked to fill the screen. Nothing else on the first screen competes; the description of what this is drops to a single small sentence. The idea comes from treating the name's letters as material. Ask what the subject can do to its own name: a photograph of the work sits inside a counter or replaces a letter, the name repeats down the page like a reel, the letters are split to opposite corners and the page happens between them. In the study this was the single most common device among sites scoring 7.5 or more.",
+  "composition": "First screen: the wordmark spans 88–100% of the viewport width (font-size 16–24vw, set with a clamp so it never wraps), anchored either to the bottom edge with its descenders nearly touching it, or dead centre with everything else pushed to the corners. One line of supporting text at 16–20px sits in a corner on a shared margin; navigation is three or four words in the opposite corner. After the hero the page is deliberately small and calm: a narrow text column or a simple two-column grid, so the contrast with the monument holds. The name returns once more at full width as the footer, in the inverse colours. Margins are tight (20–32px) so the type reaches the edges. Two type sizes do nearly all the work: the monument and a small text size, with one mid size for section headings.",
+  "typography": "One family. The display cut must survive enormous sizes: tight tracking (-0.04 to -0.07em), leading 0.8–0.9, optical kerning on. Section headings are modest (28–40px) on purpose.",
   "typeClasses": [
-   "grotesk-light",
-   "serif-light-large",
-   "serif-display",
-   "extended-heavy"
+   "grotesk-tight",
+   "condensed-heavy",
+   "extended-heavy",
+   "heavy-black",
+   "serif-display"
   ],
-  "colour": "A dark ground with a tint (blue-black, green-black, brown-black), a soft light ink, a dimmer ink for secondary text, and one warm or bright accent used once per screen at most.",
+  "colour": "Two values carry the page (ground and ink). The accent, if used at all, appears on one thing only: the single action or the inset image frame. The footer inverts ground and ink.",
   "paletteTags": [
-   "dark-neutral"
+   "light-neutral",
+   "dark-neutral",
+   "two-tone",
+   "mono-accent"
   ],
-  "imagery": "Low-key photographs: dark backgrounds, one light source, subjects emerging from shadow. Their dark edges should blend into the page ground.",
-  "photoTreatment": "If a photograph's background is lighter than the page, darken the image slightly (`filter: brightness(0.85) contrast(1.05)`) rather than adding a frame.",
+  "imagery": "Few images, used as inserts in the typography rather than as illustrations beside it: one photograph inside or behind the name (a 4:5 or 1:1 frame replacing a letter, or tucked between two words), then a short run of large full-width or half-width photographs further down. Square corners. No collage of small thumbnails.",
   "sectionTags": [
-   "photo-led",
+   "type-led",
    "quiet",
-   "object-led"
+   "poster"
   ],
-  "motion": "slow-crossfade",
-  "richness": "Light against dark, and the slow pacing.",
-  "pitfalls": "Grey text on black fails contrast quickly: check it. No glow effects, no neon accent, no coloured light blobs. A dark page with a bright busy photograph is not this direction; choose low-key images. Dark does not mean empty: every screen still carries its content at a readable size, and running text is a light ink at 7:1 or more, not a dim grey.",
+  "motion": "scaling-wordmark",
+  "richness": "Scale. The size of the name against the smallness of everything else is the entire visual event, so protect both ends: do not shrink the name to make room, and do not let body text creep above 20px.",
+  "pitfalls": "A long name set small is just a logo. If the name has more than about 12 characters, stack it on two lines or crop it with the viewport edge; never drop below 12vw. Do not add a second big headline under the name. Do not decorate the letters.",
   "seenIn": [
+   "aww-nothin",
    "opl-kereliott",
-   "aww-moto-finance",
-   "aww-izanami",
-   "aww-cipher",
-   "opl-deeo-studio-2"
+   "aww-paul-kalkbrenner",
+   "opl-nia-creative",
+   "aww-house-of-honey-1",
+   "aww-produx-design"
   ],
-  "allow": [],
-  "photoTone": "dark"
+  "allow": []
  },
  "hero": {
-  "id": "two-doors-on-a-dark-wall",
-  "name": "Two doors on a dark wall",
-  "archetype": "split",
+  "id": "film-title-on-bottom-edge",
+  "name": "Film title, bottom edge",
+  "archetype": "bottom-anchored-type",
   "directions": [
-   "dark-room",
-   "quiet-instrument"
+   "place-carries-it",
+   "name-as-monument"
   ],
   "needs": [],
-  "blueprint": "For a subject with two halves a visitor must choose between: two exhibitions, two audiences, two places, two collections. One near-black flat field. Two portrait photographs at 3:4, each 280×373px, stand side by side 80px apart, so the pair spans x 400–1040 (44% of the width) with their tops at 300px; square corners, no frame, the pictures supplying every colour on the screen. Each photograph is the link to its half, and directly beneath it, left-aligned to the frame, sit its name at 22px in the light ink and one line at 16px in the soft ink. The headline is centred above the pair: two lines at clamp(36px, 3.4vw, 52px), leading 1.05, its first line 104px from the top, at most 26 characters per line. Wordmark top-left and one text link top-right at 15px on 32px margins. About 150px of dark ground stays below the pair and 400px either side of it, closed by the two doors at the centre. Pointing at or focusing one door keeps it at full strength and dims the other to 50%. The page continues below with the two halves in order, so each door is also an anchor to its half.",
-  "mobile": "The pair stays side by side: each photograph 168px wide at 3:4 with a 14px gap, centred at 46% of the height, its name at 17px and its line at 16px beneath it. The headline sits above at 8vw on two lines, centred, 64px down. The wordmark and the link stay in the top corners.",
-  "headline": "A 4–8 word sentence on two lines that names the choice, at most 26 characters per line.",
-  "motion": "stillness",
+  "blueprint": "One photograph fills the viewport at 100vw by 100svh, `object-fit: cover`, with its subject in the upper two-thirds and a calmer, darker zone along the bottom. The name is one condensed uppercase word, or a short name in a high-contrast serif, set at clamp(150px, 17.5vw, 290px) and sized to span the full width between 32px margins. It is centred and anchored so its baseline sits 34px above the bottom edge, covering roughly the lowest quarter of the frame. A soft neutral dark scrim lies under that bottom band only, about 40% of the height; the rest of the image is untouched. Directly above the name's left end, on the same margin, sits the supporting sentence at 16px on two short lines. Directly above its right end, right-aligned, sits the single action as a small paper-coloured rectangular button. The top edge carries a small emblem or wordmark at the left margin and up to five text links at 15px grouped at the right, all in white. The central half of the screen belongs to the view.",
+  "mobile": "The photograph is re-cropped to portrait with `object-position` on its subject and fills 100svh. The name stays on the bottom edge at 22vw on one line, or two lines at 20vw beyond eight characters, 20px above the edge. The supporting sentence sits above the name's left end at 15px. The action button moves to the top-right corner and the links collapse to a menu word beside the emblem.",
+  "headline": "The name of the place: one word of up to about 12 characters at 17.5vw, or two words stacked on a phone.",
+  "motion": "slow-crossfade",
   "seenIn": [
-   "aww-hearst-exhibit-2026"
+   "aww-white-desert",
+   "opl-eagles-nest"
   ]
  },
  "type": {
-  "id": "clash-grotesk-regular",
-  "name": "Clash Grotesk",
-  "class": "grotesk-light",
+  "id": "epilogue-black",
+  "name": "Epilogue",
+  "class": "heavy-black",
   "display": {
-   "family": "Clash Grotesk",
-   "source": "fontshare",
-   "slug": "clash-grotesk",
+   "family": "Epilogue",
+   "source": "google",
    "weights": [
-    400
+    900
    ],
    "italic": false,
-   "settings": "weight 400 · tracking -0.03em · leading 0.95 · sentence case, or uppercase for one statement",
-   "css": "<link rel=\"preconnect\" href=\"https://api.fontshare.com\">\n<link rel=\"preconnect\" href=\"https://cdn.fontshare.com\" crossorigin>\n<link href=\"https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap\" rel=\"stylesheet\">"
+   "settings": "weight 900 · tracking -0.04em · leading 0.9 · sentence case or title case",
+   "css": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;900&display=swap\" rel=\"stylesheet\">"
   },
   "text": {
-   "family": "Clash Grotesk",
-   "source": "fontshare",
-   "slug": "clash-grotesk",
+   "family": "Epilogue",
+   "source": "google",
    "weights": [
     400,
     500
    ],
    "italic": false,
-   "settings": "400 for body, 500 for emphasis · leading 1.4 · tracking 0",
-   "css": "<link rel=\"preconnect\" href=\"https://api.fontshare.com\">\n<link rel=\"preconnect\" href=\"https://cdn.fontshare.com\" crossorigin>\n<link href=\"https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap\" rel=\"stylesheet\">"
+   "settings": "400 for body, 500 for emphasis · leading 1.5 · tracking 0",
+   "css": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;900&display=swap\" rel=\"stylesheet\">"
   },
   "standsInFor": [
-   "Sneak",
-   "ABC Monument Grotesk"
+   "Die Grotesk D",
+   "Acme Gothic",
+   "FH Oscar"
   ],
-  "note": "A slightly narrow neo-grotesk with closed apertures, used at regular weight from marquee size down to paragraphs. Suits agencies and digital studios that want large type without heaviness.",
+  "note": "A broad black grotesque with a slightly uneven rhythm, at its best as a name set very large in mixed case. Suits entertainers, podcasts, consumer apps and blunt SaaS pages; emphasis comes from colour, not from a change of weight.",
   "seenIn": [
-   "aww-px-push",
-   "opl-wild-as",
-   "aww-sstr-friction-reduction"
+   "aww-trevor-noah",
+   "opl-juggle"
   ],
   "links": [
-   "https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500&display=swap"
+   "https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;900&display=swap"
   ],
   "scale": {
    "step-small": "clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem)",
    "step-body": "clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem)",
    "step-lead": "clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem)",
-   "step-head": "clamp(2rem, 1.3rem + 3.2vw, 4rem)"
+   "step-head": "clamp(2.5rem, 1.2rem + 5vw, 5.5rem)"
   }
  },
  "palette": null,
@@ -147,12 +156,10 @@
   "set": "architecture",
   "title": "Architecture",
   "note": "structure, lines, bridges, facades and building interiors",
-  "treatment": "If a photograph's background is lighter than the page, darken the image slightly (`filter: brightness(0.85) contrast(1.05)`) rather than adding a frame.",
+  "treatment": null,
   "others": [
-   "texture",
    "fog-and-quiet",
-   "city-night",
-   "sky-and-space"
+   "texture"
   ],
   "photos": [
    {
@@ -172,6 +179,100 @@
     "page": "https://unsplash.com/photos/busqfOj6i80"
    },
    {
+    "id": 954,
+    "alt": "Narrow opening in a white wall revealing a white staircase",
+    "tone": "light",
+    "colours": [
+     "off-white",
+     "pale beige"
+    ],
+    "mono": false,
+    "calm": "left",
+    "quality": 5,
+    "ratio": 1.52,
+    "by": "Todd Quackenbush",
+    "page": "https://unsplash.com/photos/JJB_K8aCPU4"
+   },
+   {
+    "id": 887,
+    "alt": "White apartment block facade with repeating balconies and windows",
+    "tone": "light",
+    "colours": [
+     "white",
+     "pale grey",
+     "soft red"
+    ],
+    "mono": false,
+    "calm": "none",
+    "quality": 5,
+    "ratio": 1.5,
+    "by": "Roman Kraft",
+    "page": "https://unsplash.com/photos/7sMHTVJ0OTA"
+   },
+   {
+    "id": 620,
+    "alt": "White arched bridge spanning grey water under a pale sky",
+    "tone": "light",
+    "colours": [
+     "white",
+     "pale grey",
+     "charcoal"
+    ],
+    "mono": true,
+    "calm": "bottom",
+    "quality": 5,
+    "ratio": 1.5,
+    "by": "Matthew Wiebe",
+    "page": "https://unsplash.com/photos/HeVd38MWnw4"
+   },
+   {
+    "id": 1081,
+    "alt": "Stepped white modern building corner rising into a pale blue sky",
+    "tone": "light",
+    "colours": [
+     "white",
+     "pale blue",
+     "soft grey"
+    ],
+    "mono": false,
+    "calm": "top",
+    "quality": 5,
+    "ratio": 1.49,
+    "by": "Julien Moreau",
+    "page": "https://unsplash.com/photos/688Fna1pwOQ"
+   },
+   {
+    "id": 855,
+    "alt": "Small figure walking past a huge bright yellow wall",
+    "tone": "light",
+    "colours": [
+     "bright yellow",
+     "black"
+    ],
+    "mono": false,
+    "calm": "left",
+    "quality": 5,
+    "ratio": 1.5,
+    "by": "Rodion Kutsaev",
+    "page": "https://unsplash.com/photos/IJ25m7fXqtk"
+   },
+   {
+    "id": 508,
+    "alt": "Tall pointed vaults and pale columns of a church interior",
+    "tone": "light",
+    "colours": [
+     "cream",
+     "warm grey",
+     "soft orange"
+    ],
+    "mono": false,
+    "calm": "none",
+    "quality": 5,
+    "ratio": 0.76,
+    "by": "Jeff Sheldon",
+    "page": "https://unsplash.com/photos/u3gES0SUsnI"
+   },
+   {
     "id": 693,
     "alt": "Red suspension bridge tower rising from fog above rugged cliffs",
     "tone": "mid",
@@ -186,109 +287,13 @@
     "ratio": 2.15,
     "by": "Rob Bye",
     "page": "https://unsplash.com/photos/bopC0sTGu-E"
-   },
-   {
-    "id": 1033,
-    "alt": "Symmetrical dark concourse with escalators and teal-lit glass walls",
-    "tone": "dark",
-    "colours": [
-     "dark teal",
-     "black",
-     "amber"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Erez Attias",
-    "page": "https://unsplash.com/photos/KqVHRmHVwwM"
-   },
-   {
-    "id": 946,
-    "alt": "Yellow brick house front with a dark green door and window",
-    "tone": "mid",
-    "colours": [
-     "ochre yellow",
-     "dark green",
-     "charcoal"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.4,
-    "by": "Padurariu Alexandru",
-    "page": "https://unsplash.com/photos/2UE1givDiPM"
-   },
-   {
-    "id": 134,
-    "alt": "Steel truss bridge seen from below above brick arches",
-    "tone": "mid",
-    "colours": [
-     "rust orange",
-     "teal",
-     "cream"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.51,
-    "by": "Charlie Foster",
-    "page": "https://unsplash.com/photos/Osl4I3IS9Cw"
-   },
-   {
-    "id": 392,
-    "alt": "Red suspension bridge spanning a bay beneath a pink sunset sky",
-    "tone": "mid",
-    "colours": [
-     "dusty pink",
-     "rust red",
-     "warm brown"
-    ],
-    "mono": false,
-    "calm": "top",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Chris Brignola",
-    "page": "https://unsplash.com/photos/n7n-nkadHRM"
-   },
-   {
-    "id": 860,
-    "alt": "Bridge walkway framed by a web of suspension cables",
-    "tone": "mid",
-    "colours": [
-     "warm grey",
-     "pale beige",
-     "brown"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.33,
-    "by": "Skyler Smith",
-    "page": "https://unsplash.com/photos/ISHD1ovpJ-k"
-   },
-   {
-    "id": 1054,
-    "alt": "Weathered grey concrete apartment block with scattered small windows",
-    "tone": "mid",
-    "colours": [
-     "concrete grey",
-     "pale blue",
-     "charcoal"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.78,
-    "by": "Sérgio Rola",
-    "page": "https://unsplash.com/photos/B1amIgaNkwA"
    }
   ]
  },
  "motion": {
-  "id": "stillness",
-  "name": "Stillness",
-  "description": "No showpiece. The page is simply there, instantly, and the discipline is the statement. Motion is limited to exact feedback: a 140ms press on the button, a 180ms colour change on links, focus rings that appear without delay. Do not add a load animation or scroll reveals to this direction."
+  "id": "slow-crossfade",
+  "name": "Slow crossfade",
+  "description": "The principal photograph quietly changes: three or four images of the same framing crossfade over about 1.6 seconds, holding five to six seconds each, or the fixed image changes when its matching section arrives. It should feel like light shifting in a room. Pause when the tab is hidden; under reduced motion show only the first image."
  },
  "sections": [
   {
@@ -318,78 +323,79 @@
    ]
   },
   {
-   "id": "list-sticky-photo-active-list",
+   "id": "list-lineup-one-size",
    "role": "list",
-   "name": "Sticky photograph, active list",
-   "shape": "split",
+   "name": "Line-up at one type size",
+   "shape": "table",
    "tags": [
-    "photo-led",
     "type-led",
-    "object-led"
+    "dense"
    ],
    "directions": [
-    "hero-object",
-    "split-stage",
-    "place-carries-it",
+    "type-only-statement",
     "dark-room",
+    "loud-flat-poster",
+    "name-as-monument",
+    "borrowed-category",
     "pinned-poster"
    ],
    "needs": [],
-   "blueprint": "Two columns. The left, columns 1–5, is `position: sticky; top: 12vh` and holds one photograph or object at 4:5, 34vw wide, unframed on the ground. The right, columns 7–11, holds a vertical list of five to nine names (treatments, rooms, courses, services) at clamp(20px, 1.6vw, 24px), each row 58px tall with the name at the left and a price or duration right-aligned at 15px in the soft ink. The active row is full ink; the others rest at 40% opacity. Hovering, focusing or scrolling a row to the middle of the viewport makes it active, crossfades the left photograph to that item's image over 300ms, and opens a three-line description at 15px, 34ch wide, directly under the name, pushing later rows down. A heading of two or three words at clamp(32px, 3.4vw, 48px) sits above the list, aligned to its left edge, 48px above the first row.",
-   "mobile": "The photograph becomes a 4:3 band pinned to the top of the screen at 38svh while the list scrolls beneath it; the heading sits above the first row. Rows are 56px tall and the description opens on tap. The image changes with the row nearest the band.",
+   "blueprint": "A full-bleed flat section. The programme is a four-column table spanning the full width between 24px margins, with every cell at one size, clamp(20px, 2.1vw, 30px), one weight, no bold: the act or session flush left, the format starting at 33%, the room or stage at 66%, and the time range right-aligned at the far edge with tabular figures. Rows are 1.5em tall and separated by nothing but that leading; the fixed column starts do the organising. Day or part headings are a single line at the same size in the accent ink with 72px above and 20px below, and may be `position: sticky; top: 0` on a strip of the section's ground colour so the current day stays in view. Breaks and changeovers are rows set in capitals in the soft ink. There is no other heading. Comfortably holds 12–40 rows; with fewer than eight, raise the size to 3vw.",
+   "mobile": "Each entry becomes two lines: the act at 22px on the first, then format, room and time on one line at 14px in the soft ink with the time right-aligned. 18px between entries. Day headings stay sticky at the top on the ground colour.",
    "seenIn": [
-    "opl-neuropelvic-surgery",
-    "opl-humanoid-index"
+    "opl-spatial",
+    "opl-select26"
    ]
   },
   {
-   "id": "intro-staircase-statement",
+   "id": "intro-narrow-column",
    "role": "intro",
-   "name": "Staircase statement",
-   "shape": "statement",
+   "name": "Narrow column, empty field",
+   "shape": "stack",
    "tags": [
-    "type-led",
-    "poster",
-    "colour-field"
+    "quiet",
+    "type-led"
    ],
    "directions": [
-    "colour-chapters",
-    "loud-flat-poster",
-    "type-only-statement",
-    "dark-room",
-    "borrowed-category"
+    "quiet-instrument",
+    "split-stage",
+    "hero-object",
+    "name-as-monument",
+    "contact-sheet",
+    "product-performs"
    ],
    "needs": [],
-   "blueprint": "On a flat dark or saturated field one sentence of 12–18 words is broken into five short lines at clamp(36px, 4.4vw, 64px), bold, leading 1.02, marked up as one paragraph (a statement, so it may run past two lines at this size). Each line starts further right than the one above: indents of 0, 6, 12, 18 and 24vw from a 4vw left margin, set with `padding-left` per line, so the block descends like stairs and ends near the 75% mark. Each line takes its own flat colour from the palette, or lines alternate between two inks. The block is vertically centred in a section 100svh tall. The right quarter (columns 10–12) holds two stacked photographs, each 3:2 and 20vw wide with a 16px gap, top-aligned with the first line. No heading; a two-line note at 15px sits at the bottom-left margin, on the first line's left edge. On a page without images, leave the right quarter empty.",
-   "mobile": "Five lines at 9vw (35px on a 390px screen) with indents of 0, 5, 10, 15 and 20vw, so the stair still reads on a 390px screen. The two photographs follow below as one row of two equal 3:2 frames. The note sits last, left-aligned.",
+   "blueprint": "A single text column 300–340px wide, its left edge at 15% of the viewport width, starting 64px below the section top. It holds four or five short paragraphs at 15–16px with leading 1.5 and one blank line between them; the first paragraph is in medium weight and full ink, the rest in regular weight and the soft ink. No heading, no image, no button; one underlined text link may end the last paragraph. The remaining three-quarters of the 1440 screen is untouched ground, and the section is only as tall as the text plus 160px of padding below. The column's left edge must match a line used elsewhere on the page (the wordmark's left edge or a later column). Where the page has a large object or a fixed photograph, this column is the small text beside it. Holds 90–150 words comfortably.",
+   "mobile": "The column becomes 78% of the width, left-aligned at the 20px margin, so a strip of empty ground remains on the right as a deliberate margin. Text stays at 15–16px with the first paragraph in medium weight. Padding is 72px above and 96px below.",
    "seenIn": [
-    "aww-pp-neue-montreal",
-    "aww-trevor-noah",
-    "aww-izanami"
+    "opl-when-you-wish-upon-a-starboy",
+    "opl-deeo-studio-2",
+    "aww-vero-new-york"
    ]
   },
   {
-   "id": "about-shaped-portrait-panel",
+   "id": "about-pinned-title-portraits",
    "role": "about",
-   "name": "Inset panel, shaped portrait",
-   "shape": "split",
+   "name": "Pinned title, portraits pass",
+   "shape": "pinned",
    "tags": [
-    "colour-field",
     "photo-led",
-    "object-led"
+    "poster",
+    "type-led"
    ],
    "directions": [
-    "one-motif",
-    "hero-object",
-    "borrowed-category",
-    "colour-chapters",
-    "dark-room"
+    "pinned-poster",
+    "name-as-monument",
+    "loud-flat-poster",
+    "dark-room",
+    "uneven-photographs"
    ],
    "needs": [],
-   "blueprint": "A deep-toned panel inset 20px from the page edges with a 12px radius, about 110svh tall, `overflow: hidden`. Left half: a two-line statement of four to seven words at clamp(40px, 4.4vw, 64px) in a pale ink, top-left with 56px padding; it is the heading and has nothing above it. Below it a photograph of the person or the workshop, masked with `clip-path` or an SVG `mask` to one bold shape taken from the subject (a four-lobed flower, a circle, an arch, a chamfered block), 38vw across, positioned so the panel's bottom edge crops its lowest fifth. Right side, starting at 63% of the width and 56px from the top: two text blocks 300px wide and 64px apart, each a subhead at 22px over a four-line paragraph at 15px; then one solid button in the accent colour. Between the statement and the text blocks the panel is empty. One photograph only.",
-   "mobile": "The panel is inset 10px and stacks: the statement at 8.5vw, then the two text blocks at full width, the button, and last the shaped photograph at 86vw across, centred and cropped by the panel's bottom edge by a quarter of its height.",
+   "blueprint": "A wrapper tall enough for its portraits: about 90svh per person, up to six people. A `position: sticky; top: 0` layer of 100svh holds the heading, two words at clamp(88px, 12vw, 180px), leading 0.85, centred at mid-height, in white with `mix-blend-mode: difference` so it reads over ground and photographs alike. Beneath it in the stacking order, portraits scroll past in normal flow: each a 4:5 photograph 26–30vw wide, alternately starting at column 2 and ending at column 11, 60svh apart, so each one passes behind a different half of the heading. Under each portrait's left corner: the name at 18px, the role at 14px in the soft ink, and one sentence of up to 30 words in a 280px measure. The last portrait is followed by 40svh of empty ground before the heading releases. Square corners. Nothing else is on screen.",
+   "mobile": "The heading shrinks to 17vw and pins 16px from the top instead of at mid-height. Portraits become 72% wide, alternating between the left and right margins, 48px apart, each with name, role and sentence beneath at the portrait's width.",
    "seenIn": [
-    "opl-zara-webb"
+    "aww-glitch-grit",
+    "opl-the-deep-end"
    ]
   },
   {
@@ -416,144 +422,137 @@
    ]
   },
   {
-   "id": "contact-visit-card-on-photograph",
+   "id": "contact-address-display-rows",
    "role": "contact",
-   "name": "Visit card on a photograph",
-   "shape": "full-bleed",
+   "name": "Address in display rows",
+   "shape": "list",
    "tags": [
-    "photo-led",
-    "object-led"
+    "type-led",
+    "poster",
+    "colour-field"
    ],
    "directions": [
-    "place-carries-it",
-    "dark-room",
-    "page-is-the-object",
-    "pinned-poster",
-    "hero-object"
+    "type-only-statement",
+    "name-as-monument",
+    "loud-flat-poster",
+    "colour-chapters",
+    "borrowed-category"
    ],
    "needs": [],
-   "blueprint": "A full-bleed photograph of the place, 100vw by 100svh, carries one solid card and nothing else. The card is a filled panel in the paper colour, fully opaque, 380px wide with 8px corners and 32px padding, placed in the upper-right corner 60px from the top and right edges (or the upper-left: pick the corner where the photograph is calmest). It holds, top to bottom: a two- or three-word title at 28px in a light weight; the address on two lines at 16px; the opening hours as three rows with days at the left and times right-aligned in tabular figures; the phone number; then, flush with the card's bottom edge and spanning its width, a solid booking button 52px tall. The card may be `position: sticky; top: 60px` inside a taller section so it holds while the photograph scrolls beneath it. The photograph's focal point must stay clear of the card. No heading outside the card.",
-   "mobile": "The photograph is 100vw by 70svh. The card leaves the corner: it spans the width with 16px margins and overlaps the photograph's bottom edge by 80px, so image and card interlock. The booking button is full width, 56px tall, at the card's bottom.",
-   "seenIn": [
-    "opl-the-deep-end",
-    "opl-madie"
-   ]
+   "blueprint": "The contact block is a stack of five full-width rows, every one set at the same size, clamp(44px, 6vw, 88px), regular weight, left-aligned with a 20px inset and leading 1.0: the building or venue name, the street, the city with postcode, the opening hours as one compact line, the phone number. Each row is about 150px tall with the text sitting in its lower third; rows are told apart by alternating two flat tones of the section colour as full-width bands, or by 28px of space alone. A sixth row holds a one-word greeting at the same size followed, 24px to its right and centred on the x-height, by a solid round button 0.9em across with an arrow, which opens the email or booking link. Street and phone rows are links (map, call). No heading and no form. Optionally, one small round photograph sits at the right end of the first row.",
+   "mobile": "Rows at 9.6vw with 16px insets, about 84px tall; the hours break onto two rows (days, then times). The greeting row becomes a full-width band in the accent colour with the round arrow button at its right end, 56px across.",
+   "seenIn": []
   },
   {
-   "id": "footer-columns-then-wordmark",
+   "id": "footer-invitation-over-cropped-wordmark",
    "role": "footer",
-   "name": "Columns above, wordmark below",
-   "shape": "stack",
+   "name": "Invitation over a cropped name",
+   "shape": "statement",
    "tags": [
     "type-led",
     "poster"
    ],
    "directions": [
+    "loud-flat-poster",
     "name-as-monument",
-    "place-carries-it",
-    "uneven-photographs",
-    "dark-room",
-    "editorial-report",
+    "borrowed-category",
+    "pinned-poster",
     "type-only-statement",
-    "borrowed-category"
+    "sentence-as-layout"
    ],
    "needs": [],
-   "blueprint": "The footer inverts ground and ink and fills a whole viewport (min-height 100svh), arranged as three rows in a grid (auto 1fr auto). Top row, 40px from the edge: four small columns on the 12-column grid (address, navigation, social, hours or contact), each a plain list at 15–16px with its first line in the full ink and the rest in the softer ink. Middle row: empty. Bottom row: the wordmark alone, sized to run from the left margin to the right margin on one line. Set it as inline SVG text with a `viewBox` fitted to the word and `width: 100%`, or tune `font-size` in `vw` to the letter count, so it never wraps; its baseline sits 20px above a single line of legal text at 13px. With `position: sticky; bottom: 0` and a lower `z-index` than the page, the last section slides away to uncover it.",
-   "mobile": "Columns become two by two at 15px with 32px between rows, at the top. A gap of about 20svh follows. The wordmark spans the full width at the bottom; a name longer than ten letters stacks on two lines, each fitted to the width. Legal line beneath at 12px.",
+   "blueprint": "Close and footer in one full-viewport field of the inverse colour. Upper third, columns 1–7: a two-line invitation at about 5vw, three to five words, with one filled rectangular button beneath it. At columns 10–12, top-aligned with the invitation, three or four social or contact links stacked at 16px. The wordmark fills the bottom of the screen at 26–30vw on one line, `white-space: nowrap`, heavier and larger than the viewport can hold: it is pushed down with `transform: translateY(30%)` so the bottom edge cuts through the letters, and a long name also runs off the right edge. `overflow: hidden` on the footer does the cropping. One row of credits and legal links at 13px sits directly above the wordmark's cap line, spread left and right. The cropped name must be recognisable from its upper two-thirds alone; test that it is.",
+   "mobile": "Invitation at 11vw on two lines at the top with a full-width button. Links follow as one row of words at 15px. The wordmark sits at 34vw at the bottom, cropped by both the bottom and the right edge, with the legal row above it at 12px.",
    "seenIn": [
-    "aww-kononenko-architectural-bureau",
-    "aww-zeroz-brand-site",
-    "opl-eagles-nest",
-    "aww-white-desert",
-    "opl-lovably"
+    "aww-nothin",
+    "opl-goodgoodgreat",
+    "opl-marina-rachello",
+    "aww-butter"
    ]
   }
  ],
  "references": [
   {
-   "id": "aww-moto-finance",
-   "name": "Moto Finance",
-   "url": "https://www.moto-card.com/",
+   "id": "aww-produx-design",
+   "name": "Produx Design",
+   "url": "https://www.produx.design",
    "source": "Awwwards Site of the Day",
-   "kind": "finance",
-   "score": 7.3,
-   "idea": "A metal card presented like a museum piece: lit by a single overhead light box in a black room, then orbiting through dim architectural stills.",
+   "kind": "agency",
+   "score": 7.4,
+   "idea": "The wordmark is the hero, and the showreel image assembles itself from scattered square fragments as you scroll.",
    "mood": [
-    "nocturnal",
-    "exclusive",
-    "cold",
-    "cinematic"
+    "dark",
+    "confident",
+    "technical",
+    "spare"
    ],
-   "archetype": "product-object-centre",
-   "hero": "Black full-bleed 3D scene. A pale silver-lavender light panel, a trapezoid in perspective like a ceiling light box, occupies the top 20% and centre 55% of the viewport. The two-line uppercase headline, centred at 4.4vw in medium grotesk with tight leading, straddles the panel's lower edge so its first line sits half on light, half on black. In the exact centre a small metal card stands on a low plinth, only about 150px wide, surrounded by darkness. A light-grey pill button (about 250 by 52px) is centred near the bottom; the logo is top-left and a dark pill button top-right.",
-   "type": "Neue Montreal only: weight 500 uppercase at 64px (4.4vw) with near-zero tracking and leading under 1.0 for headings, 20px sentence case for body, tiny caps labels in the footer. Three sizes; centred until the left-aligned footer.",
-   "colour": "#080808 #edefef #c4cbd6 #e1e5e5 #2a2f3a — Black with cool silver-grey and no brand colour at all. One section inverts to pale grey-white with grey type; the only chroma is amber city lights and a blue atmosphere rim on the globe.",
-   "imagery": "Rendered chrome card with an embossed profile medallion, a night-side Earth, and small dim architectural and fashion stills floating as tilted panels in 3D. Everything underexposed, cool and low-saturation.",
-   "layout": "Full-viewport scenes stacked one per screen, each with a centred uppercase heading, an optional short sub-line and a pill button. One light interlude breaks the black. The footer switches to a left-aligned statement with link columns at the far right.",
+   "archetype": "giant-wordmark",
+   "hero": "Near-black field with 80px side margins. The wordmark, in a wide, light-weight uppercase sans with a slashed O, runs margin to margin (about 89% of the width) with a cap height near 20% of the viewport, starting 9% from the top. A large empty gap follows. In the lower half a two-line statement at 5.1vw sits flush left; opposite it, bottom-aligned to the statement and flush to the right margin, is a three-line paragraph in small monospace about a quarter of the width. No nav bar, button or image in the first viewport; the bottom quarter is empty.",
+   "type": "At Aero in light-to-medium weight for the wordmark, the 74px statement and project titles; DM Mono for the hero paragraph, bracketed nav items and uppercase project blurbs at about 11px. Three sizes; the statement is roughly five times the mono text.",
+   "colour": "#0e0e0e #e4e4e4 #545e54 #303930 #6f8f3a — Near-black page with off-white type and no accent colour. Colour arrives only through imagery: moss green and sage in the showreel render, then each case-study thumbnail brings its own palette.",
+   "imagery": "A 3D render of a moss-covered boulder on a sage background, first broken into scattered square tiles, then whole as a 16:9 inset. Work thumbnails are square-cornered stills and video in mixed ratios, including one vivid orange-violet gradient card.",
+   "layout": "80px margins. After the hero, a small logo top-left and four bracketed mono links spread across the right half. Hero is all type, the next three screens are a pinned image assembly, then a work grid with unequal column widths and mono captions under each thumbnail.",
    "sections": [
     {
-     "role": "features",
-     "description": "Centred heading at the top with a two-line grey sub-line and a pale pill button directly under it. The lower 45% is the top arc of a night-side Earth rising from the bottom edge, about 75% of the viewport wide, with city lights and a bright blue-white rim on the upper right. Three small dark capsule labels with check icons float over and beside the globe at staggered positions, like status notifications."
+     "role": "other",
+     "description": "Pinned showreel reveal on black. Eight to ten small square tiles, 60 to 100px, each a different crop of the same image, float scattered around the centre at different depths, some blurred. As scroll advances they multiply, enlarge and lock together until they form one 16:9 image inset at about 70% of viewport width, with the wordmark centred on it in white and tiny captions overlaid at left and lower right."
     },
     {
-     "role": "gallery",
-     "description": "A dark 3D room: about twelve small photo panels (roughly 70 by 90px, each tilted at its own angle, heavily dimmed) arranged in two loose rows across the full width, receding with blur. The card stands edge-on in the centre, much larger, catching a specular highlight. Later the card faces front at top-centre and a centred two-line heading with a pill button sits under it."
-    },
-    {
-     "role": "stats",
-     "description": "A pale grey-white band. Two tall columns of currency amounts in mid-size light-grey sans, one at a quarter and one at three-quarters of the width, each fading to white at top and bottom like slot-machine reels, with the centre rows darkest. Between them, three short centred lines of small black text. The bottom edge of the band reveals a dark photograph."
+     "role": "work",
+     "description": "Two unequal columns on black, roughly 52% and 30% of the width with a wide gutter. Each item is a square-cornered thumbnail with a row of small rectangular mono tags along its bottom edge; beneath it a small square bullet, the project name in the sans at about 16px and a two-line uppercase mono blurb. The next item breaks the grid: a single thumbnail centred at about 75% width."
     }
    ],
    "steal": [
-    "Let a headline straddle the edge of a light shape so one line is half on light and half on dark.",
-    "Show the product very small in a large dark space in the first viewport, then let it grow as the page scrolls.",
-    "Use vertically scrolling columns of real-looking figures, faded at both ends, as a quiet backdrop for a three-line statement."
+    "Run the wordmark margin to margin in a light weight rather than a heavy one; thin strokes at huge size read as assured instead of loud.",
+    "Pair one large sans statement with a tiny monospace paragraph bottom-aligned on the opposite margin and leave the middle of the row empty.",
+    "Introduce the hero image as scattered square crops of itself that converge into the full frame on scroll."
    ],
-   "media": "An 11s hero video of a CG metal card on a plinth covers the whole first screen and holds on its last frame. Then a pinned WebGL globe in the lower half under centred text, a 3D card centred in a depth cloud of small photo tiles dimmed to 30-40%, full-bleed sticky photographs with text docked in opposite corners, and a photo strip sitting on an index list; all low-key and desaturated, photos meeting the near-black ground through 200-300px fades, 0px radius.",
-   "motion": "The intro ends in about 1.2s as the camera pushes in and the headline, nav and button arrive (load 9.9s), and Lenis then runs 32 ScrollTriggers: the globe pins for 2.5 viewports at scrub 1, the card turns in 3D across its section, the theme inverts to pale grey with the nav colour following, and benefit rows scrub in one by one. Lines rise by yPercent over 0.65s power3.out and leave over 0.45s power2.in, and headings rise from a blur over 1s power2.inOut."
+   "media": "The fold has no media at all; the first picture is the 40s showreel, which arrives on the second screen as scattered square tiles at different depths that converge into an inset 16:9 frame, then fills 56-96% of each screen until it is full-bleed at about 4850px. Below: a staggered two-column mosaic with a centred wide interlude, a logo strip bleeding off both edges, and a pinned 3D stone centre-right with the statement docked bottom-left; zero radius everywhere.",
+   "motion": "Black at 400ms, then wordmark letters rise one by one out of a baseline mask, tagline words rise in masked lines and the small blurb types itself out, settled by about 2.2s. Lenis drives a sticky, scrubbed hero in which tiles fly in from depth, blurred to sharp, assemble the frame and scale it to full bleed, then headings resolve through a pixel-slice glitch, work frames reveal by inset clip, the manifesto colours word by word and the closing stone grows moss as the ground turns from black to moss green, all as per-frame script (44,246 style mutations) with no GSAP exposed."
   },
   {
-   "id": "aww-izanami",
-   "name": "IZANAMI",
-   "url": "https://izanami-official.com/",
-   "source": "Awwwards Site of the Day",
-   "kind": "architecture",
-   "score": 7,
-   "idea": "Silence as design: one small sentence in fog, then a slow descent from mist into a dark glass pavilion.",
+   "id": "opl-kereliott",
+   "name": "Kereliott",
+   "url": "https://kereliott.com/",
+   "source": "One Page Love",
+   "kind": "hospitality",
+   "score": 7.3,
+   "idea": "A quiet house gets a quiet page: one dark field, one typeface, the name set as wide as the screen and photographs left to drift in generous darkness.",
    "mood": [
-    "meditative",
-    "dark",
-    "misty",
-    "ceremonial",
-    "quiet"
+    "calm",
+    "understated",
+    "nocturnal",
+    "refined"
    ],
-   "archetype": "fullbleed-media-overlay",
-   "hero": "After a warm-black loader showing only one 18px serif sentence and a small counter, the hero is a full-bleed, desaturated grey-green image of pine forest dissolving into fog. The same sentence stays at 18px in white, left-aligned on a line about 17% from the left edge and exactly at vertical centre; it is the only text in the picture area. A small white seal-style logo sits top-left; a language switch and menu label in tiny tracked capitals sit top-right, each with a dot above. Along the bottom edge: copyright, two live city clocks, and a scroll cue at far right, all near 10px.",
-   "type": "Playfair Display regular for the few headings, only 18 to 45px (3.1vw at most); Shippori Mincho for body at 14px; Cinzel capitals with wide tracking for nav, clocks and footer. Nothing is large: hierarchy comes from isolation rather than size.",
-   "colour": "#0a0801 #6f7a70 #b7b5a6 #d9d2c3 #4b5b39 — Warm near-black panels and grey-green fog imagery with off-white text at reduced opacity. Moss green and sand from the small garden photos are the only colour; there is no accent.",
-   "imagery": "Fog-bound forest, a black-framed glass pavilion seen in one-point perspective, and small crops of incense smoke, a bamboo water spout and raked gravel. Small images are square-cornered, portrait or square, overlapping one another and the dark ceiling plane.",
-   "layout": "Wide margins, with text hung on an inner line about 17% across instead of the page edge. Most screens hold one image and one short text; small photos are placed asymmetrically near corners and overlap. A rotated section label runs down the left edge.",
+   "archetype": "giant-wordmark",
+   "hero": "Very dark green-black field with cream type. A two-line introductory sentence at about 30px sits top-left inside 30px margins; a small cream rectangular button sits top-right. The upper half is otherwise empty. The house name fills the full content width in a flared humanist sans, mixed case, with capitals about 19vw tall, its baseline at roughly 87% of the viewport height. Immediately beneath, separated by a gap of a few pixels, the top sliver of a full-width landscape photograph enters from the bottom edge.",
+   "type": "A single face, Trust, in regular weight: a humanist sans with flared terminals and old-style figures. The wordmark is an oversized graphic; all other text is one size of about 20-30px plus tiny 10px photo captions. Hierarchy is position, not weight.",
+   "colour": "#161c1a #eae8dc #222926 #1f2926 — Cream on green-black from top to bottom with no accent colour. The map is drawn in a tone barely lighter than the ground, so photographs supply all the colour.",
+   "imagery": "Natural-light photos of a stone cottage, garden and deck with square corners, in mixed portrait and landscape crops at differing sizes. One full-width opener, then small images placed singly with tiny captions under the left corner.",
+   "layout": "30px margins, text held to the left 60% in one size. Photographs are staggered left and right at different widths with large dark gaps between, like pictures passed on a wall. The name and a booking button stay fixed in the top corners.",
    "sections": [
     {
      "role": "intro",
-     "description": "Over the black ceiling of the pavilion image, a three-line serif heading at about 3vw sits left of centre, each line indented further than the one above. Faint body text follows below it. A small square photo sits top-left under the logo; at right, three portrait photos overlap in a cluster, two beige garden shots behind and a narrower green water-ripple image in front and raised higher, running off the bottom edge."
+     "description": "A full-width landscape photograph runs margin to margin directly under the wordmark, followed after a gap by a four-line paragraph in the single text size, left-aligned and spanning about 85% of the width. There is no heading or label; the text simply continues the sentence begun at the top of the page."
     },
     {
      "role": "other",
-     "description": "Full-bleed one-point-perspective view down a glass corridor, its ceiling filling the upper half as near-black. A text link with a short leading rule sits top-left on the inner line; a landscape photo of raked gravel is tucked against the top edge right of centre; a three-line heading fades in low and left of centre over the glass. A section name rotated ninety degrees runs down the far left."
+     "description": "After a left-aligned paragraph, a silhouette map of the region sits centre-left, about half the viewport wide, filled in a green only a few percent lighter than the background. Five towns are marked with small ring dots and tiny labels; only the house's town has a solid cream dot. No border, legend or frame."
     },
     {
-     "role": "footer",
-     "description": "Near-black and almost empty. One section name in serif at about 24px, preceded by a long thin rule, sits at mid-height left of centre. Lower down, tiny tracked-capital columns: a nav list, two office addresses side by side, and social links pushed to the far right. The bottom edge repeats the copyright and the two city clocks."
+     "role": "gallery",
+     "description": "Photographs are placed one or two per screen in a stagger: a portrait image about 30% wide against the left margin, a larger near-square one starting lower against the right margin, later a landscape image top-right of centre and a smaller one bottom-left. Each has a 10px caption under its left corner. More than half of every screen is empty dark ground."
+    },
+    {
+     "role": "contact",
+     "description": "Two short left-aligned sentences in the standard text size with underlined inline links to booking platforms and an email address, then a small cream certification badge. The footer is a single line at the very bottom: social link left, copyright centre, three underlined utility links right, with a tall empty gap above."
     }
    ],
    "steal": [
-    "Place a single 18px sentence at vertical centre on an offset left line over full-bleed fog, and let the absence of a headline be the statement.",
-    "Stair-step a three-line heading by indenting each line further than the one above it.",
-    "Run two live city clocks with time-zone labels along the bottom edge as quiet proof of where the firm operates."
-   ],
-   "media": "A misted forest photograph covers the whole first screen under drifting cloud layers, with text on about 0.2% of the area. Then a pinned full-screen architectural scene dollies forward while overlapping collages of two or three photographs at different widths pass over it, rows pair a text column at about 28vw with a portrait flush to the right margin, and the fog band returns as a bookend; about 11 photographs, one WebGL canvas, no video.",
-   "motion": "A warm near-black screen with the tagline already in place until about 2.5s, then a fog bank creeps in from the lower right and the chrome fades in by 4.5s; load took 7.2s. Lenis with three sticky sections scrubs the scene as the forest darkens and the camera sinks into the pavilion, photographs move at different rates, and headline lines fade in one by one; two cloud layers loop on 100s linear translates, and there is no reduced-motion rule."
+    "Size the wordmark to fill the content width exactly and let the first photograph tuck directly under its baseline.",
+    "Draw a location map as a tone-on-tone silhouette with one filled dot among ring dots.",
+    "Use a single typeface in one weight and essentially one text size, creating hierarchy through placement and emptiness."
+   ]
   },
   {
    "id": "aww-lpas",
