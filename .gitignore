@@ -4,7 +4,10 @@
 # Ferramentas
 .playwright-mcp/
 node_modules/
-.impeccable/
+.impeccable/*
+# a regra de ignore do detector é conhecimento do projeto: vai para o git.
+# O consentimento do hook e o cache são da máquina: ficam de fora.
+!.impeccable/config.json
 
 # Saída do inspector de design (screenshots). A folha de direção fica.
 .taste-skill/*

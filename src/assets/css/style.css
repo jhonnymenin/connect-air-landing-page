@@ -195,7 +195,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .door__body { padding: 24px 24px 28px; }
 .door__name {
   display: flex; align-items: center; gap: 10px;
-  font-size: var(--s3); line-height: 1.2; color: var(--ink); font-weight: 500;
+  font-size: var(--s3); line-height: 1.3; color: var(--ink); font-weight: 500;
   letter-spacing: -0.02em; margin: 0;
 }
 .door__name svg { width: 22px; height: 22px; fill: var(--accent); flex: none; }
@@ -218,7 +218,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .svc__list { list-style: none; margin: 0; padding: 0; }
 .svc__list button {
   all: unset; display: block; width: 100%; cursor: pointer;
-  font-size: var(--s3); line-height: 1.25; padding-block: 8px;
+  font-size: var(--s3); line-height: 1.3; padding-block: 8px;
   color: var(--ink-2); transition: color var(--t);
 }
 .svc__list button:hover, .svc__list button:focus-visible,
@@ -251,7 +251,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .sys__row > button {
   all: unset; display: flex; align-items: baseline; justify-content: space-between;
   gap: 24px; width: 100%; min-height: 60px; cursor: pointer;
-  font-size: var(--s3); line-height: 1.2; color: var(--ink-2);
+  font-size: var(--s3); line-height: 1.3; color: var(--ink-2);
   transition: color var(--t);
 }
 .sys__row > button:hover, .sys__row > button:focus-visible { color: var(--ink); }
@@ -329,7 +329,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .creds__seal { grid-column: span 2; }
 .creds__seal img { width: 100%; max-width: 124px; }
 .creds__text { grid-column: 4 / span 8; }
-.creds__sentence { font-size: var(--s3); line-height: 1.25; max-width: 24ch; }
+.creds__sentence { font-size: var(--s3); line-height: 1.3; max-width: 24ch; }
 .creds__norms { margin-top: 18px; font-size: var(--s2); line-height: 1.55; color: var(--ink-2); max-width: 58ch; }
 .creds__name { color: var(--ink-2); transition: color 400ms linear; }
 .creds__name.is-lit { color: var(--accent); }
@@ -372,7 +372,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .contact__act { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
 .contact__dl { grid-column: 8 / span 5; margin: 0; display: grid; gap: 24px; }
 .contact__dl dt { font-size: var(--s2); color: var(--on-navy-soft); margin-bottom: 4px; }
-.contact__dl dd { margin: 0; font-size: var(--s3); line-height: 1.25; }
+.contact__dl dd { margin: 0; font-size: var(--s3); line-height: 1.35; }
 .contact__dl dd a { text-decoration: underline; text-underline-offset: .22em; }
 @media (max-width: 1060px) {
   .contact { grid-template-columns: 1fr; gap: 36px; }
