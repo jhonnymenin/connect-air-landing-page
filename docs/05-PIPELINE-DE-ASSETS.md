@@ -71,9 +71,33 @@ está errado.
 
 Toda imagem publicada tem uma linha aqui. Sem linha, não entra no `src/`.
 
-| Arquivo final | Origem | Alt text | Seção |
+Derivadas geradas por `tools/build-assets.py` (limpeza destrutiva do destino).
+Originais fora do git, refazíveis com `tools/fetch-originals.py`.
+
+| Arquivo final | Origem | Licença | Onde aparece |
 |---|---|---|---|
-| _(a preencher na fase de desenvolvimento)_ | | | |
+| `duto-1957-{420,840}` | *Pantex Plant Building 12-44-1 Air Ducts*, 1957 | domínio público | porta "Instalar", Splitão |
+| `casa-de-maquinas-{420,840}` | *Ventilation ductwork in a mechanical room* | CC BY 2.0 | porta "Manter", Self-contained |
+| `chiller-{520,1040,1600}` | *Chiller*, P199 | domínio público | lista de sistemas, contato (sangria) |
+| `trocador-aberto-{520,1040}` | *Disassembled chiller heat exchanger*, Rsparks3 | CC0 | Fancoil, escada, retrato circular |
+| `controles-1957-{520,1040}` | *Pantex Plant Building 12-44-1 Air Conditioning*, 1957 | domínio público | VRF, Multi Split, escada |
+| `exaustao-cozinha-{520,1040}` | *Kitchen Exhaust Fans* | CC0 | Mini VRF, Split Inverter |
+
+**13 arquivos, 440 KB.** O script falha o build se passar de 25 arquivos ou 450 KB.
+
+Todas via Wikimedia Commons, creditadas no rodapé da página. **Nenhuma é
+apresentada como foto da Connect-Air** — mostram o mundo do ofício, não a obra
+do cliente. Saem assim que as fotos reais chegarem (ver
+[`00-DIAGNOSTICO.md`](00-DIAGNOSTICO.md) § 5).
+
+### Descartadas na curadoria
+
+| Imagem | Motivo |
+|---|---|
+| Técnicos de HVAC (USAF, domínio público) | São militares americanos identificáveis. Um visitante poderia tomá-los pela equipe da Connect-Air. |
+| `chiller-plant-scada-system` | Monitores de supervisório: outro mundo visual, não senta na sala escura. |
+| `industrial-water-cooling-tower`, `air-conditioning-plant-science` | Céu azul e gramado: claras demais para uma página escura. |
+| `double-radial-fan` | Cotas em vermelho e carimbo de data: parece catálogo de oficina. |
 
 ## 5. Estado atual dos materiais de marca
 

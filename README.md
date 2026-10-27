@@ -22,8 +22,29 @@ Landing page institucional de página única para a **Connect-Air Climatização
 ├── docs/               # Documentos de orientação do projeto
 ├── brand/              # Kit de marca curado (poucos arquivos, derivados controlados)
 ├── reference/          # Referências de direção de arte (anotações, sem binários pesados)
-└── src/                # Código da página (criado na fase de desenvolvimento)
+├── src/                # A página. É isto que vai para a Hostinger
+│   ├── index.html
+│   └── assets/         # css · js · fonts · img · brand
+├── tools/              # geração de assets, com teto verificado no build
+└── assets/             # originais das fotos de acervo (fora do git)
 ```
+
+### Rodar e publicar
+
+```bash
+# servir localmente
+python3 -m http.server 8080 -d src     # http://localhost:8080
+
+# regerar as imagens (limpa o destino antes de escrever)
+python3 tools/fetch-originals.py       # só na 1ª vez: baixa os originais
+python3 tools/build-assets.py
+
+# publicar a prévia
+npx vercel deploy --prod --yes
+```
+
+Prévia no ar: **https://connect-air.vercel.app**
+A publicação final é na Hostinger da Connect-Air, copiando o conteúdo de `src/`.
 
 ### `Connect-Air/` — não modificar
 
@@ -45,6 +66,16 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 | [`docs/04-ORCAMENTO-DE-PERFORMANCE.md`](docs/04-ORCAMENTO-DE-PERFORMANCE.md) | Limites de peso e velocidade, com teto por arquivo |
 | [`docs/05-PIPELINE-DE-ASSETS.md`](docs/05-PIPELINE-DE-ASSETS.md) | Regra antiduplicação de imagens |
 | [`docs/06-ACEITE.md`](docs/06-ACEITE.md) | Checklist dos critérios de aceite do escopo técnico |
+
+## Números atuais
+
+| | |
+|---|---|
+| Acima da dobra | **124 KB** |
+| Página inteira | **540 KB** (teto contratual: 1,5 MB) |
+| Imagens | 13 arquivos, 440 KB (teto próprio: 25 arquivos, 450 KB) |
+| Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
+| Dependências em runtime | **nenhuma** |
 
 ## Ferramentas verificadas
 

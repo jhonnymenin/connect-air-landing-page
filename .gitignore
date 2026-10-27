@@ -28,3 +28,4 @@ assets/*
 # Skills instaladas: reinstaláveis via skills-lock.json e `impeccable install`.
 # O binário sozinho tem 17 MB.
 .claude/skills/
+.vercel

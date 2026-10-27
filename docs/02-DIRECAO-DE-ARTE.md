@@ -1,7 +1,45 @@
 # 02 · Direção de arte
 
-**Status: aberto.** Nada aqui está aprovado. Este documento organiza a decisão;
-não a toma.
+**Status: fechada em 27/10/2026 e construída.** A direção escolhida foi dealt
+pela skill `design-taste-frontend`, não inventada.
+
+| | |
+|---|---|
+| Direção | **The dark room** — um campo escuro de cima a baixo e, dentro dele, objetos iluminados |
+| Seed | `1099997846` · setor `architecture` · tom `technical` |
+| Redraws | **1** — a tipografia. O par dealt (Bodoni Moda / Jost) é um didone de revista de moda; a própria folha diz que serve a "luxury property, jewellery, fragrance and fashion". Numa página de manutenção industrial contradiz o tom técnico do brief. Redealt: **Clash Grotesk** |
+| Cor | **mantida da marca** (`--keep palette`) |
+| Tipografia | Clash Grotesk 400/500, auto-hospedada, 39 KB, acentos conferidos |
+| Seções | abertura (duas portas) → serviços (colunas de nomes) → sistemas (foto fixa, lista ativa) → consequência (escada) → empresa (painel, retrato recortado) → credenciamentos (nomes como frase) → contato (cartão sobre foto) → rodapé |
+
+### A ideia
+
+> Nesta página, **os nove sistemas que a Connect-Air mantém funcionando** viram
+> **os objetos iluminados na sala escura**.
+
+Todo concorrente diz "soluções em climatização". A Connect-Air pode dizer as
+nove máquinas pelo nome: VRV, VRF, Mini VRF, Self-contained, Chiller, Fancoil,
+Splitão, Split Inverter, Multi Split Inverter. Para quem especifica, esse
+vocabulário é prova.
+
+### A coisa viva
+
+A lista de sistemas. Apontar, focar ou tocar um nome troca a fotografia fixa ao
+lado, abre a descrição daquele equipamento e **leva o nome do sistema para
+dentro da mensagem do WhatsApp**. Conteúdo real, funciona no polegar, e sem
+JavaScript a lista aparece inteira e aberta.
+
+### O retrato recortado
+
+A seção da empresa usa `clip-path: circle()` na fotografia: a esfera do símbolo
+da marca vira a máscara. É o único lugar onde a geometria do logotipo aparece
+sem ser o logotipo.
+
+---
+
+## Histórico da decisão
+
+O que segue registra como se chegou aqui.
 
 ---
 

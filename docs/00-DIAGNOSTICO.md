@@ -305,7 +305,26 @@ limites estão escritos e são numéricos:
 | **5** | **Fechar a direção de arte** — escolher entre A, B e C de [`02-DIRECAO-DE-ARTE.md`](02-DIRECAO-DE-ARTE.md), definir as 2 famílias tipográficas, montar uma amostra estática de uma seção para aprovação | Etapas 1 e 4 | ~2 h |
 | **6** | **Escrever a copy** e emitir o PDF de aprovação — entregável contratual dos dias 3–4 | Etapa 2 | ~2 h |
 | ~~7~~ | ~~Reconstruir o lockup horizontal~~ | ✅ **feito** — 62 KB → **7,6 KB**, conferido contra o original | — |
-| **8** | Desenvolvimento | Etapas 5 e 6 aprovadas | dias 5–9 |
+| **5** | **Direção de arte** | ✅ **fechada e construída** — ver [`02-DIRECAO-DE-ARTE.md`](02-DIRECAO-DE-ARTE.md) | — |
+| **8** | **Desenvolvimento** | 🟡 **primeira versão no ar**: https://connect-air.vercel.app | — |
+
+### O que a primeira versão já tem
+
+As 7 seções do escopo § 02, os 8 botões de WhatsApp com mensagem e `id` próprios,
+Schema.org de empresa local, 124 KB acima da dobra e 0 FAIL no inspector de
+design em 1440, 768 e 390 px.
+
+### O que ela ainda não tem, e por quê
+
+| Falta | Motivo |
+|---|---|
+| **Fotos da Connect-Air** | Não enviadas. No lugar, 6 fotografias de acervo (Wikimedia, CC0/PD/BY), creditadas no rodapé e **nunca apresentadas como obra do cliente**. Saem no dia em que as reais chegarem. |
+| **Seção de avaliações** (escopo § 06) | Os depoimentos não foram enviados e **prova não se inventa**. A seção não existe na página. |
+| **Citação da lei** na faixa de manutenção | A referência não foi confirmada. O texto fala da obrigação sem citar norma — afirmação jurídica sem documento não vai ao ar. |
+| **Logos dos parceiros** | Dependem de autorização de uso (§ 7). No lugar, a seção de credenciamentos usa o que é da própria Connect-Air. |
+| **Número do registro CFT/CRT** | Não informado. A página diz que há registro, sem número. |
+| **Números da seção Sobre** | Só existe um: quinze anos. |
+| **Vídeo** | Fora do plano contratado, e 1,5 MB de teto não comporta. |
 
 ### Estado em 27/10, fim do levantamento
 
