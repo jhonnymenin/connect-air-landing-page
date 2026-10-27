@@ -306,22 +306,46 @@ limites estão escritos e são numéricos:
 | **6** | **Escrever a copy** e emitir o PDF de aprovação — entregável contratual dos dias 3–4 | Etapa 2 | ~2 h |
 | ~~7~~ | ~~Reconstruir o lockup horizontal~~ | ✅ **feito** — 62 KB → **7,6 KB**, conferido contra o original | — |
 | **5** | **Direção de arte** | ✅ **fechada e construída** — ver [`02-DIRECAO-DE-ARTE.md`](02-DIRECAO-DE-ARTE.md) | — |
-| **8** | **Desenvolvimento** | 🟡 **primeira versão no ar**: https://connect-air.vercel.app | — |
+| **8** | **Desenvolvimento** | 🟡 **segunda versão no ar**: https://connect-air.vercel.app | — |
 
-### O que a primeira versão já tem
+### O que a página tem (revisão de 27/10, tarde)
 
-As 7 seções do escopo § 02, os 8 botões de WhatsApp com mensagem e `id` próprios,
-Schema.org de empresa local, 124 KB acima da dobra e 0 FAIL no inspector de
-design em 1440, 768 e 390 px.
+🔴 **Falha corrigida nesta revisão.** A primeira versão entregou **5 dos 9
+tópicos** que o cliente escreveu no `doc_txt_site_connect_air.docx`. Foram
+cortados *Qualidade e Compromisso*, *Clientes e Parceiros*, *Por que escolher* e
+*Avaliações do Google*, por julgamento próprio: risco de autorização de marcas e
+ausência de depoimentos. Os dois receios eram reais; **a resposta certa era
+construir e sinalizar, não omitir** — ainda mais com o contrato pondo essa
+responsabilidade no cliente.
+
+Hoje os 9 tópicos estão na página:
+
+| Tópico do cliente | Onde está |
+|---|---|
+| 1 · Nossos Serviços | seção *Nossos serviços*, 7 serviços em 3 frentes |
+| 2 · Nossa Experiência | seção *Quinze anos no clima ideal* |
+| 3 · Qualidade e Compromisso | segundo parágrafo da mesma seção |
+| 4 · Clientes e Parceiros | 5 logos com link, mais a Wolfmann pelo nome |
+| 5 · Equipamentos e Sistemas | os 9 sistemas, com a lista viva |
+| 6 · Contratos de Manutenção | campo azul *Contratos de manutenção e PMOC* |
+| 7 · PMOC | a mesma seção |
+| 8 · Por que escolher | os 7 motivos, literais |
+| 9 · Entre em Contato | campo azul de contato |
+| Avaliações do Google | cartão com link para o perfil |
+
+Mais: 9 botões de WhatsApp com mensagem e `id` próprios, barra fixa com marcação
+da seção atual, Schema.org de empresa local, **130 KB acima da dobra** e
+**0 FAIL** nos dois detectores em 1440, 768 e 390 px.
 
 ### O que ela ainda não tem, e por quê
 
 | Falta | Motivo |
 |---|---|
 | **Fotos da Connect-Air** | Não enviadas. No lugar, 6 fotografias de acervo (Wikimedia, CC0/PD/BY), creditadas no rodapé e **nunca apresentadas como obra do cliente**. Saem no dia em que as reais chegarem. |
-| **Seção de avaliações** (escopo § 06) | Os depoimentos não foram enviados e **prova não se inventa**. A seção não existe na página. |
+| **Depoimentos nos cartões** (escopo § 06) | A seção existe e leva ao perfil do Google, mas **sem cartões de depoimento**: os textos não foram enviados e prova não se inventa. O link que o cliente mandou é o de *escrever* avaliação, não o de ler. |
 | **Citação da lei** na faixa de manutenção | A referência não foi confirmada. O texto fala da obrigação sem citar norma — afirmação jurídica sem documento não vai ao ar. |
-| **Logos dos parceiros** | Dependem de autorização de uso (§ 7). No lugar, a seção de credenciamentos usa o que é da própria Connect-Air. |
+| **Autorização das marcas** | Os 5 logos estão na página, como o cliente pediu. **Falta a autorização por escrito** de cada empresa (§ 7). O contrato põe a responsabilidade na Connect-Air, mas a EBSS deve pedir e guardar o aceite. |
+| **Wolfmann × UTC** | O logo enviado é da **UTC Óleo e Gás**, não da UTC Engenharia, e a Wolfmann foi citada sem logo. Hoje o logo aparece com o nome certo, sem link, e a Wolfmann entra pelo nome. Falta o cliente confirmar os dois. |
 | **Número do registro CFT/CRT** | Não informado. A página diz que há registro, sem número. |
 | **Números da seção Sobre** | Só existe um: quinze anos. |
 | **Vídeo** | Fora do plano contratado, e 1,5 MB de teto não comporta. |

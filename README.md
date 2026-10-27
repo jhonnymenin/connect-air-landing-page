@@ -71,9 +71,9 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 
 | | |
 |---|---|
-| Acima da dobra | **124 KB** |
-| Página inteira | **540 KB** (teto contratual: 1,5 MB) |
-| Imagens | 13 arquivos, 440 KB (teto próprio: 25 arquivos, 450 KB) |
+| Acima da dobra | **130 KB** |
+| Página inteira | **591 KB** (teto contratual: 1,5 MB) |
+| Imagens | 19 arquivos, 483 KB (teto próprio: 25 arquivos, 500 KB) |
 | Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
 | Dependências em runtime | **nenhuma** |
 
