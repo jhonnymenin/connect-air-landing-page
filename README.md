@@ -39,12 +39,32 @@ python3 -m http.server 8080 -d src     # http://localhost:8080
 python3 tools/fetch-originals.py       # só na 1ª vez: baixa os originais
 python3 tools/build-assets.py
 
-# publicar a prévia
-npx vercel deploy --prod --yes
+# publicar: basta subir para o GitHub
+git push origin main
 ```
 
 Prévia no ar: **https://connect-air.vercel.app**
+
+### Como a publicação funciona
+
+O repositório está conectado ao Vercel. **Todo push para `main` publica em
+produção automaticamente**; push em qualquer outro branch gera uma prévia
+própria, com URL separada. Não há build step: o `vercel.json` aponta
+`outputDirectory` para `src/` e o Vercel serve os arquivos como estão.
+
+> **Não publique por `vercel deploy`.** Com o git conectado, isso cria um
+> deploy paralelo ao fluxo e consome a cota do plano Hobby (100 deploys/dia)
+> sem necessidade. O caminho é o push.
+
+Para testar antes de publicar, use um branch:
+
+```bash
+git switch -c ajuste-x
+git push -u origin ajuste-x      # o Vercel devolve uma URL de prévia
+```
+
 A publicação final é na Hostinger da Connect-Air, copiando o conteúdo de `src/`.
+Não há etapa de compilação: o que está em `src/` é exatamente o que vai ao ar.
 
 ### `Connect-Air/` — não modificar
 
