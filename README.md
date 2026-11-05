@@ -37,11 +37,16 @@ python3 -m http.server 8080 -d src     # http://localhost:8080
 
 # regerar as imagens (limpa o destino antes de escrever)
 python3 tools/fetch-originals.py       # só na 1ª vez: baixa os originais
-python3 tools/build-assets.py
+python3 tools/build-assets.py          # precisa de Pillow — ver nota abaixo
 
 # publicar: basta subir para o GitHub
 git push origin main
 ```
+
+> **Pillow:** `tools/build-assets.py` depende do Pillow. Se o `python3` padrão
+> da máquina mudar de versão (aconteceu em 05/11, numa atualização do Homebrew),
+> o script para com uma mensagem dizendo qual interpretador usar. Rode com um
+> que tenha Pillow, por exemplo `/usr/local/bin/python3 tools/build-assets.py`.
 
 Prévia no ar: **https://connect-air.vercel.app**
 
@@ -92,8 +97,8 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 | | |
 |---|---|
 | Acima da dobra | **130 KB** |
-| Página inteira | **591 KB** (teto contratual: 1,5 MB) |
-| Imagens | 19 arquivos, 483 KB (teto próprio: 25 arquivos, 500 KB) |
+| Página inteira | **599 KB** (teto contratual: 1,5 MB) |
+| Imagens | 20 arquivos, 490 KB (teto próprio: 25 arquivos, 500 KB) |
 | Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
 | Dependências em runtime | **nenhuma** |
 

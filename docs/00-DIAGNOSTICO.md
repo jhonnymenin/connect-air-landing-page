@@ -215,7 +215,7 @@ orçado (licença é responsabilidade da contratada, contrato § 7).
 | 9 | Priorização comercial dos 7 serviços |
 | 10 | ~~E-mail de contato~~ — ✅ `connectairarcondicionado@gmail.com`, obtido da trilha de auditoria do contrato assinado. Falta só confirmar que é o e-mail comercial a publicar |
 | 11 | Acesso à Hostinger |
-| 12 | Wolfmann Construtora (citada, sem logo) × UTC Engenharia (logo, não citada) |
+| 12 | ~~Wolfmann sem logo~~ ✅ **recebido em 05/11**. Resta a **UTC Óleo e Gás**: tem logotipo, mas não é citada na copy, e o nome do arquivo diz *engenharia* |
 | 13 | "Connect" ou "Connect-Air" na copy |
 | 14 | ~~Conferir o Drive do cliente~~ — ✅ encerrado: o Drive **é** a pasta `CONNECT•AIR/`, já baixada. Sem fotos |
 
@@ -345,7 +345,7 @@ da seção atual, Schema.org de empresa local, **130 KB acima da dobra** e
 | **Depoimentos nos cartões** (escopo § 06) | A seção existe e leva ao perfil do Google, mas **sem cartões de depoimento**: os textos não foram enviados e prova não se inventa. O link que o cliente mandou é o de *escrever* avaliação, não o de ler. |
 | **Citação da lei** na faixa de manutenção | A referência não foi confirmada. O texto fala da obrigação sem citar norma — afirmação jurídica sem documento não vai ao ar. |
 | **Autorização das marcas** | Os 5 logos estão na página, como o cliente pediu. **Falta a autorização por escrito** de cada empresa (§ 7). O contrato põe a responsabilidade na Connect-Air, mas a EBSS deve pedir e guardar o aceite. |
-| **Wolfmann × UTC** | O logo enviado é da **UTC Óleo e Gás**, não da UTC Engenharia, e a Wolfmann foi citada sem logo. Hoje o logo aparece com o nome certo, sem link, e a Wolfmann entra pelo nome. Falta o cliente confirmar os dois. |
+| **UTC Óleo e Gás** | O logotipo da Wölfmann chegou em 05/11 e está na página. Resta a UTC: o arquivo se chama `4_logo_utc_engenharia.png`, mas **a marca é UTC Óleo e Gás**, e ela não é citada em nenhum lugar da copy do cliente. Uma pergunta ao Márcio resolve. |
 | **Número do registro CFT/CRT** | Não informado. A página diz que há registro, sem número. |
 | **Números da seção Sobre** | Só existe um: quinze anos. |
 | **Vídeo** | Fora do plano contratado, e 1,5 MB de teto não comporta. |

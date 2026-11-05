@@ -120,12 +120,15 @@ referências legais citadas no cliente.
 | JTC Distribuidora | ✅ | `2_logo_jtc_distribuidora.png` | ✅ par completo |
 | Faculdade Oswaldo Cruz | ✅ | `3_logo_oswaldo_cruz.png` | ✅ par completo |
 | YKP Consultoria | ✅ | `5_logo_ykp.png` | ✅ par completo |
-| **Wolfmann Construtora** | ✅ | — | ❌ **logo não enviado** |
-| **UTC Engenharia** | — | `4_logo_utc_engenharia.png` | ⚠️ **logo sem menção na copy** |
+| **Wölfmann Construtora** | ✅ (como *Wolfmann*) | `logo_wolfmann_construtora.png` | ✅ **recebido em 05/11**. O logotipo grafa **Wölfmann**, com trema; a página segue o logotipo |
+| **UTC Óleo e Gás** | — | `4_logo_utc_engenharia.png` | ⚠️ **o arquivo se chama *engenharia*, mas a marca é *óleo e gás***, e não é citada na copy. Reconfirmado na entrega de 05/11: arquivo inalterado |
 
-⚠️ **Os dois conjuntos não batem.** São 5 nomes e 5 arquivos, mas não os mesmos
-cinco. Precisa de decisão do cliente: entra UTC Engenharia na lista, entra
-Wolfmann com logo, ou sai um dos dois?
+✅ **Metade resolvida em 05/11.** O logotipo da Wölfmann chegou e está na página.
+
+⚠️ **O que resta:** a UTC aparece com logotipo mas não é citada em lugar nenhum
+da copy do cliente, e o nome do arquivo (*engenharia*) não bate com a marca
+(*óleo e gás*). Pergunta única ao Márcio: **a UTC Óleo e Gás é cliente da
+Connect-Air e pode ficar na página?**
 
 🔴 **Risco jurídico a resolver antes do desenvolvimento.** Exibir as marcas
 Cacau Show, Oswaldo Cruz, UTC e demais como clientes exige autorização de uso.

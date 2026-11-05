@@ -8,7 +8,15 @@ Regra do projeto (docs/05-PIPELINE-DE-ASSETS.md):
 Rodar:  python3 tools/build-assets.py
 """
 import os, shutil, sys
-from PIL import Image, ImageEnhance, ImageChops
+
+try:
+    from PIL import Image, ImageEnhance, ImageChops
+except ImportError:
+    sys.exit(
+        "Pillow não encontrado em " + sys.executable + ".\n"
+        "O python3 padrão da máquina pode ter mudado de versão. Rode com um que\n"
+        "tenha Pillow, ou instale:  " + sys.executable + " -m pip install Pillow"
+    )
 
 SRC, OUT = "assets", "src/assets/img"
 QUALITY = 48
@@ -54,6 +62,8 @@ LOGOS = {
     "3_logo_oswaldo_cruz.png":      "parceiro-oswaldo-cruz",
     "4_logo_utc_engenharia.png":    "parceiro-utc",
     "5_logo_ykp.png":               "parceiro-ykp",
+    # entregue pelo cliente em 05/11/2026, depois da primeira leva
+    "logo_wolfmann_construtora.png": "parceiro-wolfmann",
 }
 LOGO_DIR = ("Connect-Air/CONNECT•AIR/02 - DOC SITE + ASSESTS/02 - LOGO PARCEIROS")
 CRT_SRC  = ("Connect-Air/CONNECT•AIR/02 - DOC SITE + ASSESTS/"
