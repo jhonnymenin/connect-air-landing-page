@@ -203,7 +203,7 @@ orçado (licença é responsabilidade da contratada, contrato § 7).
 | 2 | **Fotos reais** | Sem elas não há abertura nem seção Sobre |
 | 3 | **Referência legal** da manutenção obrigatória | Seção 04 não vai ao ar sem documento (escopo § 03) |
 | 4 | **Nº de registro CFT/CRT** + comprovante | Seção 05 não vai ao ar sem comprovante |
-| 5 | **Depoimentos do Google** — texto, nome, nota, média | Seção 06 não existe sem eles |
+| ~~5~~ | ~~Depoimentos do Google~~ | ✅ **resolvido em 05/11**: lidos do perfil público. 5,0 com 8 avaliações; três na página, literais |
 | 6 | **Autorização de uso** das marcas de clientes | Risco jurídico (§ 7) |
 
 ### ⚠️ Importantes
@@ -337,12 +337,28 @@ Mais: 9 botões de WhatsApp com mensagem e `id` próprios, barra fixa com marca�
 da seção atual, Schema.org de empresa local, **130 KB acima da dobra** e
 **0 FAIL** nos dois detectores em 1440, 768 e 390 px.
 
+### 🔴 Dois achados novos do perfil do Google (05/11)
+
+**1. Os endereços não batem.** O contrato diz *Rua Peixoto de Melo Filho, 310,
+Jardim Niterói, 04432-170*. O perfil do Google diz *R. Eriberto Barros
+Cajazeiras, 323, Vila do Castelo, 04438-040*. Bairros diferentes. A página usa o
+do contrato. Precisa ser resolvido antes de publicar: endereço divergente entre
+site e Google prejudica o SEO local.
+
+**2. Existem 16 fotos no perfil**, e a de capa mostra o escritório com o
+logotipo na parede. Não baixei nenhuma: são hospedadas pelo Google e o direito é
+de quem publicou. **Pedir os originais ao Márcio** resolve o bloqueio das fotos
+de uma vez, e em resolução melhor.
+
+O perfil também tem **horário de funcionamento** cadastrado, que o escopo § 07
+prevê no bloco de contato e ainda não está na página.
+
 ### O que ela ainda não tem, e por quê
 
 | Falta | Motivo |
 |---|---|
 | **Fotos da Connect-Air** | Não enviadas. No lugar, 6 fotografias de acervo (Wikimedia, CC0/PD/BY), creditadas no rodapé e **nunca apresentadas como obra do cliente**. Saem no dia em que as reais chegarem. |
-| **Depoimentos nos cartões** (escopo § 06) | A seção existe e leva ao perfil do Google, mas **sem cartões de depoimento**: os textos não foram enviados e prova não se inventa. O link que o cliente mandou é o de *escrever* avaliação, não o de ler. |
+| ~~Depoimentos~~ | ✅ **feito**. Três avaliações reais do perfil, com nota 5,0 e as 8 avaliações citadas. Nenhuma foi editada no sentido; as longas viraram recorte contíguo. |
 | **Citação da lei** na faixa de manutenção | A referência não foi confirmada. O texto fala da obrigação sem citar norma — afirmação jurídica sem documento não vai ao ar. |
 | **Autorização das marcas** | Os 5 logos estão na página, como o cliente pediu. **Falta a autorização por escrito** de cada empresa (§ 7). O contrato põe a responsabilidade na Connect-Air, mas a EBSS deve pedir e guardar o aceite. |
 | **UTC Óleo e Gás** | O logotipo da Wölfmann chegou em 05/11 e está na página. Resta a UTC: o arquivo se chama `4_logo_utc_engenharia.png`, mas **a marca é UTC Óleo e Gás**, e ela não é citada em nenhum lugar da copy do cliente. Uma pergunta ao Márcio resolve. |

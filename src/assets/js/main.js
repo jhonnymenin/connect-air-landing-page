@@ -24,6 +24,16 @@
       });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
     risers.forEach(function (el) { seen.observe(el); });
+
+    /* rede de segurança: nada de conteúdo preso em opacity 0.
+       Se o observer não disparar para algum elemento (rolagem muito rápida,
+       captura de tela de página inteira, impressão), tudo aparece assim mesmo. */
+    window.setTimeout(function () {
+      risers.forEach(function (el) { el.classList.add('is-in'); });
+    }, 2500);
+    window.addEventListener('beforeprint', function () {
+      risers.forEach(function (el) { el.classList.add('is-in'); });
+    });
   }
 
   /* --- A barra ganha um fio ao descolar do topo -------------------------- */

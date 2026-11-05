@@ -138,17 +138,28 @@ guardar o aceite por WhatsApp. Sem isso, a alternativa segura é citar os
 segmentos sem as marcas ("chocolateria nacional", "instituição de ensino
 superior").
 
-## 8. Avaliações
+## 8. Avaliações ✅ resolvido em 05/11
 
-Link fornecido: `https://g.page/r/Cd8uDIWs7dfKEBM/review`
+**Perfil no Google:** *Connect Air*, **nota 5,0 com 8 avaliações**, todas
+5 estrelas. Lido direto do perfil público em 05/11/2026.
 
-⚠️ **Esse é o link de *escrever* uma avaliação, não o de ler o perfil.** Serve
-para o botão "avalie a gente", não para a seção de prova social.
+| | |
+|---|---|
+| Link enviado pelo cliente | `g.page/r/Cd8uDIWs7dfKEBM/review` — é o de **escrever** avaliação |
+| Perfil para leitura | `g.page/r/Cd8uDIWs7dfKEBM` (sem `/review`) |
+| Place ID | `0x94ce51cafdb6af61:0xcad7edac850c2edf` |
 
-❌ **Faltam os depoimentos.** O escopo § 06 pede "3 a 6 cartões estáticos com
-nome e nota, no visual do Google, + selo de nota". Precisamos do texto de cada
-avaliação, nome do autor, nota e a média/quantidade do perfil. Nada disso foi
-enviado.
+Os três depoimentos na página são **literais e contíguos**, sem edição de
+sentido, apenas recortados quando longos:
+
+1. **Clínica Speranza Multidisciplinar** (há um ano) — cliente pessoa jurídica,
+   por isso ficou em destaque numa página B2B
+2. **Genilson Viana** (há 2 semanas) — texto completo, cita projeto e execução
+3. **Tiago Alencar** (há um ano) — recorte da frase que o próprio Google destaca
+   no resumo: *"Ele cuida do equipamento como se fosse dele"*
+
+⚠️ Vale o cliente confirmar que concorda em reproduzir nome e texto na página,
+embora sejam públicos.
 
 Referência visual enviada: `ideia_avaliacao_google.png` — captura da seção de
 avaliações do site da YKP. É **referência de formato**, não asset reutilizável.
@@ -158,15 +169,40 @@ avaliações do site da YKP. É **referência de formato**, não asset reutiliz�
 | Canal | Valor | Status |
 |---|---|---|
 | WhatsApp / telefone | +55 11 91246-2998 | ✅ |
-| Endereço | Rua Peixoto de Melo Filho, 310 — Jardim Niterói, São Paulo/SP, 04432-170 | ✅ |
+| Endereço | Rua Peixoto de Melo Filho, 310, Jardim Niterói, São Paulo/SP, 04432-170 | 🔴 **conflita** — ver § 9.1 |
 | Instagram | `instagram.com/connect.air` | ✅ |
 | E-mail | `connectairarcondicionado@gmail.com` | ⚠️ **a confirmar** — extraído da trilha de auditoria do contrato assinado (e-mail de assinatura do Márcio). Serve, mas precisa de confirmação de que é o e-mail comercial a publicar. |
 | Responsável | Márcio (Marcio Dias Souza) | ✅ |
 | Domínio | `connect-air.com.br` | ⚠️ estacionado na Hostinger, sem SSL e sem conteúdo |
 
+### 9.1 🔴 Dois endereços diferentes
+
+| Fonte | Endereço |
+|---|---|
+| Contrato, documento de textos e escopo | Rua Peixoto de Melo Filho, **310** — Jardim Niterói, **04432-170** |
+| **Perfil do Google** | R. Eriberto Barros Cajazeiras, **323** — Vila do Castelo, **04438-040** |
+
+São endereços distintos, em bairros distintos. A página e a marcação
+Schema.org usam hoje o do contrato. **Isso precisa ser resolvido antes da
+publicação:** endereço divergente entre site e perfil do Google prejudica o
+SEO local e confunde quem procura a empresa.
+
+### 9.2 Horário de funcionamento
+
+O perfil do Google informa **"Fecha 17:00"**, ou seja, existe horário cadastrado.
+O escopo § 07 prevê horário no bloco de contato e ele não está na página, porque
+o cliente não enviou. Basta copiar do perfil, depois de confirmar.
+
 ## 10. Fotografia
 
-❌ **Nenhuma foto foi enviada.** Zero.
+❌ **Nenhuma foto foi enviada diretamente.** Zero.
+
+🟡 **Mas existem 16 fotos no perfil do Google da Connect-Air** (descoberto em
+05/11). A foto de capa mostra o escritório da empresa, com o logotipo na parede.
+**Não baixei nenhuma**: as imagens ficam hospedadas pelo Google e o direito é de
+quem publicou, que pode ser o próprio Márcio ou um cliente. O caminho certo é
+pedir os **originais** a ele — é o mesmo material, sem dúvida de licença, e em
+resolução melhor.
 
 Este é o item mais grave do briefing, porque:
 

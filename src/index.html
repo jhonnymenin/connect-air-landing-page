@@ -59,6 +59,7 @@
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M9.6 16.6 5 12l1.4-1.4 3.2 3.2 8-8L19 7.2l-9.4 9.4Z"/></symbol>
   <symbol id="i-new" viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3 6.5 3.6L12 11.5 5.5 7.9 12 4.3ZM5 9.6l6 3.3v6.8l-6-3.3V9.6Zm8 10.1v-6.8l6-3.3v6.8l-6 3.3Z"/></symbol>
   <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M21.7 5.4a6 6 0 0 1-7.8 7.3L6.6 20A2.1 2.1 0 1 1 3.6 17l7.3-7.3A6 6 0 0 1 18.3 2L15 5.3l.9 2.8 2.8.9 3-3.6ZM5.1 18.5a.8.8 0 1 0 0-1.6.8.8 0 0 0 0 1.6Z"/></symbol>
+  <symbol id="i-g" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.7v3h3.9c2.3-2.1 3.5-5.2 3.5-8.9Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.7-2.1-6.7-4.9H1.3v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c1-2.8 3.6-4.9 6.7-4.9Z"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 17.3-6.2 3.6 1.7-7L2 9.2l7.1-.6L12 2l2.9 6.6 7.1.6-5.5 4.7 1.7 7L12 17.3Z"/></symbol>
 </svg>
 
@@ -424,25 +425,66 @@
     <div class="wrap">
       <div class="rev">
         <div class="rev__lead">
-          <h2 data-rise>A experiência de quem já contratou</h2>
-          <p data-rise>Avaliações públicas, feitas por clientes reais no perfil da
-             Connect-Air no Google. Leia o que eles escreveram, ou deixe a sua.</p>
+          <h2 data-rise>A experiência de quem <em>já chamou a Connect-Air</em>.</h2>
+          <div class="rev__score" data-rise>
+            <strong>5,0</strong>
+            <span class="stars" role="img" aria-label="5 de 5 estrelas"><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg></span>
+            <span>8 avaliações</span>
+          </div>
         </div>
-        <div class="rev__card" data-rise>
+
+        <div class="rev__side" data-rise>
+          <p>Avaliações públicas, escritas por clientes reais no perfil da
+             Connect-Air no Google. Nenhuma foi editada aqui.</p>
           <div class="rev__g">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.7v3h3.9c2.3-2.1 3.5-5.2 3.5-8.9Z"/>
-              <path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.7-2.1-6.7-4.9H1.3v3.1A12 12 0 0 0 12 24Z"/>
-              <path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6H1.3a12 12 0 0 0 0 10.8l4-3.1Z"/>
-              <path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c1-2.8 3.6-4.9 6.7-4.9Z"/>
-            </svg>
+            <svg aria-hidden="true"><use href="#i-g"></use></svg>
             <span>
-              <b>Avaliações no Google</b>
-              <span>Perfil público da Connect-Air</span>
+              <b>Avaliações públicas</b>
+              <span>Publicadas no Google</span>
             </span>
           </div>
-          <a class="btn" id="g-avaliacoes" href="https://g.page/r/Cd8uDIWs7dfKEBM/review" rel="noopener">
-            <svg aria-hidden="true"><use href="#i-star"></use></svg>Ver avaliações no Google
+        </div>
+
+        <div class="rev__cards">
+
+          <article class="rev__card rev__card--lead" data-rise>
+            <blockquote>Atencioso, prestativo e o principal sabe o que está
+              fazendo. Irá sempre fazer as minhas manutenções aqui em nossa
+              clínica.</blockquote>
+            <footer class="rev__head">
+              <span class="rev__av" aria-hidden="true">C</span>
+              <span class="rev__who"><b>Clínica Speranza Multidisciplinar</b><span>há um ano</span><span class="stars" role="img" aria-label="5 de 5 estrelas"><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg></span></span>
+              <svg aria-hidden="true"><use href="#i-g"></use></svg>
+            </footer>
+            </article>
+          <div class="rev__pair">
+          <article class="rev__card" data-rise>
+            <blockquote>Excelente serviço prestado pelo Márcio, desde a elaboração
+              do projeto até a execução, além de ser super atencioso com os
+              detalhes. Super recomendo!!</blockquote>
+            <footer class="rev__head">
+              <span class="rev__av" aria-hidden="true">G</span>
+              <span class="rev__who"><b>Genilson Viana</b><span>há 2 semanas</span><span class="stars" role="img" aria-label="5 de 5 estrelas"><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg></span></span>
+              <svg aria-hidden="true"><use href="#i-g"></use></svg>
+            </footer>
+          </article>
+          <article class="rev__card" data-rise>
+            <blockquote>O técnico Márcio demonstrou um altíssimo nível de
+              conhecimento e responsabilidade. Ele cuida do equipamento como se
+              fosse dele, com atenção e zelo em cada detalhe.</blockquote>
+            <footer class="rev__head">
+              <span class="rev__av" aria-hidden="true">T</span>
+              <span class="rev__who"><b>Tiago Alencar</b><span>há um ano</span><span class="stars" role="img" aria-label="5 de 5 estrelas"><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg><svg aria-hidden="true"><use href="#i-star"></use></svg></span></span>
+              <svg aria-hidden="true"><use href="#i-g"></use></svg>
+            </footer>
+            </article>
+          </div>
+
+        </div>
+
+        <div class="rev__act" data-rise>
+          <a class="btn" id="g-avaliacoes" href="https://g.page/r/Cd8uDIWs7dfKEBM" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-star"></use></svg>Ver as 8 avaliações no Google
           </a>
         </div>
       </div>
