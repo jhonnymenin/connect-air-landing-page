@@ -91,13 +91,14 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 | [`docs/04-ORCAMENTO-DE-PERFORMANCE.md`](docs/04-ORCAMENTO-DE-PERFORMANCE.md) | Limites de peso e velocidade, com teto por arquivo |
 | [`docs/05-PIPELINE-DE-ASSETS.md`](docs/05-PIPELINE-DE-ASSETS.md) | Regra antiduplicação de imagens |
 | [`docs/06-ACEITE.md`](docs/06-ACEITE.md) | Checklist dos critérios de aceite do escopo técnico |
+| [`docs/07-PEDIDO-DE-FOTOS.md`](docs/07-PEDIDO-DE-FOTOS.md) | Mensagem pronta para pedir as fotos ao cliente, e o que cada uma destrava |
 
 ## Números atuais
 
 | | |
 |---|---|
 | Acima da dobra | **130 KB** |
-| Página inteira | **599 KB** (teto contratual: 1,5 MB) |
+| Página inteira | **606 KB** (teto contratual: 1,5 MB) |
 | Imagens | 20 arquivos, 490 KB (teto próprio: 25 arquivos, 500 KB) |
 | Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
 | Dependências em runtime | **nenhuma** |
