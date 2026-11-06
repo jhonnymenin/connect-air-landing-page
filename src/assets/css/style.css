@@ -434,13 +434,25 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 /* ===========================================================================
    9. Contato
    =========================================================================== */
-.close { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-6); align-items: start; }
-.close__lead { grid-column: 1 / span 6; }
+.close { display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: var(--sp-5) var(--sp-6); align-items: start;
+  /* o cartão ocupa as duas linhas e é mais alto que a coluna da esquerda.
+     Sem isto a sobra se dividia entre as linhas e abria um vão de cem pixels
+     entre os botões e os canais; com 1fr na segunda linha, a sobra cai embaixo. */
+  grid-template-rows: auto 1fr; }
+/* Duas colunas: à esquerda o convite e os canais, à direita o formulário.
+   O cartão ocupa as duas linhas, então a seção tem a altura da coluna mais
+   alta: ganhar o formulário não custou comprimento de página. */
+.close__lead { grid-column: 1 / span 5; grid-row: 1; }
 /* sem coluna declarada o .chan caía numa faixa de ~150px e quebrava o telefone
-   e o e-mail no meio. Agora tem cinco colunas e cabe numa linha. */
-.close .chan { grid-column: 8 / span 5; margin-top: 0; }
-.close__lead h2 { font-size: var(--s5); line-height: 1.05; max-width: 16ch; }
-.close__lead p { margin-top: var(--sp-4); color: var(--on-navy-soft); max-width: 46ch; }
+   e o e-mail no meio. */
+.close .chan { grid-column: 1 / span 5; grid-row: 2; margin-top: 0; align-self: start; }
+.close .form { grid-column: 7 / span 6; grid-row: 1 / span 2; }
+/* a coluna encurtou de seis para cinco faixas quando o formulário entrou;
+   em --s5 o título passava a quebrar em três linhas. Um degrau abaixo ele
+   volta a duas, e o cartão claro à direita já carrega o peso visual. */
+.close__lead h2 { font-size: var(--s4); line-height: 1.07; max-width: 18ch; }
+.close__lead p { margin-top: var(--sp-4); color: var(--on-navy-soft); max-width: 42ch; }
 .close__act { margin-top: var(--sp-5); display: flex; gap: 12px; flex-wrap: wrap; }
 .btn--big { padding: 21px 34px; min-height: 62px; font-size: var(--s2); }
 
@@ -452,13 +464,51 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 a.chan__v { text-decoration: underline; text-underline-offset: .22em; }
 a.chan__v:hover { color: #fff; }
 
+/* O formulário é o único campo claro sobre o azul: ele se oferece. */
+.form {
+  background: var(--paper); color: var(--ink);
+  padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px;
+  align-content: start;
+}
+/* .sec--navy h2 tem especificidade (0,1,1) e venceria .form__h sozinho,
+   deixando o título branco sobre o cartão claro. Daí o seletor composto. */
+.sec--navy .form__h { grid-column: 1 / -1; font-size: var(--s3); line-height: 1.2; color: var(--ink); }
+.form__lead { grid-column: 1 / -1; margin: -6px 0 6px; font-size: var(--s1); color: var(--ink-2); }
+.field { grid-column: 1 / -1; display: grid; gap: 7px; }
+.field--half { grid-column: span 1; }
+.field label { font-size: var(--s1); color: var(--ink-soft); }
+.form input, .form textarea {
+  font: inherit; font-size: var(--s2); color: var(--ink); width: 100%;
+  background: var(--paper-2); border: 0; border-radius: var(--radius);
+  padding: 14px 16px; min-height: 52px; transition: background var(--t);
+}
+.form textarea { min-height: 112px; resize: vertical; line-height: 1.5; }
+.form input:hover, .form textarea:hover { background: #e2eaf7; }
+/* erro: o contorno marca o campo e o texto do estado diz o que houve.
+   A cor vermelha nunca é o único sinal. */
+.form input[aria-invalid="true"]:not(:focus-visible),
+.form textarea[aria-invalid="true"]:not(:focus-visible) {
+  outline: 2px solid #a4201a; outline-offset: -2px;
+}
+.form__send { grid-column: 1 / -1; width: 100%; margin-top: 6px; }
+.form__send[disabled] { opacity: .62; cursor: progress; }
+.form__hp { position: absolute; left: -9999px; opacity: 0; }
+.form__status { grid-column: 1 / -1; margin: 0; font-size: var(--s1); color: var(--ink-2); }
+.form__status:empty { display: none; }
+.form__status[data-state="erro"] { color: #a4201a; }
+.form__priv { grid-column: 1 / -1; margin: 0; font-size: var(--s1);
+  line-height: 1.5; color: var(--ink-soft); }
+
 @media (max-width: 1060px) {
   .close { grid-template-columns: 1fr; gap: var(--sp-5); }
-  .close__lead, .close .chan { grid-column: 1; }
+  /* empilhado, a ordem é a do HTML: convite, canais, formulário */
+  .close__lead, .close .chan, .close .form { grid-column: 1; grid-row: auto; }
   .chan { margin-top: 0; }
 }
 @media (max-width: 560px) {
   .close__act { flex-direction: column; align-items: stretch; }
+  .form { padding: 28px 20px; }
+  .field--half { grid-column: 1 / -1; }
 }
 
 /* ===========================================================================

@@ -69,16 +69,34 @@ git switch -c ajuste-x
 git push -u origin ajuste-x      # o Vercel devolve uma URL de prévia
 ```
 
-### Sem formulário
+### Formulário de contato
 
-A conversão é inteiramente pelo WhatsApp, como prevê o escopo. Houve um
-formulário de contato entre 06/11 de manhã e 06/11 à tarde; ele saiu na
-refatoração, pelo § 10 do brief de UX. Está em `git log` se precisar voltar.
+Dois caminhos de conversão: o **WhatsApp é o principal** (barra fixa, botão
+flutuante, um pedido por serviço) e o **formulário é a alternativa** de quem
+prefere escrever. Ele vive na seção de contato, em `src/index.html`, e o
+comportamento está em `main.js`.
+
+O envio depende de uma chave do [Web3Forms](https://web3forms.com) no campo
+oculto `access_key`:
+
+| `access_key` | O que acontece |
+|---|---|
+| **vazia** (hoje) | O botão muda para "Enviar pelo WhatsApp" e a mensagem abre lá já escrita. Nunca fica um formulário morto |
+| preenchida | A mensagem vai por e-mail para o endereço cadastrado na chave, com estados de enviando, sucesso e erro |
+
+A chave é gratuita e precisa ser criada **com o e-mail que vai receber** —
+`contato@connect-air.com.br`. Enquanto isso não acontecer, a entrega por
+e-mail não pode ser testada de ponta a ponta. Ver `docs/00-DIAGNOSTICO.md`,
+item 15.
+
+Contra robô: campo-isca invisível (`botcheck`), fora da ordem de tabulação.
+Nenhum dado é guardado no navegador nem enviado a terceiros.
 
 **Origem do visitante:** quando a visita chega de anúncio (`gclid` ou
 `utm_*` na URL), `main.js` acrescenta uma linha `(origem: …)` ao fim da
-mensagem já escrita de cada link de WhatsApp. É assim que a Connect-Air sabe
-de onde veio o contato — o WhatsApp não aceita parâmetros de campanha.
+mensagem de cada link de WhatsApp **e manda o mesmo valor junto com o
+formulário**, no campo oculto `origem`. É assim que a Connect-Air sabe de onde
+veio o contato — o WhatsApp não aceita parâmetros de campanha.
 
 A publicação final é na Hostinger da Connect-Air, copiando o conteúdo de `src/`.
 Não há etapa de compilação: o que está em `src/` é exatamente o que vai ao ar.
@@ -110,7 +128,7 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 | | |
 |---|---|
 | Acima da dobra | **130 KB** |
-| Página inteira | **500 KB** (teto contratual: 1,5 MB) |
+| Página inteira | **509 KB** (teto contratual: 1,5 MB) |
 | Imagens | 15 arquivos, 381 KB (teto próprio: 25 arquivos, 450 KB) |
 | Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
 | Dependências em runtime | **nenhuma** |

@@ -533,7 +533,7 @@
             <a class="btn btn--big" id="wa-contato" href="https://wa.me/5511912462998?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20climatiza%C3%A7%C3%A3o%20para%20a%20minha%20empresa." rel="noopener">
               <svg aria-hidden="true"><use href="#i-wa"></use></svg>Pedir orçamento no WhatsApp
             </a>
-            <a class="btn btn--onNavy btn--big" href="tel:+5511912462998">Ligar agora</a>
+            <a class="btn btn--onNavy" href="tel:+5511912462998">Ligar agora</a>
           </div>
         </div>
 
@@ -554,6 +554,46 @@
             <span class="chan__v">Rua Peixoto de Melo Filho, 310<br>Jardim Niterói, São Paulo, SP</span>
           </li>
         </ul>
+
+        <form class="form" id="form-contato" data-rise
+              method="post" action="https://api.web3forms.com/submit">
+          <h2 class="form__h">Prefere escrever?</h2>
+          <p class="form__lead" id="form-lead">Conte o que você precisa e a gente
+             retorna com um orçamento.</p>
+
+          <!-- Chave do serviço de envio. Vazia = a mensagem segue pelo WhatsApp,
+               com o botão avisando antes do clique. Ver README, "Formulário". -->
+          <input type="hidden" name="access_key" value="">
+          <input type="hidden" name="subject" value="Novo contato pelo site da Connect-Air">
+          <input type="hidden" name="from_name" value="Site Connect-Air">
+          <!-- origem do anúncio (gclid / utm_*), preenchida por main.js -->
+          <input type="hidden" name="origem" id="f-origem" value="">
+          <!-- isca de robô: um campo que gente nenhuma vê nem tabula -->
+          <input type="checkbox" name="botcheck" class="form__hp" tabindex="-1"
+                 autocomplete="off" aria-hidden="true">
+
+          <div class="field">
+            <label for="f-nome">Nome</label>
+            <input id="f-nome" name="nome" type="text" required autocomplete="name">
+          </div>
+          <div class="field field--half">
+            <label for="f-email">E-mail</label>
+            <input id="f-email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field field--half">
+            <label for="f-fone">Telefone</label>
+            <input id="f-fone" name="telefone" type="tel" required autocomplete="tel" inputmode="tel">
+          </div>
+          <div class="field">
+            <label for="f-msg">Mensagem</label>
+            <textarea id="f-msg" name="mensagem" rows="4" required></textarea>
+          </div>
+
+          <button class="btn form__send" type="submit">Enviar mensagem</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+          <p class="form__priv">Os dados servem só para responder a este contato.
+             Não vão para lista de disparo nem para terceiros.</p>
+        </form>
       </div>
     </div>
   </section>
