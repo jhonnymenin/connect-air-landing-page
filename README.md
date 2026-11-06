@@ -24,6 +24,7 @@ Landing page institucional de página única para a **Connect-Air Climatização
 ├── reference/          # Referências de direção de arte (anotações, sem binários pesados)
 ├── src/                # A página. É isto que vai para a Hostinger
 │   ├── index.html
+│   ├── robots.txt      # + sitemap.xml
 │   └── assets/         # css · js · fonts · img · brand
 ├── tools/              # geração de assets, com teto verificado no build
 └── assets/             # originais das fotos de acervo (fora do git)
@@ -68,25 +69,16 @@ git switch -c ajuste-x
 git push -u origin ajuste-x      # o Vercel devolve uma URL de prévia
 ```
 
-### Formulário de contato
+### Sem formulário
 
-O formulário da seção *Entre em contato* não tem servidor: ele posta direto para
-o **Web3Forms**, que encaminha a mensagem por e-mail. Para ligá-lo:
+A conversão é inteiramente pelo WhatsApp, como prevê o escopo. Houve um
+formulário de contato entre 06/11 de manhã e 06/11 à tarde; ele saiu na
+refatoração, pelo § 10 do brief de UX. Está em `git log` se precisar voltar.
 
-1. Em [web3forms.com](https://web3forms.com), gerar uma chave para
-   `contato@connect-air.com.br` e confirmar pelo link que chega nessa caixa.
-2. Colar a chave no `value` do campo `access_key` em `src/index.html`
-   (está comentado, logo acima dos campos).
-
-**Enquanto a chave estiver vazia o formulário não fica quebrado:** o script
-troca o rótulo do botão para *Enviar pelo WhatsApp* e a mensagem segue por lá,
-já escrita com nome, e-mail, telefone e texto. O visitante lê isso antes de
-clicar. Com a chave preenchida, o envio passa a ser por e-mail sem tocar no HTML,
-e continua funcionando mesmo com o JavaScript desligado.
-
-> Alternativa, se preferir não depender de serviço externo: a Hostinger roda PHP,
-> então um `contato.php` com `mail()` resolveria na hospedagem final — mas não
-> funcionaria na prévia do Vercel, que não executa PHP.
+**Origem do visitante:** quando a visita chega de anúncio (`gclid` ou
+`utm_*` na URL), `main.js` acrescenta uma linha `(origem: …)` ao fim da
+mensagem já escrita de cada link de WhatsApp. É assim que a Connect-Air sabe
+de onde veio o contato — o WhatsApp não aceita parâmetros de campanha.
 
 A publicação final é na Hostinger da Connect-Air, copiando o conteúdo de `src/`.
 Não há etapa de compilação: o que está em `src/` é exatamente o que vai ao ar.
@@ -118,8 +110,8 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 | | |
 |---|---|
 | Acima da dobra | **130 KB** |
-| Página inteira | **664 KB** (teto contratual: 1,5 MB) |
-| Imagens | 20 arquivos, 540 KB (teto próprio: 25 arquivos, 560 KB) |
+| Página inteira | **500 KB** (teto contratual: 1,5 MB) |
+| Imagens | 15 arquivos, 381 KB (teto próprio: 25 arquivos, 450 KB) |
 | Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
 | Dependências em runtime | **nenhuma** |
 

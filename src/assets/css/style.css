@@ -39,6 +39,11 @@
   --s4: clamp(1.875rem,  1.30rem + 2.60vw, 3.00rem);    /* 30–48 */
   --s5: clamp(2.5rem,    1.30rem + 5.40vw, 4.25rem);    /* 40–68 */
 
+  /* Escala de espaço: seis degraus, usados no ritmo das seções e dentro
+     dos blocos. Substitui os px soltos onde o código foi reescrito. */
+  --sp-1: 8px;  --sp-2: 12px; --sp-3: 20px;
+  --sp-4: 28px; --sp-5: 40px; --sp-6: 64px;
+
   --margin: 32px;
   --gap-section: 104px;
   --radius: 0;
@@ -220,63 +225,55 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 }
 
 /* ===========================================================================
-   2. Serviços
+   2. Serviços — três famílias, cada serviço legível sem interação
    =========================================================================== */
-.svc { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 32px; }
-.svc__col { grid-column: span 4; }
-.svc__col h3 { font-size: var(--s2); font-weight: 500; margin-bottom: 18px; color: var(--accent); }
-.svc__list { list-style: none; margin: 0; padding: 0; }
-.svc__list button {
-  all: unset; display: block; width: 100%; cursor: pointer;
-  font-size: var(--s3); line-height: 1.3; padding-block: 8px;
-  color: var(--ink-2); transition: color var(--t);
+.svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6) var(--sp-5); }
+.svc__group h3 {
+  font-size: var(--s2); font-weight: 500; color: var(--accent);
+  line-height: 1.5; letter-spacing: 0;
 }
-.svc__list button:hover, .svc__list button:focus-visible,
-.svc__list button[aria-current='true'] { color: var(--ink); }
-.svc__echo {
-  grid-column: 1 / -1; align-self: start; margin-top: 8px;
-  font-size: var(--s3); line-height: 1.3; color: var(--ink); max-width: 40ch;
+.svc__sum { margin-top: 6px; color: var(--ink-soft); font-size: var(--s1); max-width: 34ch; }
+.svc__list { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-4); }
+.svc__list h4 {
+  margin: 0; font-size: var(--s3); line-height: 1.3; font-weight: 400;
+  letter-spacing: -0.02em; color: var(--ink);
 }
-@media (max-width: 1060px) {
-  .svc { grid-template-columns: 1fr; gap: 40px; }
-  .svc__col, .svc__echo { grid-column: 1; }
-  .svc__echo { display: none; }
-  .svc__sum { display: block; margin-top: 14px; color: var(--ink-2); font-size: var(--s2); }
-}
-@media (min-width: 1061px) { .svc__sum { display: none; } }
+.svc__list p { margin-top: 8px; color: var(--ink-2); font-size: var(--s2); line-height: 1.5; max-width: 36ch; }
 
-/* ===========================================================================
-   3. Os sistemas — foto fixa, lista ativa (a coisa viva)
-   =========================================================================== */
-.sys { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; }
-.sys__media { grid-column: span 5; position: sticky; top: calc(var(--bar) + 32px); align-self: start; }
-.sys__media img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  transition: opacity 280ms linear;
-}
-.sys__media img.is-fading { opacity: 0; }
-.sys__side { grid-column: 7 / span 6; }
-
-.sys__list { list-style: none; margin: 0; padding: 0; }
-.sys__row > button {
-  all: unset; display: flex; align-items: baseline; justify-content: space-between;
-  gap: 24px; width: 100%; min-height: 60px; cursor: pointer;
-  font-size: var(--s3); line-height: 1.3; color: var(--ink-2);
+/* o pedido por serviço: discreto em repouso, inequívoco ao tocar */
+.ask {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+  min-height: 44px; font-size: var(--s2); color: var(--accent);
   transition: color var(--t);
 }
-.sys__row > button:hover, .sys__row > button:focus-visible { color: var(--ink); }
-.sys__row[data-active='true'] > button { color: var(--ink); font-weight: 500; }
-.sys__use { font-size: var(--s2); color: var(--ink-2); white-space: nowrap; }
-.sys__row[data-active='true'] .sys__use { color: var(--accent); }
-.sys__panel { max-width: 46ch; font-size: var(--s2); line-height: 1.5; color: var(--ink-2); padding-bottom: 20px; }
-.sys__panel p { margin-bottom: 14px; }
-.js .sys__panel[hidden] { display: none; }
+.ask svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+.ask span, .ask { text-underline-offset: .22em; }
+.ask:hover { color: var(--accent-d); text-decoration: underline; }
 
-@media (max-width: 1060px) {
-  .sys { grid-template-columns: 1fr; gap: 24px; }
-  .sys__media { grid-column: 1; position: static; }
-  .sys__media img { aspect-ratio: 16 / 10; }
-  .sys__side { grid-column: 1; }
+/* ===========================================================================
+   3. Os sistemas — ficha técnica, nove linhas, tudo à vista
+   =========================================================================== */
+.sys { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-5); }
+.sys__row {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: var(--sp-5); align-items: start;
+}
+.sys__row h3 { font-size: var(--s3); line-height: 1.25; margin: 0; }
+.sys__use {
+  grid-column: 1; margin-top: 8px; font-size: var(--s1);
+  color: var(--accent); display: block;
+}
+.sys__row p {
+  grid-column: 2; grid-row: 1 / span 2; margin: 0;
+  font-size: var(--s2); line-height: 1.55; color: var(--ink-2); max-width: 52ch;
+}
+.sys__row .ask { grid-column: 2; margin-top: 4px; }
+
+@media (max-width: 860px) {
+  .svc { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .sys__row { grid-template-columns: 1fr; row-gap: 8px; }
+  .sys__row p, .sys__row .ask, .sys__use { grid-column: 1; grid-row: auto; }
+  .sys__row p { margin-top: 4px; }
 }
 
 /* ===========================================================================
@@ -327,6 +324,10 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
    =========================================================================== */
 /* grade de células iguais: os logos têm proporções muito diferentes entre si,
    e uma fileira solta deixa os altos e estreitos sumirem ao lado dos largos */
+.partners__t {
+  font-size: var(--s1); font-weight: 400; letter-spacing: 0; line-height: 1.5;
+  color: var(--ink-soft); margin-bottom: var(--sp-4);
+}
 .partners {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 32px 24px;
@@ -433,13 +434,16 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 /* ===========================================================================
    9. Contato
    =========================================================================== */
-.contact { display: grid; grid-template-columns: repeat(12, 1fr); gap: 56px; align-items: start; }
-.contact__body { grid-column: 1 / span 5; }
-.contact__body h2 { font-size: var(--s4); }
-.contact__body p { margin-top: 20px; color: var(--on-navy-soft); max-width: 44ch; }
-.contact__act { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+.close { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-6); align-items: start; }
+.close__lead { grid-column: 1 / span 6; }
+/* sem coluna declarada o .chan caía numa faixa de ~150px e quebrava o telefone
+   e o e-mail no meio. Agora tem cinco colunas e cabe numa linha. */
+.close .chan { grid-column: 8 / span 5; margin-top: 0; }
+.close__lead h2 { font-size: var(--s5); line-height: 1.05; max-width: 16ch; }
+.close__lead p { margin-top: var(--sp-4); color: var(--on-navy-soft); max-width: 46ch; }
+.close__act { margin-top: var(--sp-5); display: flex; gap: 12px; flex-wrap: wrap; }
+.btn--big { padding: 21px 34px; min-height: 62px; font-size: var(--s2); }
 
-/* os canais, com o icone do proprio meio */
 .chan { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 22px; }
 .chan li { display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; align-items: start; }
 .chan li > svg { width: 22px; height: 22px; fill: var(--on-navy-soft); grid-row: span 2; margin-top: 3px; }
@@ -448,38 +452,13 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 a.chan__v { text-decoration: underline; text-underline-offset: .22em; }
 a.chan__v:hover { color: #fff; }
 
-/* o formulario e o unico campo claro sobre o azul: ele se oferece */
-.form {
-  grid-column: 7 / span 6; background: var(--paper); color: var(--ink);
-  padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px;
-  align-content: start;
-}
-.sec--navy .form__h { grid-column: 1 / -1; font-size: var(--s3); line-height: 1.2; color: var(--ink); }
-.form__lead { grid-column: 1 / -1; margin: -6px 0 6px; font-size: var(--s1); color: var(--ink-2); }
-.field { grid-column: 1 / -1; display: grid; gap: 7px; }
-.field--half { grid-column: span 1; }
-.field label { font-size: var(--s1); color: var(--ink-soft); }
-.form input, .form textarea {
-  font: inherit; font-size: var(--s2); color: var(--ink); width: 100%;
-  background: var(--paper-2); border: 0; border-radius: var(--radius);
-  padding: 14px 16px; min-height: 52px; transition: background var(--t);
-}
-.form textarea { min-height: 118px; resize: vertical; line-height: 1.5; }
-.form input:hover, .form textarea:hover { background: #e2eaf7; }
-.form__send { grid-column: 1 / -1; width: 100%; margin-top: 6px; }
-.form__hp { position: absolute; left: -9999px; opacity: 0; }
-.form__status { grid-column: 1 / -1; margin: 0; font-size: var(--s1); color: var(--ink-2); }
-.form__status:empty { display: none; }
-.form__status[data-state="erro"] { color: #a4201a; }
-
 @media (max-width: 1060px) {
-  .contact { grid-template-columns: 1fr; gap: 40px; }
-  .contact__body, .form { grid-column: 1; }
-  .contact__act { flex-direction: column; align-items: stretch; }
+  .close { grid-template-columns: 1fr; gap: var(--sp-5); }
+  .close__lead, .close .chan { grid-column: 1; }
+  .chan { margin-top: 0; }
 }
 @media (max-width: 560px) {
-  .form { padding: 28px 20px; }
-  .field--half { grid-column: 1 / -1; }
+  .close__act { flex-direction: column; align-items: stretch; }
 }
 
 /* ===========================================================================
@@ -524,3 +503,23 @@ a.chan__v:hover { color: #fff; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   .js [data-rise] { opacity: 1; transform: none; }
 }
+
+/* ===========================================================================
+   Acabamento móvel e alvos de toque (revisão de 06/11/2026)
+   =========================================================================== */
+
+/* A 360px o logotipo e o botão da barra não cabiam lado a lado: o botão
+   transbordava 22px e criava rolagem horizontal. Medido, não estimado. */
+@media (max-width: 440px) {
+  .bar__mark img { max-width: 140px; }
+  .bar__cta { padding: 12px 16px; min-height: 44px; font-size: var(--s1); }
+  .bar__cta svg { width: 18px; height: 18px; }
+}
+
+/* Links de lista do rodapé tinham 19px de altura — abaixo do mínimo de 24px
+   da WCAG 2.5.8. O padding entra no link, não na linha, para virar alvo. */
+.foot__nav a, .foot__lines a {
+  display: inline-block; padding-block: 7px;
+}
+.foot__nav li { line-height: 1.2; }
+.foot__social a:focus-visible { outline-offset: 2px; }

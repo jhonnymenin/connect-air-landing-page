@@ -61,7 +61,7 @@ sobrevive sem estar na lista de entrada.
 | Limite | Valor |
 |---|---|
 | Arquivos em `src/assets/` | **≤ 25** |
-| Peso de `src/assets/` | **≤ 560 KB** |
+| Peso de `src/assets/` | **≤ 450 KB** |
 | Derivadas por original | **3** (imagens) · **1** (SVG) |
 
 Bater o teto é um sinal de que o layout pede imagens demais, não de que o teto
@@ -91,7 +91,18 @@ Originais fora do git, refazíveis com `tools/fetch-originals.py`.
 | `parceiro-wolfmann` | `logo_wolfmann_construtora.png`, **entrega de 05/11/2026** | o logotipo que faltava. Arquivado em `Connect-Air/`, junto dos outros |
 | `selo-cft-crt` | `logo_sistema_cft_crt.png` | 320 px, **mantém a cor**: o brasão em escala de cinza descaracteriza |
 
-**20 arquivos, 540 KB.** O script falha o build se passar de 25 arquivos ou 560 KB.
+**15 arquivos, 381 KB.** O script falha o build se passar de 25 arquivos ou 450 KB.
+
+### Enxugada de 06/11/2026
+
+A refatoração de UX tirou a foto que trocava na seção de sistemas e trocou a
+fotografia da porta "Preciso instalar". Com isso **duto-1957**, **controles-1957**
+e **chiller-1440** ficaram sem uso e saíram do plano — 159 KB e 5 arquivos a
+menos, sem perder nada na página.
+
+Efeito colateral bom: as duas chapas P&B de 1957 eram justamente essas. **As
+quatro fotografias que sobraram são todas coloridas**, e a inconsistência
+cinza-ao-lado-de-cor deixou de existir. O teto voltou de 560 para 450 KB.
 
 ### Tratamento: cor original (06/11/2026)
 
@@ -102,12 +113,6 @@ deixando a página inteira monocromática.
 
 O duotone saiu. A foto entra como ela é, com um empurrão discreto de contraste
 (1,04) e saturação (1,06) só para aguentar a compressão.
-
-> ⚠️ **Duas das seis são preto e branco de origem:** as duas chapas do *Pantex
-> Plant Building*, de 1957 (`duto-1957` e `controles-1957`). Em cor original
-> elas continuam cinza, ao lado de quatro coloridas. É uma inconsistência real,
-> ainda em aberto — a única original colorida não usada na pasta é uma mesa de
-> operação desarrumada, que seria uma troca para pior.
 
 > O teto subiu de 500 para 560 KB por um motivo declarado: cor custa mais bytes
 > que uma rampa de um canal só, e espremer a qualidade até caber nos 500 deixava

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://connect-air.com.br/sitemap.xml

@@ -28,22 +28,17 @@ QUALITY = 46
 # contratual de 1,5 MB. Não é licença para crescer: é o custo declarado de uma
 # decisão de direção. Quando as fotos do Márcio chegarem, as de acervo saem e
 # este teto volta para 500.
-MAX_FILES, MAX_KB = 25, 560
+MAX_FILES, MAX_KB = 25, 450
 
 # origem -> (nome de saída, larguras, recorte opcional (l,t,r,b) em fração)
 PLAN = {
-    # os dois retratos do hero
-    "pantex-plant-building-12-44-1-air.png":
-        ("duto-1957",       [420, 760], None),
     "ventilation-ductwork-in-a-mechanical-room-of.jpg":
         ("casa-de-maquinas",[420, 760], (0.0, 0.0, 0.93, 0.83)),  # corta o carimbo de data do canto
     # os expostos
     "chiller.jpg":
-        ("chiller",         [520, 1040, 1440], None),   # 1600: sangra a largura toda no contato
+        ("chiller",         [520, 1040], None),
     "disassembled-chiller-heat-exchanger.jpg":
         ("trocador-aberto", [520, 920], None),
-    "pantex-plant-building-12-44-1-air-2.png":
-        ("controles-1957",  [520, 1040], None),
     "kitchen-exhaust-fans.jpg":
         ("exaustao-cozinha",[520, 920], (0.0, 0.40, 1.0, 1.0)),  # fora o céu: a sala é escura
 }
