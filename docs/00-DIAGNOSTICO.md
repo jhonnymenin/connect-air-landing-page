@@ -213,11 +213,12 @@ orçado (licença é responsabilidade da contratada, contrato § 7).
 | 7 | Região de atendimento — falta no material, é o dado de maior peso para SEO local e Schema.org |
 | 8 | Três números de destaque além dos 15 anos (o escopo prevê até 4) |
 | 9 | Priorização comercial dos 7 serviços |
-| 10 | ~~E-mail de contato~~ — ✅ `connectairarcondicionado@gmail.com`, obtido da trilha de auditoria do contrato assinado. Falta só confirmar que é o e-mail comercial a publicar |
+| 10 | **E-mail de contato — divergência.** A página publica `contato@connect-air.com.br` (definido pelo João em 06/11). A trilha de auditoria do contrato assinado traz `connectairarcondicionado@gmail.com`. Confirmar com o Márcio qual é o endereço ativo, e se a caixa do domínio já recebe |
 | 11 | Acesso à Hostinger |
 | 12 | ~~Wolfmann sem logo~~ ✅ **recebido em 05/11**. Resta a **UTC Óleo e Gás**: tem logotipo, mas não é citada na copy, e o nome do arquivo diz *engenharia* |
 | 13 | "Connect" ou "Connect-Air" na copy |
 | 14 | ~~Conferir o Drive do cliente~~ — ✅ encerrado: o Drive **é** a pasta `CONNECT•AIR/`, já baixada. Sem fotos |
+| 15 | **Chave do formulário de contato.** O formulário posta para o Web3Forms e precisa de uma chave gerada para o e-mail da empresa, confirmada na própria caixa. Sem ela, o envio segue pelo WhatsApp (ver README, “Formulário de contato”) |
 
 ## 7. Risco jurídico — logos de clientes
 

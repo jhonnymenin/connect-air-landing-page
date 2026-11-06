@@ -198,7 +198,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 }
 .door:hover { background: #e2eaf7; transform: translateY(-3px); }
 .door img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
-.door__body { padding: 24px 24px 28px; }
+.door__body { display: block; padding: 24px 24px 28px; }
 .door__name {
   display: flex; align-items: center; gap: 10px;
   font-size: var(--s3); line-height: 1.3; color: var(--ink); font-weight: 500;
@@ -433,26 +433,71 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 /* ===========================================================================
    9. Contato
    =========================================================================== */
-.contact { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: center; }
-.contact__body { grid-column: span 6; }
+.contact { display: grid; grid-template-columns: repeat(12, 1fr); gap: 56px; align-items: start; }
+.contact__body { grid-column: 1 / span 5; }
 .contact__body h2 { font-size: var(--s4); }
-.contact__body p { margin-top: 20px; color: var(--on-navy-soft); max-width: 48ch; }
+.contact__body p { margin-top: 20px; color: var(--on-navy-soft); max-width: 44ch; }
 .contact__act { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
-.contact__dl { grid-column: 8 / span 5; margin: 0; display: grid; gap: 24px; }
-.contact__dl dt { font-size: var(--s2); color: var(--on-navy-soft); margin-bottom: 4px; }
-.contact__dl dd { margin: 0; font-size: var(--s3); line-height: 1.35; }
-.contact__dl dd a { text-decoration: underline; text-underline-offset: .22em; }
+
+/* os canais, com o icone do proprio meio */
+.chan { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 22px; }
+.chan li { display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; align-items: start; }
+.chan li > svg { width: 22px; height: 22px; fill: var(--on-navy-soft); grid-row: span 2; margin-top: 3px; }
+.chan__t { font-size: var(--s1); color: var(--on-navy-soft); }
+.chan__v { font-size: var(--s2); line-height: 1.45; color: var(--on-navy); }
+a.chan__v { text-decoration: underline; text-underline-offset: .22em; }
+a.chan__v:hover { color: #fff; }
+
+/* o formulario e o unico campo claro sobre o azul: ele se oferece */
+.form {
+  grid-column: 7 / span 6; background: var(--paper); color: var(--ink);
+  padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px;
+  align-content: start;
+}
+.sec--navy .form__h { grid-column: 1 / -1; font-size: var(--s3); line-height: 1.2; color: var(--ink); }
+.form__lead { grid-column: 1 / -1; margin: -6px 0 6px; font-size: var(--s1); color: var(--ink-2); }
+.field { grid-column: 1 / -1; display: grid; gap: 7px; }
+.field--half { grid-column: span 1; }
+.field label { font-size: var(--s1); color: var(--ink-soft); }
+.form input, .form textarea {
+  font: inherit; font-size: var(--s2); color: var(--ink); width: 100%;
+  background: var(--paper-2); border: 0; border-radius: var(--radius);
+  padding: 14px 16px; min-height: 52px; transition: background var(--t);
+}
+.form textarea { min-height: 118px; resize: vertical; line-height: 1.5; }
+.form input:hover, .form textarea:hover { background: #e2eaf7; }
+.form__send { grid-column: 1 / -1; width: 100%; margin-top: 6px; }
+.form__hp { position: absolute; left: -9999px; opacity: 0; }
+.form__status { grid-column: 1 / -1; margin: 0; font-size: var(--s1); color: var(--ink-2); }
+.form__status:empty { display: none; }
+.form__status[data-state="erro"] { color: #a4201a; }
+
 @media (max-width: 1060px) {
-  .contact { grid-template-columns: 1fr; gap: 36px; }
-  .contact__body, .contact__dl { grid-column: 1; }
+  .contact { grid-template-columns: 1fr; gap: 40px; }
+  .contact__body, .form { grid-column: 1; }
   .contact__act { flex-direction: column; align-items: stretch; }
+}
+@media (max-width: 560px) {
+  .form { padding: 28px 20px; }
+  .field--half { grid-column: 1 / -1; }
 }
 
 /* ===========================================================================
    Rodapé
    =========================================================================== */
 .foot { background: var(--navy-2); color: var(--on-navy); padding: 72px var(--margin) 40px; }
-.foot__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; max-width: 1280px; margin-inline: auto; }
+.foot__cols { display: grid; grid-template-columns: 1.5fr 1fr 1.4fr; gap: 56px; max-width: 1280px; margin-inline: auto; }
+.foot__lines { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 16px;
+  font-size: var(--s2); color: var(--on-navy-soft); }
+.foot__lines li { display: grid; grid-template-columns: 22px 1fr; column-gap: 12px;
+  align-items: start; line-height: 1.5; }
+.foot__lines svg { width: 20px; height: 20px; fill: var(--on-navy-soft); margin-top: 4px; }
+.foot__lines a:hover { color: var(--on-navy); }
+.foot__social { list-style: none; margin: 26px 0 0; padding: 0; display: flex; gap: 10px; }
+.foot__social a { display: grid; place-items: center; width: 44px; height: 44px;
+  background: rgba(234, 241, 252, .08); transition: background var(--t); }
+.foot__social svg { width: 20px; height: 20px; fill: var(--on-navy); }
+.foot__social a:hover { background: rgba(234, 241, 252, .2); }
 .foot__col h2 { font-size: var(--s2); font-weight: 500; letter-spacing: 0; line-height: 1.5; margin-bottom: 8px; color: var(--on-navy); }
 .foot__col ul { list-style: none; margin: 0; padding: 0; color: var(--on-navy-soft); font-size: var(--s2); line-height: 1.6; }
 .foot__col a:hover { color: var(--on-navy); }
@@ -463,7 +508,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
   color: var(--on-navy-soft); display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between;
 }
 @media (max-width: 760px) {
-  .foot__cols { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .foot__cols { grid-template-columns: 1fr; gap: 36px; }
   .foot__mark { margin-top: 48px; }
 }
 

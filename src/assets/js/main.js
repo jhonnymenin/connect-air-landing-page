@@ -171,4 +171,77 @@
       step(); setInterval(step, 1800);
     }
   }
+
+  /* --- Formulário de contato --------------------------------------------
+     Com a chave de envio preenchida, a mensagem vai por e-mail. Sem ela, em
+     vez de um formulário morto, a mensagem segue pelo WhatsApp — e o botão
+     avisa isso antes do clique. Sem script, o POST nativo continua valendo. */
+  var form = document.getElementById('form-contato');
+  if (form) {
+    var campoChave = form.querySelector('[name="access_key"]');
+    var status = form.querySelector('.form__status');
+    var send = form.querySelector('.form__send');
+    var lead = form.querySelector('.form__lead');
+    var chave = campoChave ? campoChave.value.trim() : '';
+    var FONE = '5511912462998';
+
+    var diz = function (texto, estado) {
+      if (!status) return;
+      status.textContent = texto;
+      if (estado) status.setAttribute('data-state', estado);
+      else status.removeAttribute('data-state');
+    };
+
+    var valores = function () {
+      var d = {};
+      ['nome', 'email', 'telefone', 'mensagem'].forEach(function (n) {
+        var el = form.elements[n];
+        d[n] = el ? el.value.trim() : '';
+      });
+      return d;
+    };
+
+    if (!chave) {
+      form.removeAttribute('action');
+      form.removeAttribute('method');
+      if (send) send.textContent = 'Enviar pelo WhatsApp';
+      if (lead) lead.textContent =
+        'Conte o que você precisa: a mensagem abre no WhatsApp já escrita.';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (form.reportValidity && !form.reportValidity()) return;
+      var d = valores();
+
+      if (!chave) {
+        var txt = 'Olá! Vim pelo site da Connect-Air.\n\n' +
+                  'Nome: ' + d.nome + '\nE-mail: ' + d.email +
+                  '\nTelefone: ' + d.telefone + '\n\n' + d.mensagem;
+        window.open('https://wa.me/' + FONE + '?text=' + encodeURIComponent(txt),
+                    '_blank', 'noopener');
+        diz('Pronto: sua mensagem foi aberta no WhatsApp.');
+        return;
+      }
+
+      if (send) send.disabled = true;
+      diz('Enviando\u2026');
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: chave,
+          subject: 'Novo contato pelo site da Connect-Air',
+          from_name: 'Site Connect-Air',
+          nome: d.nome, email: d.email, telefone: d.telefone, mensagem: d.mensagem
+        })
+      }).then(function (r) { return r.json(); }).then(function (r) {
+        if (!r || !r.success) throw new Error('recusado');
+        form.reset();
+        diz('Mensagem enviada. A Connect-Air retorna em breve.');
+      }).catch(function () {
+        diz('Não consegui enviar agora. Chame no WhatsApp: +55 11 91246-2998.', 'erro');
+      }).then(function () { if (send) send.disabled = false; });
+    });
+  }
 })();
