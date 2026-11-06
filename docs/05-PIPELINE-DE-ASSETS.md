@@ -61,7 +61,7 @@ sobrevive sem estar na lista de entrada.
 | Limite | Valor |
 |---|---|
 | Arquivos em `src/assets/` | **≤ 25** |
-| Peso de `src/assets/` | **≤ 450 KB** |
+| Peso de `src/assets/` | **≤ 560 KB** |
 | Derivadas por original | **3** (imagens) · **1** (SVG) |
 
 Bater o teto é um sinal de que o layout pede imagens demais, não de que o teto
@@ -83,7 +83,7 @@ Originais fora do git, refazíveis com `tools/fetch-originals.py`.
 | `controles-1957-{520,1040}` | *Pantex Plant Building 12-44-1 Air Conditioning*, 1957 | domínio público | VRF, Multi Split, escada |
 | `exaustao-cozinha-{520,1040}` | *Kitchen Exhaust Fans* | CC0 | Mini VRF, Split Inverter |
 
-### Logos, derivada única, sem duotone
+### Logos, derivada única
 
 | Arquivo final | Origem | Observação |
 |---|---|---|
@@ -91,16 +91,29 @@ Originais fora do git, refazíveis com `tools/fetch-originals.py`.
 | `parceiro-wolfmann` | `logo_wolfmann_construtora.png`, **entrega de 05/11/2026** | o logotipo que faltava. Arquivado em `Connect-Air/`, junto dos outros |
 | `selo-cft-crt` | `logo_sistema_cft_crt.png` | 320 px, **mantém a cor**: o brasão em escala de cinza descaracteriza |
 
-**20 arquivos, 490 KB.** O script falha o build se passar de 25 arquivos ou 500 KB.
+**20 arquivos, 540 KB.** O script falha o build se passar de 25 arquivos ou 560 KB.
 
-> ⚠️ **Restam 10 KB de folga.** O próximo arquivo que entrar provavelmente
-> estoura o teto. Quando as fotos reais da Connect-Air chegarem, as 6
-> fotografias de acervo saem e abrem ~370 KB — então a folga volta. Até lá,
-> nada novo entra sem tirar algo.
+### Tratamento: cor original (06/11/2026)
 
-> O teto subiu de 450 para 500 KB por um motivo declarado: a página clara pede
-> um tratamento de fotografia que retém mais detalhe, e entraram 6 logos que o
-> cliente pediu no documento. Não foi deriva.
+Até 06/11 toda fotografia passava por um **duotone** entre o azul da marca e o
+papel da página. Ele servia para unir imagens de origens diferentes num conjunto
+que não tinha nenhuma foto do cliente — e cobrava por isso a cor de todas elas,
+deixando a página inteira monocromática.
+
+O duotone saiu. A foto entra como ela é, com um empurrão discreto de contraste
+(1,04) e saturação (1,06) só para aguentar a compressão.
+
+> ⚠️ **Duas das seis são preto e branco de origem:** as duas chapas do *Pantex
+> Plant Building*, de 1957 (`duto-1957` e `controles-1957`). Em cor original
+> elas continuam cinza, ao lado de quatro coloridas. É uma inconsistência real,
+> ainda em aberto — a única original colorida não usada na pasta é uma mesa de
+> operação desarrumada, que seria uma troca para pior.
+
+> O teto subiu de 500 para 560 KB por um motivo declarado: cor custa mais bytes
+> que uma rampa de um canal só, e espremer a qualidade até caber nos 500 deixava
+> artefato visível. A página inteira fica em 664 KB, contra 1,5 MB de teto
+> contratual. Quando as fotos do Márcio chegarem, as de acervo saem, abrem
+> ~420 KB e o teto volta para 500.
 
 Todas via Wikimedia Commons, creditadas no rodapé da página. **Nenhuma é
 apresentada como foto da Connect-Air** — mostram o mundo do ofício, não a obra

@@ -486,14 +486,15 @@ a.chan__v:hover { color: #fff; }
    Rodapé
    =========================================================================== */
 .foot { background: var(--navy-2); color: var(--on-navy); padding: 72px var(--margin) 40px; }
-.foot__cols { display: grid; grid-template-columns: 1.5fr 1fr 1.4fr; gap: 56px; max-width: 1280px; margin-inline: auto; }
-.foot__lines { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 16px;
+.foot__cols { display: grid; grid-template-columns: auto auto; justify-content: space-between;
+  gap: 56px; max-width: 1280px; margin-inline: auto; }
+.foot__col .foot__lines { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 16px;
   font-size: var(--s2); color: var(--on-navy-soft); }
 .foot__lines li { display: grid; grid-template-columns: 22px 1fr; column-gap: 12px;
   align-items: start; line-height: 1.5; }
 .foot__lines svg { width: 20px; height: 20px; fill: var(--on-navy-soft); margin-top: 4px; }
 .foot__lines a:hover { color: var(--on-navy); }
-.foot__social { list-style: none; margin: 26px 0 0; padding: 0; display: flex; gap: 10px; }
+.foot__col .foot__social { list-style: none; margin: 40px 0 0; padding: 0; display: flex; gap: 10px; }
 .foot__social a { display: grid; place-items: center; width: 44px; height: 44px;
   background: rgba(234, 241, 252, .08); transition: background var(--t); }
 .foot__social svg { width: 20px; height: 20px; fill: var(--on-navy); }
@@ -501,15 +502,14 @@ a.chan__v:hover { color: #fff; }
 .foot__col h2 { font-size: var(--s2); font-weight: 500; letter-spacing: 0; line-height: 1.5; margin-bottom: 8px; color: var(--on-navy); }
 .foot__col ul { list-style: none; margin: 0; padding: 0; color: var(--on-navy-soft); font-size: var(--s2); line-height: 1.6; }
 .foot__col a:hover { color: var(--on-navy); }
-.foot__mark { max-width: 1280px; margin: 72px auto 0; }
-.foot__mark svg { width: 100%; height: auto; display: block; fill: var(--on-navy); }
 .foot__legal {
-  max-width: 1280px; margin: 20px auto 0; font-size: var(--s1);
-  color: var(--on-navy-soft); display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between;
+  max-width: 1280px; margin: 64px auto 0; font-size: var(--s1);
+  color: var(--on-navy-soft); display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline;
 }
+.foot__cred { flex-basis: 100%; }
 @media (max-width: 760px) {
   .foot__cols { grid-template-columns: 1fr; gap: 36px; }
-  .foot__mark { margin-top: 48px; }
+  .foot__legal { margin-top: 44px; }
 }
 
 /* --- Entradas discretas; nada fica escondido se o script falhar ---------- */
