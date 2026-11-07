@@ -218,7 +218,7 @@ orçado (licença é responsabilidade da contratada, contrato § 7).
 | 12 | ~~Wolfmann sem logo~~ ✅ **recebido em 05/11**. Resta a **UTC Óleo e Gás**: tem logotipo, mas não é citada na copy, e o nome do arquivo diz *engenharia* |
 | 13 | "Connect" ou "Connect-Air" na copy |
 | 14 | ~~Conferir o Drive do cliente~~ — ✅ encerrado: o Drive **é** a pasta `CONNECT•AIR/`, já baixada. Sem fotos |
-| 15 | ~~Chave do formulário~~ — ✅ encerrado em 06/11: o formulário não usa serviço de envio nenhum. Ele monta a mensagem e abre o WhatsApp. Não há chave para criar, conta para abrir nem endpoint para cair |
+| 15 | **Chave do formulário.** O campo `access_key` está vazio: enquanto estiver, o formulário envia pelo WhatsApp e o botão avisa isso antes do clique. Para a mensagem chegar por e-mail é preciso criar uma chave gratuita em web3forms.com **com o endereço que vai receber**. Só quem tem a caixa de `contato@connect-air.com.br` pode fazer isso |
 
 ## 7. Risco jurídico — logos de clientes
 

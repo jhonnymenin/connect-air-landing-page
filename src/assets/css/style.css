@@ -39,20 +39,15 @@
   --s4: clamp(1.875rem,  1.30rem + 2.60vw, 3.00rem);    /* 30–48 */
   --s5: clamp(2.5rem,    1.30rem + 5.40vw, 4.25rem);    /* 40–68 */
 
-  /* Escala de espaço: seis degraus, usados no ritmo das seções e dentro
-     dos blocos. Substitui os px soltos onde o código foi reescrito. */
-  --sp-1: 8px;  --sp-2: 12px; --sp-3: 20px;
-  --sp-4: 28px; --sp-5: 40px; --sp-6: 64px;
-
   --margin: 32px;
-  --gap-section: clamp(88px, 8.5vw, 120px);
+  --gap-section: 104px;
   --radius: 0;
   --bar: 76px;            /* altura da barra fixa */
   --t: 180ms cubic-bezier(.2,.6,.3,1);
 }
 
 @media (max-width: 760px) {
-  :root { --margin: 20px; --gap-section: 76px; --bar: 64px; }
+  :root { --margin: 20px; --gap-section: 64px; --bar: 64px; }
 }
 
 /* --- Base ----------------------------------------------------------------- */
@@ -163,6 +158,7 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 /* --- Cabeçalho de seção, igual em toda a página -------------------------- */
 .sec { padding-block: var(--gap-section); }
 .sec--tint { background: var(--paper-2); }
+.sec--tight { padding-block: calc(var(--gap-section) * 0.62); }
 .sec--navy { background: var(--navy); color: var(--on-navy); }
 .sec--navy h2, .sec--navy h3 { color: var(--on-navy); }
 
@@ -175,18 +171,14 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
    1. Abertura
    =========================================================================== */
 .hero { padding-block: clamp(36px, 4vw, 64px) var(--gap-section); }
-/* A fotografia passou de 42% para sete das doze faixas e ficou em retrato:
-   é a imagem dominante que a primeira tela não tinha. */
 .hero__grid {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  gap: var(--sp-6); align-items: center;
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;
 }
-.hero__text { grid-column: 1 / span 5; }
-.hero__figure { grid-column: 6 / -1; margin: 0; }
-.hero__figure img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; display: block; }
+.hero__figure { margin: 0; }
+.hero__figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
 .hero h1 { font-size: var(--s5); max-width: 15ch; }
 .hero__sub {
-  margin-top: 24px; max-width: 40ch; font-size: var(--s3);
+  margin-top: 24px; max-width: 46ch; font-size: var(--s3);
   line-height: 1.35; color: var(--ink-2);
 }
 .hero__act { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
@@ -198,221 +190,136 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 }
 .hero__proof strong { color: var(--ink); font-weight: 500; }
 
-/* As duas portas, em tamanhos diferentes e em alturas diferentes. Eram dois
-   cartões idênticos lado a lado: a forma mais batida da página, logo na
-   primeira tela. Agora a instalação é grande e a manutenção é menor e mais
-   abaixo: a assimetria é o que faz a composição ser de alguém. */
-.doors {
-  margin-top: clamp(48px, 6vw, 96px);
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  gap: var(--sp-6); align-items: start;
+/* as duas portas: o visitante se separa já na primeira tela */
+.doors { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.door {
+  display: block; background: var(--paper-2);
+  transition: background var(--t), transform var(--t);
 }
-.door { display: block; }
-.door--a { grid-column: 1 / span 7; }
-.door--b { grid-column: 9 / -1; margin-top: clamp(40px, 7vw, 120px); }
-.door img { width: 100%; object-fit: cover; display: block; transition: opacity var(--t); }
-.door--a img { aspect-ratio: 16 / 10; }
-.door--b img { aspect-ratio: 4 / 5; }
-.door:hover img { opacity: .88; }
-.door__body { display: block; padding-top: var(--sp-3); }
+.door:hover { background: #e2eaf7; transform: translateY(-3px); }
+.door img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.door__body { display: block; padding: 24px 24px 28px; }
 .door__name {
-  font-size: var(--s3); line-height: 1.25; color: var(--ink); font-weight: 500;
+  display: flex; align-items: center; gap: 10px;
+  font-size: var(--s3); line-height: 1.3; color: var(--ink); font-weight: 500;
   letter-spacing: -0.02em; margin: 0;
-  text-underline-offset: .18em;
 }
-.door:hover .door__name { text-decoration: underline; }
-.door__line { display: block; margin-top: var(--sp-1); color: var(--ink-2); font-size: var(--s2); }
+.door__name svg { width: 22px; height: 22px; fill: var(--accent); flex: none; }
+.door__line { display: block; margin-top: 10px; color: var(--ink-2); font-size: var(--s2); }
 
 @media (max-width: 1060px) {
   .hero__grid { grid-template-columns: 1fr; gap: 36px; }
-  .doors { grid-template-columns: 1fr; gap: var(--sp-5); }
-  .door--a, .door--b { grid-column: 1; }
-  .door--b { margin-top: 0; width: 72%; margin-left: auto; }
-  .hero__text, .hero__figure { grid-column: 1; }
   .hero__figure img { aspect-ratio: 16 / 10; }
 }
 @media (max-width: 760px) {
   .hero h1 { font-size: 10.5vw; max-width: none; }
   .hero__sub { font-size: var(--s2); }
   .hero__act { flex-direction: column; align-items: stretch; }
+  .doors { grid-template-columns: 1fr; gap: 14px; margin-top: 40px; }
+  .door img { aspect-ratio: 16 / 9; }
 }
 
 /* ===========================================================================
-   2. Servicos: enunciado largo, índice à direita, fotografia fechando
-      a coluna da esquerda. Nada depende de apontar o mouse.
+   2. Serviços
    =========================================================================== */
-.svc {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--sp-6); row-gap: clamp(40px, 5vw, 72px);
-  align-items: start;
+.svc { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 32px; }
+.svc__col { grid-column: span 4; }
+.svc__col h3 { font-size: var(--s2); font-weight: 500; margin-bottom: 18px; color: var(--accent); }
+.svc__list { list-style: none; margin: 0; padding: 0; }
+.svc__list button {
+  all: unset; display: block; width: 100%; cursor: pointer;
+  font-size: var(--s3); line-height: 1.3; padding-block: 8px;
+  color: var(--ink-2); transition: color var(--t);
 }
-/* a primeira linha recuada: o enunciado é a maior coisa da seção */
-.svc__h {
-  grid-column: 1 / -1; font-size: var(--s5); line-height: .98;
-  letter-spacing: -0.03em; margin: 0; text-indent: 3vw;
+.svc__list button:hover, .svc__list button:focus-visible,
+.svc__list button[aria-current='true'] { color: var(--ink); }
+.svc__echo {
+  grid-column: 1 / -1; align-self: start; margin-top: 8px;
+  font-size: var(--s3); line-height: 1.3; color: var(--ink); max-width: 40ch;
 }
-.svc__aside { grid-column: 1 / span 4; }
-.svc__lead { margin: 0 0 var(--sp-5); color: var(--ink-2); font-size: var(--s2); }
-.svc__figure { margin: 0; }
-.svc__figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+@media (max-width: 1060px) {
+  .svc { grid-template-columns: 1fr; gap: 40px; }
+  .svc__col, .svc__echo { grid-column: 1; }
+  .svc__echo { display: none; }
+  .svc__sum { display: block; margin-top: 14px; color: var(--ink-2); font-size: var(--s2); }
+}
+@media (min-width: 1061px) { .svc__sum { display: none; } }
 
-.svc__index { grid-column: 6 / -1; display: grid; gap: clamp(36px, 4vw, 64px); }
-.svc__group h3 {
-  font-size: var(--s3); line-height: 1.2; letter-spacing: -0.02em;
-  color: var(--ink); margin: 0;
+/* ===========================================================================
+   3. Os sistemas — foto fixa, lista ativa (a coisa viva)
+   =========================================================================== */
+.sys { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; }
+.sys__media { grid-column: span 5; position: sticky; top: calc(var(--bar) + 32px); align-self: start; }
+.sys__media img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  transition: opacity 280ms linear;
 }
-.svc__group ul {
-  list-style: none; margin: var(--sp-4) 0 0; padding: 0;
-  display: grid; gap: var(--sp-3);
-}
-.svc__group li {
-  display: grid; grid-template-columns: minmax(0, 11fr) minmax(0, 14fr);
-  column-gap: var(--sp-5); align-items: baseline;
-}
-.svc__n {
-  font-size: var(--s2); font-weight: 500; color: var(--ink);
-  text-underline-offset: .2em;
-}
-.svc__n:hover { color: var(--accent); text-decoration: underline; }
-.svc__group li span { font-size: var(--s2); line-height: 1.45; color: var(--ink-2); }
-.svc__group .ask { margin-top: var(--sp-4); }
+.sys__media img.is-fading { opacity: 0; }
+.sys__side { grid-column: 7 / span 6; }
 
-/* O pedido de orçamento de cada família. Um link, não um botão: o botão
-   cheio fica para o fim de cada seção, e o azul volta a querer dizer "aqui". */
-.ask {
-  display: inline-flex; align-items: center; gap: var(--sp-1);
-  min-height: 44px; color: var(--accent); font-size: var(--s2);
-  text-underline-offset: .22em;
+.sys__list { list-style: none; margin: 0; padding: 0; }
+.sys__row > button {
+  all: unset; display: flex; align-items: baseline; justify-content: space-between;
+  gap: 24px; width: 100%; min-height: 60px; cursor: pointer;
+  font-size: var(--s3); line-height: 1.3; color: var(--ink-2);
+  transition: color var(--t);
 }
-.ask svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
-.ask:hover { color: var(--accent-d); text-decoration: underline; }
+.sys__row > button:hover, .sys__row > button:focus-visible { color: var(--ink); }
+.sys__row[data-active='true'] > button { color: var(--ink); font-weight: 500; }
+.sys__use { font-size: var(--s2); color: var(--ink-2); white-space: nowrap; }
+.sys__row[data-active='true'] .sys__use { color: var(--accent); }
+.sys__panel { max-width: 46ch; font-size: var(--s2); line-height: 1.5; color: var(--ink-2); padding-bottom: 20px; }
+.sys__panel p { margin-bottom: 14px; }
+.js .sys__panel[hidden] { display: none; }
 
 @media (max-width: 1060px) {
-  .svc { grid-template-columns: 1fr; }
-  .svc__aside, .svc__index { grid-column: 1; }
-  .svc__aside { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); align-items: start; }
-  .svc__lead { margin-bottom: 0; }
-}
-@media (max-width: 680px) {
-  .svc__h { text-indent: 0; }
-  .svc__aside { grid-template-columns: 1fr; }
-  .svc__figure { width: 72%; }
-  .svc__group li { grid-template-columns: 1fr; gap: 4px; }
+  .sys { grid-template-columns: 1fr; gap: 24px; }
+  .sys__media { grid-column: 1; position: static; }
+  .sys__media img { aspect-ratio: 16 / 10; }
+  .sys__side { grid-column: 1; }
 }
 
 /* ===========================================================================
-   3. Os sistemas: indice tipográfico em colunas. Sem caixas, sem fios:
-      quem organiza são as bordas das colunas e a linha de base comum.
+   4. Contratos, PMOC e a obrigação (campo de cor)
    =========================================================================== */
-.sys {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--sp-6); row-gap: clamp(40px, 5vw, 72px);
-}
-.sys__h {
-  grid-column: 1 / span 6; font-size: var(--s4); line-height: 1.02;
-  letter-spacing: -0.03em; margin: 0;
-}
-.sys__lead {
-  grid-column: 8 / -1; margin: 0; align-self: end;
-  color: var(--ink-2); font-size: var(--s2); max-width: 36ch;
-}
-.sys__cols {
-  grid-column: 1 / -1; list-style: none; margin: 0; padding: 0;
-  columns: 3; column-gap: var(--sp-6);
-}
-.sys__cols li {
-  break-inside: avoid; margin-bottom: clamp(28px, 3vw, 44px);
-}
-.sys__n {
-  display: block; font-size: var(--s3); line-height: 1.15;
-  letter-spacing: -0.02em; color: var(--ink); font-weight: 500;
-  text-underline-offset: .18em;
-}
-.sys__n:hover { color: var(--accent); text-decoration: underline; }
-.sys__use {
-  display: block; margin-top: 4px;
-  font-size: var(--s1); color: var(--ink-soft);
-}
-.sys__cols p {
-  margin: var(--sp-2) 0 0; font-size: var(--s2);
-  line-height: 1.45; color: var(--ink-2);
-}
-.sys__act { grid-column: 1 / -1; }
-
+.plan { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: start; }
+.plan__lead { grid-column: span 5; }
+.plan__lead h2 { font-size: var(--s4); }
+.plan__lead p { margin-top: 20px; color: var(--on-navy-soft); }
+.plan__lead .btn { margin-top: 32px; }
+.plan__blocks { grid-column: 7 / span 6; display: grid; gap: 40px; }
+.plan__block h3 { font-size: var(--s3); margin-bottom: 12px; }
+.plan__block p { color: var(--on-navy-soft); }
 @media (max-width: 1060px) {
-  .sys { grid-template-columns: 1fr; }
-  .sys__h, .sys__lead, .sys__cols, .sys__act { grid-column: 1; }
-  .sys__lead { align-self: start; }
-  .sys__cols { columns: 2; }
-}
-@media (max-width: 680px) { .sys__cols { columns: 1; } }
-
-/* ===========================================================================
-   4. Contratos, PMOC e a obrigacao (campo de cor)
-      Sobre o azul, a fotografia é a única coisa clara: é ela que carrega
-      a seção, e os dois blocos de texto descem para baixo dela.
-   =========================================================================== */
-.plan {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--sp-6); row-gap: clamp(40px, 5vw, 64px); align-items: start;
-}
-.plan__lead { grid-column: 1 / span 6; }
-.plan__lead h2 { font-size: var(--s4); line-height: 1.05; letter-spacing: -0.02em; }
-.plan__lead p { margin-top: var(--sp-3); color: var(--on-navy-soft); max-width: 44ch; }
-.plan__lead .btn { margin-top: var(--sp-5); }
-
-.plan__side { grid-column: 8 / -1; }
-.plan__figure { margin: 0 0 clamp(36px, 4vw, 56px); }
-.plan__figure img { width: 100%; aspect-ratio: 14 / 10; object-fit: cover; display: block; }
-.plan__blocks { display: grid; gap: var(--sp-5); }
-.plan__block h3 { font-size: var(--s3); line-height: 1.2; margin-bottom: var(--sp-2); }
-.plan__block p { color: var(--on-navy-soft); font-size: var(--s2); line-height: 1.5; }
-
-@media (max-width: 1060px) {
-  .plan { grid-template-columns: 1fr; }
-  .plan__lead, .plan__side { grid-column: 1; }
+  .plan { grid-template-columns: 1fr; gap: 40px; }
+  .plan__lead, .plan__blocks { grid-column: 1; }
 }
 
 /* ===========================================================================
-   5. A empresa: fotografia alta à esquerda, a história e as razões à
-      direita. "Por que escolher" era uma seção inteira só com itens
-      iguais; aqui ela é uma coluna, e a página perde uma repetição.
+   5. Por que escolher
    =========================================================================== */
-.about {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--sp-6); row-gap: var(--sp-6); align-items: start;
-}
-/* a coluna da esquerda acompanha a altura da direita: com a fotografia
-   parada no topo sobravam uns seiscentos pixels de chão vazio embaixo dela,
-   que é exatamente o buraco que a crítica manda fechar */
-.about__figure { grid-column: 1 / span 4; margin: 0; align-self: stretch; }
-.about__figure img {
-  width: 100%; height: 100%; min-height: 520px;
-  object-fit: cover; object-position: 50% 42%; display: block;
-}
-.about__body { grid-column: 6 / -1; }
-.about__body h2 { font-size: var(--s4); line-height: 1.05; letter-spacing: -0.02em; }
-.about__body > p { margin-top: var(--sp-4); color: var(--ink-2); max-width: 56ch; }
-.about__body .btn { margin-top: var(--sp-5); }
+.why { list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 26px 56px; }
+.why li { display: flex; gap: 16px; align-items: start; }
+.why svg { width: 24px; height: 24px; fill: var(--accent); flex: none; margin-top: 4px; }
+.why span { font-size: var(--s3); line-height: 1.3; }
+@media (max-width: 1060px) { .why span { font-size: var(--s2); } }
+@media (max-width: 760px) { .why { grid-template-columns: 1fr; gap: 22px; } }
 
-.about__why { margin-top: clamp(36px, 4vw, 56px); }
-.about__why h3 { font-size: var(--s3); line-height: 1.2; letter-spacing: -0.02em; }
-/* sem marcador e sem ícone: as razões se organizam pela coluna e pelo espaço */
-.about__why ul {
-  list-style: none; margin: var(--sp-4) 0 0; padding: 0;
-  columns: 2; column-gap: var(--sp-6);
-  font-size: var(--s2); line-height: 1.4; color: var(--ink-2);
-}
-.about__why li { break-inside: avoid; margin-bottom: var(--sp-3); max-width: 30ch; }
-
+/* ===========================================================================
+   6. A empresa
+   =========================================================================== */
+.about { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: center; }
+.about__figure { grid-column: span 5; }
+.about__figure img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
+.about__body { grid-column: 7 / span 6; }
+.about__body h2 { font-size: var(--s4); }
+.about__body p { margin-top: 22px; color: var(--ink-2); }
+.about__body .btn { margin-top: 32px; }
 @media (max-width: 1060px) {
-  .about { grid-template-columns: 1fr; }
-  .about__figure { grid-column: 1; width: 56%; }
+  .about { grid-template-columns: 1fr; gap: 32px; }
+  .about__figure { grid-column: 1; max-width: none; }
   .about__body { grid-column: 1; }
-}
-@media (max-width: 680px) {
-  .about__figure { grid-column: 1; width: 72%; }
-  .about__why ul { columns: 1; }
 }
 
 /* ===========================================================================
@@ -420,10 +327,6 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
    =========================================================================== */
 /* grade de células iguais: os logos têm proporções muito diferentes entre si,
    e uma fileira solta deixa os altos e estreitos sumirem ao lado dos largos */
-.partners__t {
-  font-size: var(--s1); font-weight: 400; letter-spacing: 0; line-height: 1.5;
-  color: var(--ink-soft); margin-bottom: var(--sp-4);
-}
 .partners {
   list-style: none; margin: 0; padding: 0;
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 32px 24px;
@@ -443,99 +346,100 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .creds { margin-top: 72px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; align-items: center; }
 .creds__seal { grid-column: span 2; }
 .creds__seal img { width: 100%; max-width: 124px; }
-/* o texto ocupava oito faixas mas media vinte e quatro caracteres: sobrava
-   um terço de tela vazio à direita. Agora a frase e as normas são duas
-   colunas, e a linha fecha dos dois lados. */
-.creds__text {
-  grid-column: 4 / -1; display: grid;
-  grid-template-columns: minmax(0, 8fr) minmax(0, 11fr); gap: var(--sp-6);
-  align-items: start;
-}
-.creds__sentence { font-size: var(--s3); line-height: 1.25; letter-spacing: -0.02em; max-width: 18ch; }
-.creds__norms { margin-top: 0; font-size: var(--s2); line-height: 1.55; color: var(--ink-2); }
+.creds__text { grid-column: 4 / span 8; }
+.creds__sentence { font-size: var(--s3); line-height: 1.3; max-width: 24ch; }
+.creds__norms { margin-top: 18px; font-size: var(--s2); line-height: 1.55; color: var(--ink-2); max-width: 58ch; }
 .creds__name { color: var(--ink-2); transition: color 400ms linear; }
 .creds__name.is-lit { color: var(--accent); }
-.creds__foot { margin-top: var(--sp-3); color: var(--ink-2); font-size: var(--s2); }
+.creds__foot { margin-top: 20px; color: var(--ink-2); max-width: 60ch; }
 @media (max-width: 1060px) {
   .creds { grid-template-columns: 1fr; gap: 24px; }
   .creds__seal { grid-column: 1; } .creds__seal img { max-width: 92px; }
-  .creds__text { grid-column: 1; grid-template-columns: 1fr; gap: var(--sp-4); }
+  .creds__text { grid-column: 1; }
 }
 
 /* ===========================================================================
-   8. Avaliacoes do Google: a citacao grande leva a seção; as outras duas
-      viraram texto corrido numa coluna estreita. Os cartões com avatar de
-      letra e borda eram a terceira fileira de cartões iguais da página.
+   8. Avaliações do Google
    =========================================================================== */
-.rev {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--sp-6); row-gap: var(--sp-6); align-items: start;
-}
-.rev__lead { grid-column: 1 / span 7; }
-.rev__lead h2 { font-size: var(--s4); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch; }
+/* topo: título à esquerda, resumo do perfil à direita */
+.rev { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: start; }
+.rev__lead { grid-column: span 7; }
+.rev__lead h2 { font-size: var(--s4); max-width: 16ch; }
+.rev__lead h2 em { font-style: normal; color: var(--accent); }
+.rev__side { grid-column: 9 / span 4; }
+.rev__side p { color: var(--ink-2); }
 
-.rev__score { display: flex; align-items: baseline; gap: var(--sp-2); margin-top: var(--sp-4); }
+.rev__g { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+.rev__g svg { width: 40px; height: 40px; flex: none; }
+.rev__g b { display: block; font-weight: 500; font-size: var(--s2); }
+.rev__g span { display: block; font-size: var(--s2); color: var(--ink-2); }
+
+/* nota do perfil, com os números reais */
+.rev__score { display: flex; align-items: baseline; gap: 12px; margin-top: 26px; }
 .rev__score strong { font-size: var(--s4); font-weight: 500; line-height: 1; letter-spacing: -0.03em; }
 .rev__score .stars { display: flex; gap: 2px; }
-.rev__score > span { font-size: var(--s2); color: var(--ink-2); }
-.stars svg { width: 20px; height: 20px; fill: #f5a623; }
+.rev__score span { font-size: var(--s2); color: var(--ink-2); }
+.stars svg { width: 18px; height: 18px; fill: #f5a623; }
 
-/* declaração, não manchete: fica em tamanho de parágrafo grande */
-.rev__big {
-  margin: clamp(36px, 4vw, 56px) 0 0;
-  font-size: var(--s3); line-height: 1.3; letter-spacing: -0.02em;
-  color: var(--ink); max-width: 38ch;
+/* os cartões */
+/* um depoimento em destaque e dois ao lado: a frase mais forte ganha tamanho,
+   e a fileira deixa de ser três cartões iguais */
+.rev__cards {
+  grid-column: 1 / -1; margin-top: 56px;
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start;
 }
-.rev__big::before { content: '“'; }
-.rev__big::after  { content: '”'; }
-.rev__who { margin: var(--sp-3) 0 0; font-size: var(--s2); color: var(--ink-2); }
-.rev__act { margin-top: clamp(36px, 4vw, 56px); }
+.rev__pair { display: grid; gap: 24px; align-content: start; }
+.rev__card {
+  background: var(--paper); padding: 30px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.rev__head { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 4px; }
+.rev__av {
+  width: 44px; height: 44px; flex: none;
+  display: grid; place-items: center;
+  background: var(--accent); color: #fff;
+  font-size: var(--s2); font-weight: 500; line-height: 1;
+}
+.rev__who { flex: 1; min-width: 0; }
+.rev__who b { display: block; font-weight: 500; font-size: var(--s2); line-height: 1.3; }
+.rev__who span { display: block; font-size: var(--s2); color: var(--ink-2); }
+.rev__who .stars { margin-top: 4px; }
+.rev__who .stars svg { width: 15px; height: 15px; }
+.rev__head > svg { width: 22px; height: 22px; flex: none; }
+.rev__card blockquote { margin: 0; font-size: var(--s2); line-height: 1.55; color: var(--ink); }
+.rev__card blockquote::before { content: '“'; }
+.rev__card blockquote::after { content: '”'; }
 
-.rev__side { grid-column: 9 / -1; }
-.rev__side .rev__note { margin: 0; color: var(--ink-2); font-size: var(--s2); }
-.rev__side blockquote {
-  margin: clamp(32px, 3.5vw, 48px) 0 0;
-  font-size: var(--s2); line-height: 1.55; color: var(--ink);
-}
-.rev__side blockquote::before { content: '“'; }
-.rev__side blockquote::after  { content: '”'; }
-.rev__side .rev__who { margin-top: var(--sp-2); color: var(--ink-soft); }
+/* o destaque perde a moldura e vira citação: não é mais um cartão entre iguais.
+   Precisa vir depois de .rev__card: mesma especificidade, vence quem vem depois. */
+.rev__card--lead { background: none; padding: 0; gap: 24px; }
+.rev__card--lead blockquote { font-size: var(--s3); line-height: 1.3; letter-spacing: -0.02em; }
+.rev__card--lead .rev__head { margin-top: 0; }
+.rev__card .stars { display: flex; gap: 2px; }
+
+.rev__act { grid-column: 1 / -1; margin-top: 40px; }
 
 @media (max-width: 1060px) {
-  .rev { grid-template-columns: 1fr; }
-  .rev__lead, .rev__side { grid-column: 1; }
+  .rev { grid-template-columns: 1fr; gap: 28px; }
+  .rev__lead, .rev__side, .rev__cards, .rev__act { grid-column: 1; }
   .rev__lead h2 { max-width: none; }
-  .rev__big { max-width: 30ch; }
-}
-@media (max-width: 560px) {
-  .rev__act .btn { width: 100%; justify-content: center; }
+  .rev__cards { grid-template-columns: 1fr; margin-top: 36px; }
+  .rev__cards { gap: 36px; }
+  .rev__card--lead blockquote { font-size: var(--s3); line-height: 1.3; }
+  .rev__card { padding: 24px; }
+  .rev__act .btn { width: 100%; }
 }
 
 /* ===========================================================================
    9. Contato
    =========================================================================== */
-.close { display: grid; grid-template-columns: repeat(12, 1fr);
-  gap: var(--sp-5) var(--sp-6); align-items: start;
-  /* o cartão ocupa as duas linhas e é mais alto que a coluna da esquerda.
-     Sem isto a sobra se dividia entre as linhas e abria um vão de cem pixels
-     entre os botões e os canais; com 1fr na segunda linha, a sobra cai embaixo. */
-  grid-template-rows: auto 1fr; }
-/* Duas colunas: à esquerda o convite e os canais, à direita o formulário.
-   O cartão ocupa as duas linhas, então a seção tem a altura da coluna mais
-   alta: ganhar o formulário não custou comprimento de página. */
-.close__lead { grid-column: 1 / span 5; grid-row: 1; }
-/* sem coluna declarada o .chan caía numa faixa de ~150px e quebrava o telefone
-   e o e-mail no meio. */
-.close .chan { grid-column: 1 / span 5; grid-row: 2; margin-top: 0; align-self: start; }
-.close .form { grid-column: 7 / span 6; grid-row: 1 / span 2; }
-/* a coluna encurtou de seis para cinco faixas quando o formulário entrou;
-   em --s5 o título passava a quebrar em três linhas. Um degrau abaixo ele
-   volta a duas, e o cartão claro à direita já carrega o peso visual. */
-.close__lead h2 { font-size: var(--s4); line-height: 1.07; max-width: 18ch; }
-.close__lead p { margin-top: var(--sp-4); color: var(--on-navy-soft); max-width: 42ch; }
-.close__act { margin-top: var(--sp-5); display: flex; gap: 12px; flex-wrap: wrap; }
-.btn--big { padding: 21px 34px; min-height: 62px; font-size: var(--s2); }
+.contact { display: grid; grid-template-columns: repeat(12, 1fr); gap: 56px; align-items: start; }
+.contact__body { grid-column: 1 / span 5; }
+.contact__body h2 { font-size: var(--s4); }
+.contact__body p { margin-top: 20px; color: var(--on-navy-soft); max-width: 44ch; }
+.contact__act { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
 
+/* os canais, com o icone do proprio meio */
 .chan { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 22px; }
 .chan li { display: grid; grid-template-columns: 24px 1fr; column-gap: 14px; align-items: start; }
 .chan li > svg { width: 22px; height: 22px; fill: var(--on-navy-soft); grid-row: span 2; margin-top: 3px; }
@@ -544,14 +448,12 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 a.chan__v { text-decoration: underline; text-underline-offset: .22em; }
 a.chan__v:hover { color: #fff; }
 
-/* O formulário é o único campo claro sobre o azul: ele se oferece. */
+/* o formulario e o unico campo claro sobre o azul: ele se oferece */
 .form {
-  background: var(--paper); color: var(--ink);
+  grid-column: 7 / span 6; background: var(--paper); color: var(--ink);
   padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px;
   align-content: start;
 }
-/* .sec--navy h2 tem especificidade (0,1,1) e venceria .form__h sozinho,
-   deixando o título branco sobre o cartão claro. Daí o seletor composto. */
 .sec--navy .form__h { grid-column: 1 / -1; font-size: var(--s3); line-height: 1.2; color: var(--ink); }
 .form__lead { grid-column: 1 / -1; margin: -6px 0 6px; font-size: var(--s1); color: var(--ink-2); }
 .field { grid-column: 1 / -1; display: grid; gap: 7px; }
@@ -562,28 +464,20 @@ a.chan__v:hover { color: #fff; }
   background: var(--paper-2); border: 0; border-radius: var(--radius);
   padding: 14px 16px; min-height: 52px; transition: background var(--t);
 }
-.form textarea { min-height: 112px; resize: vertical; line-height: 1.5; }
+.form textarea { min-height: 118px; resize: vertical; line-height: 1.5; }
 .form input:hover, .form textarea:hover { background: #e2eaf7; }
-/* erro: o contorno marca o campo e o texto do estado diz o que houve.
-   A cor vermelha nunca é o único sinal. */
-.form input[aria-invalid="true"]:not(:focus-visible),
-.form textarea[aria-invalid="true"]:not(:focus-visible) {
-  outline: 2px solid #a4201a; outline-offset: -2px;
-}
 .form__send { grid-column: 1 / -1; width: 100%; margin-top: 6px; }
+.form__hp { position: absolute; left: -9999px; opacity: 0; }
 .form__status { grid-column: 1 / -1; margin: 0; font-size: var(--s1); color: var(--ink-2); }
 .form__status:empty { display: none; }
-.form__priv { grid-column: 1 / -1; margin: 0; font-size: var(--s1);
-  line-height: 1.5; color: var(--ink-soft); }
+.form__status[data-state="erro"] { color: #a4201a; }
 
 @media (max-width: 1060px) {
-  .close { grid-template-columns: 1fr; gap: var(--sp-5); }
-  /* empilhado, a ordem é a do HTML: convite, canais, formulário */
-  .close__lead, .close .chan, .close .form { grid-column: 1; grid-row: auto; }
-  .chan { margin-top: 0; }
+  .contact { grid-template-columns: 1fr; gap: 40px; }
+  .contact__body, .form { grid-column: 1; }
+  .contact__act { flex-direction: column; align-items: stretch; }
 }
 @media (max-width: 560px) {
-  .close__act { flex-direction: column; align-items: stretch; }
   .form { padding: 28px 20px; }
   .field--half { grid-column: 1 / -1; }
 }
@@ -630,23 +524,3 @@ a.chan__v:hover { color: #fff; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
   .js [data-rise] { opacity: 1; transform: none; }
 }
-
-/* ===========================================================================
-   Acabamento móvel e alvos de toque (revisão de 06/11/2026)
-   =========================================================================== */
-
-/* A 360px o logotipo e o botão da barra não cabiam lado a lado: o botão
-   transbordava 22px e criava rolagem horizontal. Medido, não estimado. */
-@media (max-width: 440px) {
-  .bar__mark img { max-width: 140px; }
-  .bar__cta { padding: 12px 16px; min-height: 44px; font-size: var(--s1); }
-  .bar__cta svg { width: 18px; height: 18px; }
-}
-
-/* Links de lista do rodapé tinham 19px de altura — abaixo do mínimo de 24px
-   da WCAG 2.5.8. O padding entra no link, não na linha, para virar alvo. */
-.foot__nav a, .foot__lines a {
-  display: inline-block; padding-block: 7px;
-}
-.foot__nav li { line-height: 1.2; }
-.foot__social a:focus-visible { outline-offset: 2px; }

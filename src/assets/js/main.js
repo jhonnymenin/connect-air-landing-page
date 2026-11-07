@@ -86,6 +86,59 @@
     });
   }
 
+  /* --- Os sistemas: a lista ativa troca a fotografia fixa ---------------- */
+  var list = document.getElementById('sys-list');
+  var photo = document.getElementById('sys-photo');
+
+  if (list && photo) {
+    var rows = Array.prototype.slice.call(list.querySelectorAll('.sys__row'));
+
+    /* com script, só o sistema ativo fica aberto */
+    rows.forEach(function (row, i) {
+      var panel = row.querySelector('.sys__panel');
+      var btn = row.querySelector('button');
+      if (panel) panel.hidden = i !== 0;
+      if (btn) btn.setAttribute('aria-expanded', String(i === 0));
+    });
+
+    var activate = function (row) {
+      if (row.dataset.active === 'true') return;
+
+      rows.forEach(function (r) {
+        var on = r === row;
+        r.dataset.active = on ? 'true' : 'false';
+        var p = r.querySelector('.sys__panel');
+        var b = r.querySelector('button');
+        if (p) p.hidden = !on;
+        if (b) b.setAttribute('aria-expanded', String(on));
+      });
+
+      var stem = row.dataset.photo;
+      var w = (row.dataset.w || '').split(',');
+      if (!stem || w.length !== 2) return;
+
+      var swap = function () {
+        photo.src = 'assets/img/' + stem + '-' + w[0] + '.webp';
+        photo.srcset = 'assets/img/' + stem + '-' + w[0] + '.webp ' + w[0] + 'w, ' +
+                       'assets/img/' + stem + '-' + w[1] + '.webp ' + w[1] + 'w';
+        photo.alt = row.dataset.alt || '';
+        photo.classList.remove('is-fading');
+      };
+
+      if (quieter) { swap(); return; }
+      photo.classList.add('is-fading');
+      window.setTimeout(swap, 280);
+    };
+
+    rows.forEach(function (row) {
+      var btn = row.querySelector('button');
+      if (!btn) return;
+      btn.addEventListener('click', function () { activate(row); });
+      btn.addEventListener('mouseenter', function () { activate(row); });
+      btn.addEventListener('focus', function () { activate(row); });
+    });
+  }
+
   /* --- O flutuante recua onde o contato já oferece o WhatsApp ------------ */
   var float_ = document.getElementById('wa-flutuante');
   var contact = document.getElementById('contato');
@@ -119,97 +172,76 @@
     }
   }
 
-  /* --- Origem do visitante nos links de WhatsApp -------------------------
-     Visita vinda de anúncio traz utm_* ou gclid na URL. O WhatsApp não aceita
-     parâmetros de campanha, então a origem entra como uma linha no fim da
-     mensagem já escrita: é assim que a Connect-Air sabe de onde veio o contato.
-     Guardado na sessão para sobreviver à rolagem e a cliques internos. */
-  var ORIGEM = (function () {
-    var CHAVE = 'ca:origem';
-    var guardada = null;
-    try { guardada = window.sessionStorage.getItem(CHAVE); } catch (e) {}
-
-    var q = new URLSearchParams(window.location.search);
-    var gclid = q.get('gclid');
-    var fonte = q.get('utm_source');
-    var campanha = q.get('utm_campaign');
-    var termo = q.get('utm_term');
-
-    var partes = [];
-    if (gclid) partes.push('Google Ads');
-    else if (fonte) partes.push(fonte);
-    if (campanha) partes.push(campanha);
-    if (termo) partes.push('"' + termo + '"');
-
-    var atual = partes.length ? partes.join(' · ') : null;
-    if (atual) {
-      try { window.sessionStorage.setItem(CHAVE, atual); } catch (e) {}
-      return atual;
-    }
-    return guardada;
-  })();
-
-  if (ORIGEM) {
-    var sufixo = '\n\n(origem: ' + ORIGEM + ')';
-    document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
-      var u;
-      try { u = new URL(a.href); } catch (e) { return; }
-      var texto = u.searchParams.get('text');
-      if (!texto || texto.indexOf('(origem:') !== -1) return;
-      u.searchParams.set('text', texto + sufixo);
-      a.href = u.toString();
-    });
-  }
-
   /* --- Formulário de contato --------------------------------------------
-     Sem serviço de envio, sem chave, sem servidor: o formulário monta a
-     mensagem e abre o WhatsApp com ela escrita. Nada sai daqui por conta
-     própria: quem aperta enviar, no fim, é a pessoa, dentro do WhatsApp.
-
-     É por isso que não há isca de robô nem estado de "enviando": não existe
-     endereço para um robô atacar, e não existe rede para esperar. O preço
-     honesto é que sem JavaScript o formulário não faz nada; por isso o
-     telefone, o e-mail e o botão do WhatsApp estão ao lado, em HTML puro. */
+     Com a chave de envio preenchida, a mensagem vai por e-mail. Sem ela, em
+     vez de um formulário morto, a mensagem segue pelo WhatsApp — e o botão
+     avisa isso antes do clique. Sem script, o POST nativo continua valendo. */
   var form = document.getElementById('form-contato');
   if (form) {
+    var campoChave = form.querySelector('[name="access_key"]');
     var status = form.querySelector('.form__status');
+    var send = form.querySelector('.form__send');
+    var lead = form.querySelector('.form__lead');
+    var chave = campoChave ? campoChave.value.trim() : '';
     var FONE = '5511912462998';
-    var CAMPOS = ['nome', 'email', 'telefone', 'mensagem'];
 
-    /* aria-invalid acompanha a validação nativa: o leitor de tela ouve o erro,
-       e o contorno vermelho nunca é o único sinal */
-    CAMPOS.forEach(function (n) {
-      var el = form.elements[n];
-      if (!el) return;
-      el.addEventListener('invalid', function () { el.setAttribute('aria-invalid', 'true'); });
-      el.addEventListener('input', function () { el.removeAttribute('aria-invalid'); });
-    });
+    var diz = function (texto, estado) {
+      if (!status) return;
+      status.textContent = texto;
+      if (estado) status.setAttribute('data-state', estado);
+      else status.removeAttribute('data-state');
+    };
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      /* zera a marca antes de reavaliar: reportValidity remarca quem continua
-         errado, e quem foi corrigido por preenchimento automático (sem evento
-         'input') não fica marcado à toa */
-      CAMPOS.forEach(function (n) {
-        var el = form.elements[n];
-        if (el) el.removeAttribute('aria-invalid');
-      });
-      if (form.reportValidity && !form.reportValidity()) return;
-
+    var valores = function () {
       var d = {};
-      CAMPOS.forEach(function (n) {
+      ['nome', 'email', 'telefone', 'mensagem'].forEach(function (n) {
         var el = form.elements[n];
         d[n] = el ? el.value.trim() : '';
       });
+      return d;
+    };
 
-      var txt = 'Olá! Vim pelo site da Connect-Air.\n\n' +
-                'Nome: ' + d.nome + '\nE-mail: ' + d.email +
-                '\nTelefone: ' + d.telefone + '\n\n' + d.mensagem +
-                (ORIGEM ? '\n\n(origem: ' + ORIGEM + ')' : '');
-      window.open('https://wa.me/' + FONE + '?text=' + encodeURIComponent(txt),
-                  '_blank', 'noopener');
-      if (status) status.textContent = 'Pronto: sua mensagem abriu no WhatsApp.';
+    if (!chave) {
+      form.removeAttribute('action');
+      form.removeAttribute('method');
+      if (send) send.textContent = 'Enviar pelo WhatsApp';
+      if (lead) lead.textContent =
+        'Conte o que você precisa: a mensagem abre no WhatsApp já escrita.';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (form.reportValidity && !form.reportValidity()) return;
+      var d = valores();
+
+      if (!chave) {
+        var txt = 'Olá! Vim pelo site da Connect-Air.\n\n' +
+                  'Nome: ' + d.nome + '\nE-mail: ' + d.email +
+                  '\nTelefone: ' + d.telefone + '\n\n' + d.mensagem;
+        window.open('https://wa.me/' + FONE + '?text=' + encodeURIComponent(txt),
+                    '_blank', 'noopener');
+        diz('Pronto: sua mensagem foi aberta no WhatsApp.');
+        return;
+      }
+
+      if (send) send.disabled = true;
+      diz('Enviando\u2026');
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: chave,
+          subject: 'Novo contato pelo site da Connect-Air',
+          from_name: 'Site Connect-Air',
+          nome: d.nome, email: d.email, telefone: d.telefone, mensagem: d.mensagem
+        })
+      }).then(function (r) { return r.json(); }).then(function (r) {
+        if (!r || !r.success) throw new Error('recusado');
+        form.reset();
+        diz('Mensagem enviada. A Connect-Air retorna em breve.');
+      }).catch(function () {
+        diz('Não consegui enviar agora. Chame no WhatsApp: +55 11 91246-2998.', 'erro');
+      }).then(function () { if (send) send.disabled = false; });
     });
   }
-
 })();
