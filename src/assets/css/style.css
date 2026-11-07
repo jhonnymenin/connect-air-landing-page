@@ -45,14 +45,14 @@
   --sp-4: 28px; --sp-5: 40px; --sp-6: 64px;
 
   --margin: 32px;
-  --gap-section: 104px;
+  --gap-section: clamp(88px, 8.5vw, 120px);
   --radius: 0;
   --bar: 76px;            /* altura da barra fixa */
   --t: 180ms cubic-bezier(.2,.6,.3,1);
 }
 
 @media (max-width: 760px) {
-  :root { --margin: 20px; --gap-section: 64px; --bar: 64px; }
+  :root { --margin: 20px; --gap-section: 76px; --bar: 64px; }
 }
 
 /* --- Base ----------------------------------------------------------------- */
@@ -163,7 +163,6 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 /* --- Cabeçalho de seção, igual em toda a página -------------------------- */
 .sec { padding-block: var(--gap-section); }
 .sec--tint { background: var(--paper-2); }
-.sec--tight { padding-block: calc(var(--gap-section) * 0.62); }
 .sec--navy { background: var(--navy); color: var(--on-navy); }
 .sec--navy h2, .sec--navy h3 { color: var(--on-navy); }
 
@@ -176,14 +175,18 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
    1. Abertura
    =========================================================================== */
 .hero { padding-block: clamp(36px, 4vw, 64px) var(--gap-section); }
+/* A fotografia passou de 42% para sete das doze faixas e ficou em retrato:
+   é a imagem dominante que a primeira tela não tinha. */
 .hero__grid {
-  display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: var(--sp-6); align-items: center;
 }
-.hero__figure { margin: 0; }
-.hero__figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.hero__text { grid-column: 1 / span 5; }
+.hero__figure { grid-column: 6 / -1; margin: 0; }
+.hero__figure img { width: 100%; aspect-ratio: 5 / 6; object-fit: cover; display: block; }
 .hero h1 { font-size: var(--s5); max-width: 15ch; }
 .hero__sub {
-  margin-top: 24px; max-width: 46ch; font-size: var(--s3);
+  margin-top: 24px; max-width: 40ch; font-size: var(--s3);
   line-height: 1.35; color: var(--ink-2);
 }
 .hero__act { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
@@ -195,128 +198,221 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 }
 .hero__proof strong { color: var(--ink); font-weight: 500; }
 
-/* as duas portas: o visitante se separa já na primeira tela */
-.doors { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.door {
-  display: block; background: var(--paper-2);
-  transition: background var(--t), transform var(--t);
+/* As duas portas, em tamanhos diferentes e em alturas diferentes. Eram dois
+   cartões idênticos lado a lado: a forma mais batida da página, logo na
+   primeira tela. Agora a instalação é grande e a manutenção é menor e mais
+   abaixo: a assimetria é o que faz a composição ser de alguém. */
+.doors {
+  margin-top: clamp(48px, 6vw, 96px);
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: var(--sp-6); align-items: start;
 }
-.door:hover { background: #e2eaf7; transform: translateY(-3px); }
-.door img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
-.door__body { display: block; padding: 24px 24px 28px; }
+.door { display: block; }
+.door--a { grid-column: 1 / span 7; }
+.door--b { grid-column: 9 / -1; margin-top: clamp(40px, 7vw, 120px); }
+.door img { width: 100%; object-fit: cover; display: block; transition: opacity var(--t); }
+.door--a img { aspect-ratio: 16 / 10; }
+.door--b img { aspect-ratio: 4 / 5; }
+.door:hover img { opacity: .88; }
+.door__body { display: block; padding-top: var(--sp-3); }
 .door__name {
-  display: flex; align-items: center; gap: 10px;
-  font-size: var(--s3); line-height: 1.3; color: var(--ink); font-weight: 500;
+  font-size: var(--s3); line-height: 1.25; color: var(--ink); font-weight: 500;
   letter-spacing: -0.02em; margin: 0;
+  text-underline-offset: .18em;
 }
-.door__name svg { width: 22px; height: 22px; fill: var(--accent); flex: none; }
-.door__line { display: block; margin-top: 10px; color: var(--ink-2); font-size: var(--s2); }
+.door:hover .door__name { text-decoration: underline; }
+.door__line { display: block; margin-top: var(--sp-1); color: var(--ink-2); font-size: var(--s2); }
 
 @media (max-width: 1060px) {
   .hero__grid { grid-template-columns: 1fr; gap: 36px; }
+  .doors { grid-template-columns: 1fr; gap: var(--sp-5); }
+  .door--a, .door--b { grid-column: 1; }
+  .door--b { margin-top: 0; width: 72%; margin-left: auto; }
+  .hero__text, .hero__figure { grid-column: 1; }
   .hero__figure img { aspect-ratio: 16 / 10; }
 }
 @media (max-width: 760px) {
   .hero h1 { font-size: 10.5vw; max-width: none; }
   .hero__sub { font-size: var(--s2); }
   .hero__act { flex-direction: column; align-items: stretch; }
-  .doors { grid-template-columns: 1fr; gap: 14px; margin-top: 40px; }
-  .door img { aspect-ratio: 16 / 9; }
 }
 
 /* ===========================================================================
-   2. Serviços — três famílias, cada serviço legível sem interação
+   2. Servicos: enunciado largo, índice à direita, fotografia fechando
+      a coluna da esquerda. Nada depende de apontar o mouse.
    =========================================================================== */
-.svc { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6) var(--sp-5); }
-.svc__group h3 {
-  font-size: var(--s2); font-weight: 500; color: var(--accent);
-  line-height: 1.5; letter-spacing: 0;
+.svc {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--sp-6); row-gap: clamp(40px, 5vw, 72px);
+  align-items: start;
 }
-.svc__sum { margin-top: 6px; color: var(--ink-soft); font-size: var(--s1); max-width: 34ch; }
-.svc__list { list-style: none; margin: var(--sp-4) 0 0; padding: 0; display: grid; gap: var(--sp-4); }
-.svc__list h4 {
-  margin: 0; font-size: var(--s3); line-height: 1.3; font-weight: 400;
-  letter-spacing: -0.02em; color: var(--ink);
+/* a primeira linha recuada: o enunciado é a maior coisa da seção */
+.svc__h {
+  grid-column: 1 / -1; font-size: var(--s5); line-height: .98;
+  letter-spacing: -0.03em; margin: 0; text-indent: 3vw;
 }
-.svc__list p { margin-top: 8px; color: var(--ink-2); font-size: var(--s2); line-height: 1.5; max-width: 36ch; }
+.svc__aside { grid-column: 1 / span 4; }
+.svc__lead { margin: 0 0 var(--sp-5); color: var(--ink-2); font-size: var(--s2); }
+.svc__figure { margin: 0; }
+.svc__figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
 
-/* o pedido por serviço: discreto em repouso, inequívoco ao tocar */
+.svc__index { grid-column: 6 / -1; display: grid; gap: clamp(36px, 4vw, 64px); }
+.svc__group h3 {
+  font-size: var(--s3); line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--ink); margin: 0;
+}
+.svc__group ul {
+  list-style: none; margin: var(--sp-4) 0 0; padding: 0;
+  display: grid; gap: var(--sp-3);
+}
+.svc__group li {
+  display: grid; grid-template-columns: minmax(0, 11fr) minmax(0, 14fr);
+  column-gap: var(--sp-5); align-items: baseline;
+}
+.svc__n {
+  font-size: var(--s2); font-weight: 500; color: var(--ink);
+  text-underline-offset: .2em;
+}
+.svc__n:hover { color: var(--accent); text-decoration: underline; }
+.svc__group li span { font-size: var(--s2); line-height: 1.45; color: var(--ink-2); }
+.svc__group .ask { margin-top: var(--sp-4); }
+
+/* O pedido de orçamento de cada família. Um link, não um botão: o botão
+   cheio fica para o fim de cada seção, e o azul volta a querer dizer "aqui". */
 .ask {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
-  min-height: 44px; font-size: var(--s2); color: var(--accent);
-  transition: color var(--t);
+  display: inline-flex; align-items: center; gap: var(--sp-1);
+  min-height: 44px; color: var(--accent); font-size: var(--s2);
+  text-underline-offset: .22em;
 }
 .ask svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
-.ask span, .ask { text-underline-offset: .22em; }
 .ask:hover { color: var(--accent-d); text-decoration: underline; }
 
-/* ===========================================================================
-   3. Os sistemas — ficha técnica, nove linhas, tudo à vista
-   =========================================================================== */
-.sys { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-5); }
-.sys__row {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  column-gap: var(--sp-5); align-items: start;
+@media (max-width: 1060px) {
+  .svc { grid-template-columns: 1fr; }
+  .svc__aside, .svc__index { grid-column: 1; }
+  .svc__aside { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5); align-items: start; }
+  .svc__lead { margin-bottom: 0; }
 }
-.sys__row h3 { font-size: var(--s3); line-height: 1.25; margin: 0; }
+@media (max-width: 680px) {
+  .svc__h { text-indent: 0; }
+  .svc__aside { grid-template-columns: 1fr; }
+  .svc__figure { width: 72%; }
+  .svc__group li { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* ===========================================================================
+   3. Os sistemas: indice tipográfico em colunas. Sem caixas, sem fios:
+      quem organiza são as bordas das colunas e a linha de base comum.
+   =========================================================================== */
+.sys {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--sp-6); row-gap: clamp(40px, 5vw, 72px);
+}
+.sys__h {
+  grid-column: 1 / span 6; font-size: var(--s4); line-height: 1.02;
+  letter-spacing: -0.03em; margin: 0;
+}
+.sys__lead {
+  grid-column: 8 / -1; margin: 0; align-self: end;
+  color: var(--ink-2); font-size: var(--s2); max-width: 36ch;
+}
+.sys__cols {
+  grid-column: 1 / -1; list-style: none; margin: 0; padding: 0;
+  columns: 3; column-gap: var(--sp-6);
+}
+.sys__cols li {
+  break-inside: avoid; margin-bottom: clamp(28px, 3vw, 44px);
+}
+.sys__n {
+  display: block; font-size: var(--s3); line-height: 1.15;
+  letter-spacing: -0.02em; color: var(--ink); font-weight: 500;
+  text-underline-offset: .18em;
+}
+.sys__n:hover { color: var(--accent); text-decoration: underline; }
 .sys__use {
-  grid-column: 1; margin-top: 8px; font-size: var(--s1);
-  color: var(--accent); display: block;
+  display: block; margin-top: 4px;
+  font-size: var(--s1); color: var(--ink-soft);
 }
-.sys__row p {
-  grid-column: 2; grid-row: 1 / span 2; margin: 0;
-  font-size: var(--s2); line-height: 1.55; color: var(--ink-2); max-width: 52ch;
+.sys__cols p {
+  margin: var(--sp-2) 0 0; font-size: var(--s2);
+  line-height: 1.45; color: var(--ink-2);
 }
-.sys__row .ask { grid-column: 2; margin-top: 4px; }
+.sys__act { grid-column: 1 / -1; }
 
-@media (max-width: 860px) {
-  .svc { grid-template-columns: 1fr; gap: var(--sp-6); }
-  .sys__row { grid-template-columns: 1fr; row-gap: 8px; }
-  .sys__row p, .sys__row .ask, .sys__use { grid-column: 1; grid-row: auto; }
-  .sys__row p { margin-top: 4px; }
-}
-
-/* ===========================================================================
-   4. Contratos, PMOC e a obrigação (campo de cor)
-   =========================================================================== */
-.plan { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: start; }
-.plan__lead { grid-column: span 5; }
-.plan__lead h2 { font-size: var(--s4); }
-.plan__lead p { margin-top: 20px; color: var(--on-navy-soft); }
-.plan__lead .btn { margin-top: 32px; }
-.plan__blocks { grid-column: 7 / span 6; display: grid; gap: 40px; }
-.plan__block h3 { font-size: var(--s3); margin-bottom: 12px; }
-.plan__block p { color: var(--on-navy-soft); }
 @media (max-width: 1060px) {
-  .plan { grid-template-columns: 1fr; gap: 40px; }
-  .plan__lead, .plan__blocks { grid-column: 1; }
+  .sys { grid-template-columns: 1fr; }
+  .sys__h, .sys__lead, .sys__cols, .sys__act { grid-column: 1; }
+  .sys__lead { align-self: start; }
+  .sys__cols { columns: 2; }
+}
+@media (max-width: 680px) { .sys__cols { columns: 1; } }
+
+/* ===========================================================================
+   4. Contratos, PMOC e a obrigacao (campo de cor)
+      Sobre o azul, a fotografia é a única coisa clara: é ela que carrega
+      a seção, e os dois blocos de texto descem para baixo dela.
+   =========================================================================== */
+.plan {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--sp-6); row-gap: clamp(40px, 5vw, 64px); align-items: start;
+}
+.plan__lead { grid-column: 1 / span 6; }
+.plan__lead h2 { font-size: var(--s4); line-height: 1.05; letter-spacing: -0.02em; }
+.plan__lead p { margin-top: var(--sp-3); color: var(--on-navy-soft); max-width: 44ch; }
+.plan__lead .btn { margin-top: var(--sp-5); }
+
+.plan__side { grid-column: 8 / -1; }
+.plan__figure { margin: 0 0 clamp(36px, 4vw, 56px); }
+.plan__figure img { width: 100%; aspect-ratio: 14 / 10; object-fit: cover; display: block; }
+.plan__blocks { display: grid; gap: var(--sp-5); }
+.plan__block h3 { font-size: var(--s3); line-height: 1.2; margin-bottom: var(--sp-2); }
+.plan__block p { color: var(--on-navy-soft); font-size: var(--s2); line-height: 1.5; }
+
+@media (max-width: 1060px) {
+  .plan { grid-template-columns: 1fr; }
+  .plan__lead, .plan__side { grid-column: 1; }
 }
 
 /* ===========================================================================
-   5. Por que escolher
+   5. A empresa: fotografia alta à esquerda, a história e as razões à
+      direita. "Por que escolher" era uma seção inteira só com itens
+      iguais; aqui ela é uma coluna, e a página perde uma repetição.
    =========================================================================== */
-.why { list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 26px 56px; }
-.why li { display: flex; gap: 16px; align-items: start; }
-.why svg { width: 24px; height: 24px; fill: var(--accent); flex: none; margin-top: 4px; }
-.why span { font-size: var(--s3); line-height: 1.3; }
-@media (max-width: 1060px) { .why span { font-size: var(--s2); } }
-@media (max-width: 760px) { .why { grid-template-columns: 1fr; gap: 22px; } }
+.about {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--sp-6); row-gap: var(--sp-6); align-items: start;
+}
+/* a coluna da esquerda acompanha a altura da direita: com a fotografia
+   parada no topo sobravam uns seiscentos pixels de chão vazio embaixo dela,
+   que é exatamente o buraco que a crítica manda fechar */
+.about__figure { grid-column: 1 / span 4; margin: 0; align-self: stretch; }
+.about__figure img {
+  width: 100%; height: 100%; min-height: 520px;
+  object-fit: cover; object-position: 50% 42%; display: block;
+}
+.about__body { grid-column: 6 / -1; }
+.about__body h2 { font-size: var(--s4); line-height: 1.05; letter-spacing: -0.02em; }
+.about__body > p { margin-top: var(--sp-4); color: var(--ink-2); max-width: 56ch; }
+.about__body .btn { margin-top: var(--sp-5); }
 
-/* ===========================================================================
-   6. A empresa
-   =========================================================================== */
-.about { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: center; }
-.about__figure { grid-column: span 5; }
-.about__figure img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
-.about__body { grid-column: 7 / span 6; }
-.about__body h2 { font-size: var(--s4); }
-.about__body p { margin-top: 22px; color: var(--ink-2); }
-.about__body .btn { margin-top: 32px; }
+.about__why { margin-top: clamp(36px, 4vw, 56px); }
+.about__why h3 { font-size: var(--s3); line-height: 1.2; letter-spacing: -0.02em; }
+/* sem marcador e sem ícone: as razões se organizam pela coluna e pelo espaço */
+.about__why ul {
+  list-style: none; margin: var(--sp-4) 0 0; padding: 0;
+  columns: 2; column-gap: var(--sp-6);
+  font-size: var(--s2); line-height: 1.4; color: var(--ink-2);
+}
+.about__why li { break-inside: avoid; margin-bottom: var(--sp-3); max-width: 30ch; }
+
 @media (max-width: 1060px) {
-  .about { grid-template-columns: 1fr; gap: 32px; }
-  .about__figure { grid-column: 1; max-width: none; }
+  .about { grid-template-columns: 1fr; }
+  .about__figure { grid-column: 1; width: 56%; }
   .about__body { grid-column: 1; }
+}
+@media (max-width: 680px) {
+  .about__figure { grid-column: 1; width: 72%; }
+  .about__why ul { columns: 1; }
 }
 
 /* ===========================================================================
@@ -347,88 +443,72 @@ a:not([class]) { text-decoration: underline; text-underline-offset: 0.22em; }
 .creds { margin-top: 72px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px; align-items: center; }
 .creds__seal { grid-column: span 2; }
 .creds__seal img { width: 100%; max-width: 124px; }
-.creds__text { grid-column: 4 / span 8; }
-.creds__sentence { font-size: var(--s3); line-height: 1.3; max-width: 24ch; }
-.creds__norms { margin-top: 18px; font-size: var(--s2); line-height: 1.55; color: var(--ink-2); max-width: 58ch; }
+/* o texto ocupava oito faixas mas media vinte e quatro caracteres: sobrava
+   um terço de tela vazio à direita. Agora a frase e as normas são duas
+   colunas, e a linha fecha dos dois lados. */
+.creds__text {
+  grid-column: 4 / -1; display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 11fr); gap: var(--sp-6);
+  align-items: start;
+}
+.creds__sentence { font-size: var(--s3); line-height: 1.25; letter-spacing: -0.02em; max-width: 18ch; }
+.creds__norms { margin-top: 0; font-size: var(--s2); line-height: 1.55; color: var(--ink-2); }
 .creds__name { color: var(--ink-2); transition: color 400ms linear; }
 .creds__name.is-lit { color: var(--accent); }
-.creds__foot { margin-top: 20px; color: var(--ink-2); max-width: 60ch; }
+.creds__foot { margin-top: var(--sp-3); color: var(--ink-2); font-size: var(--s2); }
 @media (max-width: 1060px) {
   .creds { grid-template-columns: 1fr; gap: 24px; }
   .creds__seal { grid-column: 1; } .creds__seal img { max-width: 92px; }
-  .creds__text { grid-column: 1; }
+  .creds__text { grid-column: 1; grid-template-columns: 1fr; gap: var(--sp-4); }
 }
 
 /* ===========================================================================
-   8. Avaliações do Google
+   8. Avaliacoes do Google: a citacao grande leva a seção; as outras duas
+      viraram texto corrido numa coluna estreita. Os cartões com avatar de
+      letra e borda eram a terceira fileira de cartões iguais da página.
    =========================================================================== */
-/* topo: título à esquerda, resumo do perfil à direita */
-.rev { display: grid; grid-template-columns: repeat(12, 1fr); gap: 48px; align-items: start; }
-.rev__lead { grid-column: span 7; }
-.rev__lead h2 { font-size: var(--s4); max-width: 16ch; }
-.rev__lead h2 em { font-style: normal; color: var(--accent); }
-.rev__side { grid-column: 9 / span 4; }
-.rev__side p { color: var(--ink-2); }
+.rev {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--sp-6); row-gap: var(--sp-6); align-items: start;
+}
+.rev__lead { grid-column: 1 / span 7; }
+.rev__lead h2 { font-size: var(--s4); line-height: 1.05; letter-spacing: -0.02em; max-width: 18ch; }
 
-.rev__g { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
-.rev__g svg { width: 40px; height: 40px; flex: none; }
-.rev__g b { display: block; font-weight: 500; font-size: var(--s2); }
-.rev__g span { display: block; font-size: var(--s2); color: var(--ink-2); }
-
-/* nota do perfil, com os números reais */
-.rev__score { display: flex; align-items: baseline; gap: 12px; margin-top: 26px; }
+.rev__score { display: flex; align-items: baseline; gap: var(--sp-2); margin-top: var(--sp-4); }
 .rev__score strong { font-size: var(--s4); font-weight: 500; line-height: 1; letter-spacing: -0.03em; }
 .rev__score .stars { display: flex; gap: 2px; }
-.rev__score span { font-size: var(--s2); color: var(--ink-2); }
-.stars svg { width: 18px; height: 18px; fill: #f5a623; }
+.rev__score > span { font-size: var(--s2); color: var(--ink-2); }
+.stars svg { width: 20px; height: 20px; fill: #f5a623; }
 
-/* os cartões */
-/* um depoimento em destaque e dois ao lado: a frase mais forte ganha tamanho,
-   e a fileira deixa de ser três cartões iguais */
-.rev__cards {
-  grid-column: 1 / -1; margin-top: 56px;
-  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start;
+/* declaração, não manchete: fica em tamanho de parágrafo grande */
+.rev__big {
+  margin: clamp(36px, 4vw, 56px) 0 0;
+  font-size: var(--s3); line-height: 1.3; letter-spacing: -0.02em;
+  color: var(--ink); max-width: 38ch;
 }
-.rev__pair { display: grid; gap: 24px; align-content: start; }
-.rev__card {
-  background: var(--paper); padding: 30px;
-  display: flex; flex-direction: column; gap: 16px;
-}
-.rev__head { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 4px; }
-.rev__av {
-  width: 44px; height: 44px; flex: none;
-  display: grid; place-items: center;
-  background: var(--accent); color: #fff;
-  font-size: var(--s2); font-weight: 500; line-height: 1;
-}
-.rev__who { flex: 1; min-width: 0; }
-.rev__who b { display: block; font-weight: 500; font-size: var(--s2); line-height: 1.3; }
-.rev__who span { display: block; font-size: var(--s2); color: var(--ink-2); }
-.rev__who .stars { margin-top: 4px; }
-.rev__who .stars svg { width: 15px; height: 15px; }
-.rev__head > svg { width: 22px; height: 22px; flex: none; }
-.rev__card blockquote { margin: 0; font-size: var(--s2); line-height: 1.55; color: var(--ink); }
-.rev__card blockquote::before { content: '“'; }
-.rev__card blockquote::after { content: '”'; }
+.rev__big::before { content: '“'; }
+.rev__big::after  { content: '”'; }
+.rev__who { margin: var(--sp-3) 0 0; font-size: var(--s2); color: var(--ink-2); }
+.rev__act { margin-top: clamp(36px, 4vw, 56px); }
 
-/* o destaque perde a moldura e vira citação: não é mais um cartão entre iguais.
-   Precisa vir depois de .rev__card: mesma especificidade, vence quem vem depois. */
-.rev__card--lead { background: none; padding: 0; gap: 24px; }
-.rev__card--lead blockquote { font-size: var(--s3); line-height: 1.3; letter-spacing: -0.02em; }
-.rev__card--lead .rev__head { margin-top: 0; }
-.rev__card .stars { display: flex; gap: 2px; }
-
-.rev__act { grid-column: 1 / -1; margin-top: 40px; }
+.rev__side { grid-column: 9 / -1; }
+.rev__side .rev__note { margin: 0; color: var(--ink-2); font-size: var(--s2); }
+.rev__side blockquote {
+  margin: clamp(32px, 3.5vw, 48px) 0 0;
+  font-size: var(--s2); line-height: 1.55; color: var(--ink);
+}
+.rev__side blockquote::before { content: '“'; }
+.rev__side blockquote::after  { content: '”'; }
+.rev__side .rev__who { margin-top: var(--sp-2); color: var(--ink-soft); }
 
 @media (max-width: 1060px) {
-  .rev { grid-template-columns: 1fr; gap: 28px; }
-  .rev__lead, .rev__side, .rev__cards, .rev__act { grid-column: 1; }
+  .rev { grid-template-columns: 1fr; }
+  .rev__lead, .rev__side { grid-column: 1; }
   .rev__lead h2 { max-width: none; }
-  .rev__cards { grid-template-columns: 1fr; margin-top: 36px; }
-  .rev__cards { gap: 36px; }
-  .rev__card--lead blockquote { font-size: var(--s3); line-height: 1.3; }
-  .rev__card { padding: 24px; }
-  .rev__act .btn { width: 100%; }
+  .rev__big { max-width: 30ch; }
+}
+@media (max-width: 560px) {
+  .rev__act .btn { width: 100%; justify-content: center; }
 }
 
 /* ===========================================================================

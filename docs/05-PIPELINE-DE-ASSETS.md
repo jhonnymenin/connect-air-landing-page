@@ -166,3 +166,26 @@ do cliente. Saem assim que as fotos reais chegarem (ver
 
 Um arquivo, 1200 × 630, **≤ 80 KB**, gerado a partir do lockup vertical sobre
 fundo `#021D64`. Não entra no teto de 25 porque não é carregado pela página.
+
+## 06/11/2026 · a recuperação visual
+
+O conjunto passou de quatro para **seis fotografias**, todas coloridas. Duas
+entraram do Wikimedia Commons (`assets.mjs`), uma estava em `assets/` sem uso,
+e uma saiu.
+
+| | |
+|---|---|
+| Entraram | `solda` (técnico soldando numa casa de máquinas, CC BY 2.0), `cobre` (linhas de cobre na laje, CC BY 2.0), `supervisao` (mesa de supervisão com o sinótico, CC0 — já estava em `assets/`, nunca tinha sido usada) |
+| Saiu | `exaustao-cozinha` — ferrugem e neve, lê-se como descuido numa página que vende manutenção |
+| Cresceram | `casa-de-maquinas` para 520/1040 (a abertura passou de 31% para 40% da tela) e `chiller` para 640/1280 |
+| Teto | 450 → **660 KB**. As fotografias deixaram de ser enfeite de canto e viraram o assunto de três seções |
+
+Olhadas e **recusadas** depois de baixar: `rooftop-packaged-units` (bege, céu
+cinzento, sem assunto) e `hvac-ductwork-in-the-chiller-plant-room` (canteiro de
+obra com lona e entulho). Ficam em `assets/` sem entrar no PLAN.
+
+O recorte do `cobre` foi refeito uma vez: o primeiro deixava a parede canelada
+ocupando dois terços do quadro e a imagem lia como um painel cinza.
+
+Por que cada uma está onde está, e a crítica da composição inteira:
+[`08-DIRECAO-VISUAL.md`](08-DIRECAO-VISUAL.md).

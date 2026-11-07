@@ -21,27 +21,43 @@ except ImportError:
 SRC, OUT = "assets", "src/assets/img"
 QUALITY = 46
 
-# Teto próprio de peso das imagens. Subiu de 500 para 560 KB em 06/11/2026, ao
-# trocar o duotone azul pela cor original: cor custa mais bytes que uma rampa de
-# um canal só, e baixar a qualidade até caber nos 500 deixava artefato visível
-# nas fotos coloridas. A página inteira fica em ~665 KB, contra o teto
-# contratual de 1,5 MB. Não é licença para crescer: é o custo declarado de uma
-# decisão de direção. Quando as fotos do Márcio chegarem, as de acervo saem e
-# este teto volta para 500.
-MAX_FILES, MAX_KB = 25, 450
+# Teto próprio de peso das imagens. Subiu de 450 para 660 KB em 06/11/2026, na
+# recuperação da direção visual: a página tinha quatro fotografias e nenhuma no
+# miolo, o que a deixou com cinco telas seguidas só de texto. Agora são seis,
+# maiores, e duas delas são o assunto de uma seção inteira. A página fica em
+# torno de 790 KB, contra o teto contratual de 1,5 MB. Quando as fotos do
+# Márcio chegarem, as de acervo saem e este teto volta a cair.
+MAX_FILES, MAX_KB = 25, 660
 
 # origem -> (nome de saída, larguras, recorte opcional (l,t,r,b) em fração)
 PLAN = {
+    # abertura: a casa de máquinas, retrato alto, sangrando na borda direita
     "ventilation-ductwork-in-a-mechanical-room-of.jpg":
-        ("casa-de-maquinas",[420, 760], (0.0, 0.0, 0.93, 0.83)),  # corta o carimbo de data do canto
-    # os expostos
+        ("casa-de-maquinas", [520, 1040], (0.0, 0.0, 0.93, 0.83)),  # corta o carimbo de data
+    # o par desigual: o chiller grande, o trocador pequeno e mais abaixo
     "chiller.jpg":
-        ("chiller",         [520, 1040], None),
+        ("chiller",          [640, 1280], None),
     "disassembled-chiller-heat-exchanger.jpg":
-        ("trocador-aberto", [520, 920], None),
-    "kitchen-exhaust-fans.jpg":
-        ("exaustao-cozinha",[520, 920], (0.0, 0.40, 1.0, 1.0)),  # fora o céu: a sala é escura
+        ("trocador-aberto",  [400, 800],  None),
+    # serviços: serviço acontecendo. É a fotografia que mais passa confiança
+    # num serviço técnico, e era justamente o que faltava na página.
+    "welding-and-fitting-a-triple-duty-valve.jpg":
+        ("solda",            [460, 920],  (0.14, 0.14, 0.90, 0.86)),
+    # serviços: instalação na laje. O primeiro corte deixava a parede canelada
+    # ocupando dois terços do quadro e a imagem lia como um painel cinza; este
+    # desce o enquadramento até as linhas de cobre e a unidade.
+    "installation-of-copper-piping-for-the-air.jpg":
+        ("cobre",            [580],       (0.40, 0.22, 0.80, 0.887)),
+    # manutenção e PMOC: a mesa de supervisão. Quatro telas com o sinótico da
+    # planta e os cadernos de registro ao lado: é literalmente o que um plano
+    # de manutenção, operação e controle produz.
+    "chiller-plant-scada-system.jpg":
+        ("supervisao",       [560, 1120], (0.02, 0.0, 1.0, 0.94)),
 }
+
+# Fora em 06/11: "kitchen-exhaust-fans" (ferrugem e neve — ler como descuido,
+# o oposto do que a página diz) e as duas chapas em preto e branco do Pantex,
+# que já tinham saído na troca para cor original.
 
 def treat(im):
     """Cor original. O duotone azul existia para unir fotografias de origens

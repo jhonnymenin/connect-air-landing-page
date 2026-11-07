@@ -118,14 +118,15 @@ gerado em `brand/` ou `src/assets/`, com a origem registrada em
 | [`docs/05-PIPELINE-DE-ASSETS.md`](docs/05-PIPELINE-DE-ASSETS.md) | Regra antiduplicação de imagens |
 | [`docs/06-ACEITE.md`](docs/06-ACEITE.md) | Checklist dos critérios de aceite do escopo técnico |
 | [`docs/07-PEDIDO-DE-FOTOS.md`](docs/07-PEDIDO-DE-FOTOS.md) | Mensagem pronta para pedir as fotos ao cliente, e o que cada uma destrava |
+| [`docs/08-DIRECAO-VISUAL.md`](docs/08-DIRECAO-VISUAL.md) | A direção de arte da página: diagnóstico, direção escolhida, composição por seção e a crítica |
 
 ## Números atuais
 
 | | |
 |---|---|
-| Acima da dobra | **130 KB** |
-| Página inteira | **506 KB** (teto contratual: 1,5 MB) |
-| Imagens | 15 arquivos, 381 KB (teto próprio: 25 arquivos, 450 KB) |
+| Acima da dobra | **170 KB** |
+| Página inteira | **741 KB** (teto contratual: 1,5 MB) |
+| Imagens | 18 arquivos, 615 KB — 6 fotografias (teto próprio: 25 arquivos, 660 KB) |
 | Tipografia | 1 família, 2 pesos, 39 KB, auto-hospedada |
 | Dependências em runtime | **nenhuma** |
 
