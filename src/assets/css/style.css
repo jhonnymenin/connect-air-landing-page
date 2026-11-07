@@ -491,11 +491,8 @@ a.chan__v:hover { color: #fff; }
   outline: 2px solid #a4201a; outline-offset: -2px;
 }
 .form__send { grid-column: 1 / -1; width: 100%; margin-top: 6px; }
-.form__send[disabled] { opacity: .62; cursor: progress; }
-.form__hp { position: absolute; left: -9999px; opacity: 0; }
 .form__status { grid-column: 1 / -1; margin: 0; font-size: var(--s1); color: var(--ink-2); }
 .form__status:empty { display: none; }
-.form__status[data-state="erro"] { color: #a4201a; }
 .form__priv { grid-column: 1 / -1; margin: 0; font-size: var(--s1);
   line-height: 1.5; color: var(--ink-soft); }
 
